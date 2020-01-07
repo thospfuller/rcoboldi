@@ -20,11 +20,18 @@ import net.sf.JRecord.Log.TextLog;
 import net.sf.JRecord.Numeric.ICopybookDialects;
 import net.sf.cb2xml.def.Cb2xmlConstants;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
+ * 
+ * @see <a href="https://github.com/svn2github/jrecord/blob/master/ReadMe.md">ReadMe.md for JRecord</a>
  * 
  * @author <a href="mailto:thomas.fuller@coherentlogic.com">Thomas P. Fuller</a>
  */
 public class JCopyBookConverter {
+
+    private static final Logger log = LoggerFactory.getLogger(JCopyBookConverter.class);
 
     static class PassThroughUpdateFieldName implements IUpdateFieldName {
         public String updateName(String name) { return name; }
@@ -41,8 +48,11 @@ public class JCopyBookConverter {
         IUpdateFieldName updateFldName
     ) throws IOException {
 
-        JDataFrameBuilder<String, String[]> result = new JDataFrameBuilder<String, String[]> (new JDataFrame (), new RemoteAdapter<String, String[]> ());
-        JDataFrameBuilder<Integer, String> resultValues = new JDataFrameBuilder<Integer, String> (new JDataFrame (), new RemoteAdapter<Integer, String> ());
+        JDataFrameBuilder<String, String[]> result =
+            new JDataFrameBuilder<String, String[]> (new JDataFrame<String, String[]> (), new RemoteAdapter<String, String[]> ());
+
+//        JDataFrameBuilder<Integer, String> resultValues =
+//            new JDataFrameBuilder<Integer, String> (new JDataFrame<String, String[]> (), new RemoteAdapter<Integer, String> ());
 
         AbstractLine line;
 
@@ -57,7 +67,6 @@ public class JCopyBookConverter {
             System.out.println ("header: " + header);
 
             result.getDataFrame().addOrReturnExistingColumn (header); // .addValues for column values.
-            resultValues.getDataFrame().addOrReturnExistingColumn(ctr);
         }
 
         while ((line = reader.read()) != null) {
@@ -66,23 +75,23 @@ public class JCopyBookConverter {
 
             if (0 <= idx) {
 
-//                System.out.println(" --> " + formatField(line.getField(idx, 0), sep, quote));
-
                 for (ctr = 1; ctr < layout.getRecord(idx).getFieldCount(); ctr++) {
 
                     System.out.println(" --> " + line.getField(idx, ctr) + ", fldName: " + rec.getField(ctr).getName());
 
+                    var header = rec.getField(ctr).getName();
+
                     var value = sep + formatField(line.getField(idx, ctr), sep, quote);
 
-                    System.out.println(" =====> " + value);
+                    log.debug("header: " + header + ", value: " + value);
 
-                    resultValues.getDataFrame().addOrReturnExistingColumn(ctr).addValues(value.toString());
+                    result
+                        .getDataFrame()
+                        .addOrReturnExistingColumn(header)
+                        .addValues( new String [] { value.toString() });
                 }
             }
-//            writer.newLine();
         }
-
-        System.out.println("resultValues: " + resultValues.serialize());
 
         return result;
     }
@@ -96,7 +105,7 @@ public class JCopyBookConverter {
         ExternalRecord schema;
 
         // #126 https://github.com/bmTas/JRecord/blob/master/Source/JRecord_Project/JRecord/src/net/sf/JRecord/zExamples/cobol/toCsv/ParseArgsCobol2Csv.java
-        var binFormat = ICopybookDialects.FMT_MAINFRAME; // ExternalConversion.getDialect((int) 
+        var binFormat = ICopybookDialects.FMT_MAINFRAME; 
 
         schema = conv.loadCopyBook(
             copyBookFile,
@@ -146,8 +155,6 @@ public class JCopyBookConverter {
         var result = readCopyBookAsJDataFrameBuilder (reader, layout, font, sep, quote, updateFldName);
 
         reader.close();
-
-        System.out.println ("Column count: " + result.getDataFrame().getColumns());
 
         return (String) result.serialize();
     }

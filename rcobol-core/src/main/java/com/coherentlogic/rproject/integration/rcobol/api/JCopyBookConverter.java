@@ -66,7 +66,7 @@ public class JCopyBookConverter {
 
             System.out.println ("header: " + header);
 
-            result.getDataFrame().addOrReturnExistingColumn (header); // .addValues for column values.
+            result.getDataFrame().addOrReturnExistingColumn (header);
         }
 
         while ((line = reader.read()) != null) {
@@ -96,7 +96,22 @@ public class JCopyBookConverter {
         return result;
     }
 
-    public String readCopyBookAsString(String copyBookFile, String font, String sep, String quote, IUpdateFieldName updateFldName) throws IOException {
+    /**
+     * Invokes the {@link #readCopyBookAsString(String, String, String, String, IUpdateFieldName)} using an instance of
+     * PassThroughUpdateFieldName for the updateFldName.
+     */
+    public String readCopyBookAsString(String copyBookFile, String inFile, String font, String sep, String quote) throws IOException {
+        return readCopyBookAsString(copyBookFile, inFile, font, sep, quote, new PassThroughUpdateFieldName());
+    }
+
+    public String readCopyBookAsString(
+        String copyBookFile,
+        String inFile,
+        String font,
+        String sep,
+        String quote,
+        IUpdateFieldName updateFldName
+    ) throws IOException {
 
         // #62 https://github.com/svn2github/jrecord/blob/master/Source/JRecord/src/net/sf/JRecord/zExamples/cobol/toCsv/Cobol2CsvAlternative.java
 
@@ -148,9 +163,10 @@ public class JCopyBookConverter {
 
         AbstractLineReader reader = ioProvider.getLineReader(layout);
 
-        reader.open("/Users/thospfuller/development/projects/rcobol/download/"
-            + "Source/JRecord/src/net/sf/JRecord/zTest/Common/SampleFiles/DTAR020.bin", layout);
-            //+ "Source/JRecord/src/net/sf/JRecord/zTest/Common/SampleFiles/DTAR020.bin", layout);
+        reader.open(inFile, layout);
+//            "/Users/thospfuller/development/projects/rcobol/download/"
+//            + "Source/JRecord/src/net/sf/JRecord/zTest/Common/SampleFiles/DTAR020.bin", layout);
+//            //+ "Source/JRecord/src/net/sf/JRecord/zTest/Common/SampleFiles/DTAR020.bin", layout);
 
         var result = readCopyBookAsJDataFrameBuilder (reader, layout, font, sep, quote, updateFldName);
 

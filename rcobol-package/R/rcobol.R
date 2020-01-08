@@ -21,6 +21,7 @@
 #' uncoercedResultDF <- as.data.frame(do.call("rbind", resultAsJson))
 #' coercedResultDF <- t(uncoercedResultDF)
 #' resultAsDF <- as.data.frame(coercedResultDF)
+#' head(resultAsDF)
 #'
 #' See also: https://github.com/s-u/rJava/issues/151
 #'

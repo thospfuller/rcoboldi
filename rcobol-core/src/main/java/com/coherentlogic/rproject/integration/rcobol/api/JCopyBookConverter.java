@@ -76,7 +76,7 @@ public class JCopyBookConverter {
 
                     var header = rec.getField(ctr).getName();
 
-                    var value = formatField(line.getField(idx, ctr), sep, quote);
+                    var value = formatField(line.getFieldValue(idx, ctr).asString(), sep, quote);
 
                     log.debug("header: " + header + ", value: " + value);
 

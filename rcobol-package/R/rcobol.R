@@ -61,9 +61,7 @@ NULL
         rcobol <- list()
         warning (
             paste (
-                "The RCOBOL_JARS option is NULL so no additional dependencies have been added. You can add additional dependencies by setting",
-                "the RCOBOL_JARS as follows: options(RCOBOL_JARS=list(\"C:/Temp/some.jar\")) prior to using this package (that means ",
-                "*before* executing library (\"RCOBOL\").", sep="\n"))
+                "The RCOBOL_JARS option is NULL so no additional dependencies have been added. You can add additional dependencies by setting the RCOBOL_JARS as follows: options(RCOBOL_JARS=list(\"C:/Temp/some.jar\")) prior to using this package (that means *before* executing library (\"RCOBOL\").", sep="\n"))
     } else {
         info (
             paste (
@@ -90,11 +88,15 @@ Initialize <- function () {
 
 #' This function delegates to the R COBOL Java API and returns the results as a data frame. 
 #'
-#' 
+#' @param copyBookFile The CopyBook file.
+#' @param inFile The binary file.
+#' @param font The font.
+#' @param sep The line separator.
+#' @param quote The quote character. 
 #'
 #' @export
 #'
-ReadCopyBookAsDataFrame <- function (copyBookFile, inFile, String font, String sep, quote) {
+ReadCopyBookAsDataFrame <- function (copyBookFile, inFile, font, sep, quote) {
 
     jCopyBookConverter <- .rcobol.env$jCopyBookConverter
 
@@ -110,5 +112,5 @@ ReadCopyBookAsDataFrame <- function (copyBookFile, inFile, String font, String s
 
     coercedResultDF <- t(uncoercedResultDF)
 
-    retun as.data.frame(coercedResultDF)
+    return(as.data.frame(coercedResultDF))
 }

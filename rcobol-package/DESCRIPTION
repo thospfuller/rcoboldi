@@ -8,8 +8,12 @@ Maintainer: Thomas P. Fuller <thomas.fuller@coherentlogic.com>
 Description: Facilitates the importation of COBOL CopyBook files as data frames in the R Project for Statistical Computing.
 SystemRequirements: Java (>= 11)
 Depends:
-    rJava
-    RJSONIO
+    rJava,
+    RJSONIO,
+    rGroovy
+Imports:
+    rJava,
+    RJSONIO,
     rGroovy
 Suggests:
     testthat
@@ -23,5 +27,4 @@ URL: https://github.com/bmTas/JRecord/tree/master/Source/JRecord_Project
     https://coherentlogic.com/wordpress/middleware-development/RCOBOL?source=cran
 Repository: https://bitbucket.org/CoherentLogic/
 Archs: i386, x64
-RoxygenNote: 6.0.1
-
+RoxygenNote: 7.0.2

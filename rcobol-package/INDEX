@@ -1,0 +1,3 @@
+Initialize               Instantiates this package and must be called exactly once.
+ReadCopyBookAsDataFrame  This function delegates to the R COBOL Java API and returns the results as a data frame.
+About                    Prints some information about this plugin.

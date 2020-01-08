@@ -1,0 +1,27 @@
+Package: RCOBOL
+Type: Package
+Title: R COBOL Package
+Version: 1.0
+Date: 2020-01-07
+Author: Thomas P. Fuller <thomas.fuller@coherentlogic.com>
+Maintainer: Thomas P. Fuller <thomas.fuller@coherentlogic.com>
+Description: Facilitates the importation of COBOL CopyBook files as data frames in the R Project for Statistical Computing.
+SystemRequirements: Java (>= 11)
+Depends:
+    rJava
+    RJSONIO
+    rGroovy
+Suggests:
+    testthat
+LazyLoad: yes
+License: LGPL-3
+Copyright: (C) 2020 Coherent Logic Limited; ALL RIGHTS RESERVED.
+URL: https://github.com/bmTas/JRecord/tree/master/Source/JRecord_Project
+    http://groovy-lang.org/,
+    http://www.groovy-lang.org/indy.html,
+    http://docs.groovy-lang.org/latest/html/api/index.html,
+    https://coherentlogic.com/wordpress/middleware-development/RCOBOL?source=cran
+Repository: https://bitbucket.org/CoherentLogic/
+Archs: i386, x64
+RoxygenNote: 6.0.1
+

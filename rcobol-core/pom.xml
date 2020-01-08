@@ -54,7 +54,7 @@
         <dependency>
             <groupId>com.coherentlogic.rproject.integration</groupId>
             <artifactId>jdataframe-core</artifactId>
-            <version>1.0.0-RELEASE</version>
+            <!-- version>1.0.0-RELEASE</version -->
         </dependency>
 
         <dependency>

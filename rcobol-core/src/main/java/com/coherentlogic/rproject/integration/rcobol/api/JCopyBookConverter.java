@@ -51,23 +51,20 @@ public class JCopyBookConverter {
         JDataFrameBuilder<String, String[]> result =
             new JDataFrameBuilder<String, String[]> (new JDataFrame<String, String[]> (), new RemoteAdapter<String, String[]> ());
 
-//        JDataFrameBuilder<Integer, String> resultValues =
-//            new JDataFrameBuilder<Integer, String> (new JDataFrame<String, String[]> (), new RemoteAdapter<Integer, String> ());
-
         AbstractLine line;
-
-        int idx, ctr;
 
         RecordDetail rec = layout.getRecord(0);
 
-        for (ctr = 1; ctr < rec.getFieldCount(); ctr++) {
+        for (int ctr = 1; ctr < rec.getFieldCount(); ctr++) {
 
             var header = (sep + updateFldName.updateName(rec.getField(ctr).getName()));
 
-            System.out.println ("header: " + header);
+            log.debug ("(first scan) header: " + header);
 
             result.getDataFrame().addOrReturnExistingColumn (header);
         }
+
+        int idx;
 
         while ((line = reader.read()) != null) {
 
@@ -75,13 +72,11 @@ public class JCopyBookConverter {
 
             if (0 <= idx) {
 
-                for (ctr = 1; ctr < layout.getRecord(idx).getFieldCount(); ctr++) {
-
-                    System.out.println(" --> " + line.getField(idx, ctr) + ", fldName: " + rec.getField(ctr).getName());
+                for (int ctr = 1; ctr < layout.getRecord(idx).getFieldCount(); ctr++) {
 
                     var header = rec.getField(ctr).getName();
 
-                    var value = sep + formatField(line.getField(idx, ctr), sep, quote);
+                    var value = formatField(line.getField(idx, ctr), sep, quote);
 
                     log.debug("header: " + header + ", value: " + value);
 

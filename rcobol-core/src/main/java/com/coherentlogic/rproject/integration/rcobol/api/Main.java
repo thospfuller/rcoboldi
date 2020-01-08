@@ -70,9 +70,9 @@ public class Main {
 
     	// /Users/thospfuller/development/projects/rcobol/download/
         var copyBookFile = "/Users/thospfuller/development/projects/rcobol/download/Examples/SchemaCompare/cobol_copybooks/DTAR020.cbl";
-        var inFile   = "/Users/thospfuller/development/projects/rcobol/download/Source/JRecord/src/net/sf/JRecord/zTest/Common/SampleFiles/DTAR020.bin";
+        var inFile       = "/Users/thospfuller/development/projects/rcobol/download/Source/JRecord/src/net/sf/JRecord/zTest/Common/SampleFiles/DTAR020.bin";
 
-        var fixed2JDataFrame = new JCopyBookConverter ();
+        var jCopyBookConverter = new JCopyBookConverter ();
 
         var inFont = "cp037";
 
@@ -83,7 +83,7 @@ public class Main {
          *
          * String copyBookFile, String font, String sep, String quote, IUpdateFieldName updateFldName
          */
-        var result = fixed2JDataFrame.readCopyBookAsString (
+        var result = jCopyBookConverter.readCopyBookAsString (
             copyBookFile,
             inFile,
             inFont, 

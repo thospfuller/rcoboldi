@@ -43,8 +43,8 @@
         <appender-ref ref="fileAppender"/ -->
     </logger>
 
-    <logger name="com.coherentlogic.coherent.data.adapter.openfigi.client.core.adapters">
-        <level value="warn"/>
+    <logger name="com.coherentlogic.rproject.integration.rcobol.api">
+        <level value="info"/>
         <!-- appender-ref ref="consoleAppender"/>
         <appender-ref ref="fileAppender"/  -->
     </logger>

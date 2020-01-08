@@ -8,6 +8,24 @@
 #' single record type files can be converted to CSV however complicated multi-record files will not map to
 #' CSV.
 #'
+#' library(rJava)
+#' library(RJSONIO)
+#' .jinit()
+#' .jaddClassPath("/Users/thospfuller/development/projects/rcobol/rcobol-api/rcobol-assembly/target/rcobol-assembly-1.0.0-RELEASE.jar")
+#' jCopyBookConverter <- .jnew('com/coherentlogic/rproject/integration/rcobol/api/JCopyBookConverter')
+#' copyBookFile <- "/Users/thospfuller/development/projects/rcobol/download/Examples/SchemaCompare/cobol_copybooks/DTAR020.cbl"
+#' inFile <- "/Users/thospfuller/development/projects/rcobol/download/Source/JRecord/src/net/sf/JRecord/zTest/Common/SampleFiles/DTAR020.bin"
+#' inFont <- "cp037"
+#' result <- jCopyBookConverter$readCopyBookAsString (copyBookFile, inFile, inFont, ",", "\"")
+#' resultAsJson <- RJSONIO::fromJSON(result)
+#' uncoercedResultDF <- as.data.frame(do.call("rbind", resultAsJson))
+#' coercedResultDF <- t(uncoercedResultDF)
+#' resultAsDF <- as.data.frame(coercedResultDF)
+#'
+#' See also: https://github.com/s-u/rJava/issues/151
+#'
+#' sudo R CMD javareconf
+#'
 #' @import RJSONIO
 #' @import rJava
 #' @import rGroovy

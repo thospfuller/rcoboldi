@@ -18,6 +18,7 @@
 #'
 NULL
 
+#'
 #' An environment which is used by this package when managing package-scope variables.
 #'
 .rcobol.env <- new.env()

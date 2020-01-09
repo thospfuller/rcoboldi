@@ -108,29 +108,26 @@ Initialize <- function () {
 #' This function delegates to the R COBOL Java API and returns the results as a data frame. 
 #'
 #' \dontrun{
-#' RCOBOL::ReadCopyBookAsDataFrame("/Users/thospfuller/development/projects/rcobol/download/Examples/SchemaCompare/cobol_copybooks/DTAR020.cbl", "/Users/thospfuller/development/projects/rcobol/download/Source/JRecord/src/net/sf/JRecord/zTest/Common/SampleFiles/DTAR020.bin", "cp037", ",", "\"")
+#' RCOBOL::ReadCopyBookAsDataFrame("/Users/thospfuller/development/projects/rcobol/download/Examples/SchemaCompare/cobol_copybooks/DTAR020.cbl", "/Users/thospfuller/development/projects/rcobol/download/Source/JRecord/src/net/sf/JRecord/zTest/Common/SampleFiles/DTAR020.bin", "2", cp037", ",", "\"")
 #' }
 #'
 #' @param copyBookFile The CopyBook file.
 #' @param inFile The binary file.
+#' @param inputFileStructure One of One of: "1": ioStandardTextFile, "2": ioFixedLength, 4: ioVB, or 5: ioVBDump.
 #' @param font The font.
 #' @param sep The line separator.
 #' @param quote The quote character. 
 #'
 #' @export
 #'
-ReadCopyBookAsDataFrame <- function (copyBookFile, inFile, font, sep, quote) {
+ReadCopyBookAsDataFrame <- function (copyBookFile, inFile, inputFileStructure, font, sep, quote) {
 
     jCopyBookConverter <- .rcobol.env$jCopyBookConverter
 
-    #message (
-    #    paste (
-    #        ">>>>> jCopyBookConverter: ", jCopyBookConverter, sep="\n"))
-
     tryCatch(
-        result <- jCopyBookConverter$readCopyBookAsString (copyBookFile, inFile, font, sep, quote), Throwable = function (e) {
+        result <- jCopyBookConverter$readCopyBookAsString (copyBookFile, inFile, inputFileStructure, font, sep, quote), Throwable = function (e) {
             stop(
-                paste ("Unable to read the copyBook and convert it into JSON; copyBookFile: ", copyBookFile, ", inFile: ", inFile, ", font: ", font, ", sep: ", sep, ", quote: ", quote, " -- details follow. ", e$getMessage(), sep="")
+                paste ("Unable to read the copyBook and convert it into JSON; copyBookFile: ", copyBookFile, ", inFile: ", inFile, ", inputFileStructure: ", inputFileStructure,", font: ", font, ", sep: ", sep, ", quote: ", quote, " -- details follow. ", e$getMessage(), sep="")
             )
         }
     )

@@ -96,23 +96,10 @@ public class JCopyBookConverter {
     }
 
     /**
-     * Invokes the {@link #readCopyBookAsString(String, String, String, String, IUpdateFieldName)} using an instance of
-     * PassThroughUpdateFieldName for the updateFldName.
-     */
-    public String readCopyBookAsString(
-        String copyBookFile,
-        String inFile,
-        String font,
-        String sep,
-        String quote
-    ) throws IOException {
-        return readCopyBookAsString(copyBookFile, inFile, font, sep, quote, new PassThroughUpdateFieldName());
-    }
-
-    /**
      * TODO: Add: binFormat, splitCopybookOption, copybookFormat, inputFileStructure
-     * 
-     * 
+     *
+     * https://github.com/svn2github/jrecord/blob/master/Source/JRecord/src/net/sf/JRecord/External/CopybookLoader.java
+     *
      * @param copyBookFile
      * @param inFile
      * @param font
@@ -125,11 +112,17 @@ public class JCopyBookConverter {
     public String readCopyBookAsString(
         String copyBookFile,
         String inFile,
+        int inputFileStructure, // Constants.IO_FIXED_LENGTH.
         String font,
         String sep,
         String quote,
         IUpdateFieldName updateFldName
     ) throws IOException {
+
+        log.debug("readCopyBookAsString: method invoked; copyBookFile: " + copyBookFile + ", inFile: " + inFile +
+            ", inputFileStructure (int): " + inputFileStructure + ", font: " + font + ", sep: " + sep +
+            ", quote: " + quote +
+            ", updateFldName: " + updateFldName);
 
         // #62 https://github.com/svn2github/jrecord/blob/master/Source/JRecord/src/net/sf/JRecord/zExamples/cobol/toCsv/Cobol2CsvAlternative.java
 
@@ -169,11 +162,16 @@ public class JCopyBookConverter {
          * 7  Mainframe_VB           : Mainframe VB File
          * 8  Mainframe_VB_As_RECFMU : Mainframe VB File including BDW (block descriptor word)
          * 10 FUJITSU_VB             : Fujitsu Cobol VB File
-         * ?? Open_Cobol_VB</b>      : Gnu Cobol VB File
+         * ?? Open_Cobol_VB          : Gnu Cobol VB File
          *
          * @see net.sf.JRecord.IO.AbstractLineIOProvider#getStructureName(int)
          */
-        var inputFileStructure = Constants.IO_FIXED_LENGTH;
+//        Fixed_Width: Every record is a constant length
+//        VB: each record is preceded by its lenngth
+//        VB_Dump: variation of VB - less important.
+//        Standard_Text: Standard Windows / Unix Text file for when files are converted to ascii
+//        (The only advantage JRecord has over standard R is it understands Mainframe Zoned
+        //var inputFileStructure = Constants.IO_FIXED_LENGTH;
 
         schema.setFileStructure(inputFileStructure);
 
@@ -187,7 +185,61 @@ public class JCopyBookConverter {
 
         reader.close();
 
-        return (String) result.serialize();
+        String serializedResult = (String) result.serialize();
+
+        log.debug("serializedResult: " + serializedResult);
+
+        return serializedResult;
+    }
+
+    public String readCopyBookAsString(
+            String copyBookFile,
+            String inFile,
+            String inputFileStructure,
+            String font,
+            String sep,
+            String quote,
+            IUpdateFieldName updateFldName
+        ) throws IOException {
+
+        log.debug("readCopyBookAsString: method invoked; copyBookFile: " + copyBookFile + ", inFile: " + inFile +
+            ", inputFileStructure: " + inputFileStructure + ", font: " + font + ", sep: " + sep + ", quote: " + quote +
+            ", updateFldName: " + updateFldName);
+
+        return readCopyBookAsString(
+            copyBookFile,
+            inFile,
+            Integer.parseInt(inputFileStructure),
+            font,
+            sep,
+            quote,
+            updateFldName
+        );
+    }
+
+    /**
+     * Invokes the {@link #readCopyBookAsString(String, String, int, String, String, String, IUpdateFieldName)} method
+     * using an instance of PassThroughUpdateFieldName for the updateFldName.
+     * 
+     * @param inputFileStructure One of: ioStandardTextFile (1), ioFixedLength (2), ioVB (4), or ioVBDump (5).
+     */
+    public String readCopyBookAsString(
+        String copyBookFile,
+        String inFile,
+        String inputFileStructure,
+        String font,
+        String sep,
+        String quote
+    ) throws IOException {
+        return readCopyBookAsString(
+            copyBookFile,
+            inFile,
+            Integer.parseInt(inputFileStructure),
+            font,
+            sep,
+            quote,
+            new PassThroughUpdateFieldName()
+        );
     }
 
     static String formatField(Object value, String sep, String quote) {

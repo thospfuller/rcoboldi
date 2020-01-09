@@ -113,7 +113,7 @@ Initialize <- function () {
 #'
 #' @param copyBookFile The CopyBook file.
 #' @param inFile The binary file.
-#' @param inputFileStructure One of One of: "1": ioStandardTextFile, "2": ioFixedLength, 4: ioVB, or 5: ioVBDump.
+#' @param inputFileStructure One of One of: "1" OR "ioStandardTextFile", "2" OR "ioFixedLength", "4" OR "ioVB", or "5" OR "ioVBDump".
 #' @param font The font.
 #' @param sep The line separator.
 #' @param quote The quote character. 

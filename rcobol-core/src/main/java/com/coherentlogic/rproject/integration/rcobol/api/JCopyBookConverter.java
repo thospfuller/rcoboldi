@@ -2,11 +2,13 @@ package com.coherentlogic.rproject.integration.rcobol.api;
 
 import java.io.IOException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.coherentlogic.rproject.integration.dataframe.adapters.RemoteAdapter;
 import com.coherentlogic.rproject.integration.dataframe.builders.JDataFrameBuilder;
 import com.coherentlogic.rproject.integration.dataframe.domain.JDataFrame;
 
-import net.sf.JRecord.Common.Constants;
 import net.sf.JRecord.Common.Conversion;
 import net.sf.JRecord.Details.AbstractLine;
 import net.sf.JRecord.Details.LayoutDetail;
@@ -19,9 +21,6 @@ import net.sf.JRecord.IO.LineIOProvider;
 import net.sf.JRecord.Log.TextLog;
 import net.sf.JRecord.Numeric.ICopybookDialects;
 import net.sf.cb2xml.def.Cb2xmlConstants;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Offers functionality for converting COBOL CopyBook files into either JDataFrame or JSON (String).
@@ -206,15 +205,39 @@ public class JCopyBookConverter {
             ", inputFileStructure: " + inputFileStructure + ", font: " + font + ", sep: " + sep + ", quote: " + quote +
             ", updateFldName: " + updateFldName);
 
+        int inputFileStructureNumber = toInt (inputFileStructure);
+
         return readCopyBookAsString(
             copyBookFile,
             inFile,
-            Integer.parseInt(inputFileStructure),
+            inputFileStructureNumber,
             font,
             sep,
             quote,
             updateFldName
         );
+    }
+
+    static int toInt (String inputFileStructure) {
+
+        log.debug("inputFileStructure: " + inputFileStructure);
+
+        Integer result = null;
+
+        if ("ioStandardTextFile".equals(inputFileStructure))
+            result = 1;
+        else if ("ioFixedLength".equals(inputFileStructure))
+            result = 2;
+        else if ("ioVB".equals(inputFileStructure))
+            result = 4;
+        else if ("ioVBDump".equals(inputFileStructure))
+            result = 5;
+        else
+            result = Integer.parseInt(inputFileStructure);
+
+        log.debug("result: " + result);
+
+        return result;
     }
 
     /**
@@ -231,10 +254,13 @@ public class JCopyBookConverter {
         String sep,
         String quote
     ) throws IOException {
+
+        int inputFileStructureNumber = toInt (inputFileStructure);
+
         return readCopyBookAsString(
             copyBookFile,
             inFile,
-            Integer.parseInt(inputFileStructure),
+            inputFileStructureNumber,
             font,
             sep,
             quote,

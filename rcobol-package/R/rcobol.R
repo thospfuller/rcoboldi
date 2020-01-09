@@ -8,6 +8,19 @@
 #' single record type files can be converted to CSV however complicated multi-record files will not map to
 #' CSV.
 #'
+#' This package uses the open-source JRecord API, which is written in Java.
+#'
+#' More information about JRecord can be found here:
+#'
+#' https://github.com/bmTas/JRecord/
+#'
+#' \dontrun{
+#' library(RCOBOL)
+#' RCOBOL::Initialize()
+#' RCOBOL::ReadCopyBookAsDataFrame("/Users/thospfuller/development/projects/rcobol/download/Examples/SchemaCompare/cobol_copybooks/DTAR020.cbl", "/Users/thospfuller/development/projects/rcobol/download/Source/JRecord/src/net/sf/JRecord/zTest/Common/SampleFiles/DTAR020.bin", "cp037", ",", "\"")
+#' }
+#'
+#' \dontrun{
 #' library(rJava)
 #' library(RJSONIO)
 #' .jinit()
@@ -22,6 +35,7 @@
 #' coercedResultDF <- t(uncoercedResultDF)
 #' resultAsDF <- as.data.frame(coercedResultDF)
 #' head(resultAsDF)
+#' }
 #'
 #' See also: https://github.com/s-u/rJava/issues/151
 #'
@@ -59,11 +73,11 @@ NULL
 
     if (is.null(rcobolJars)) {
         rcobol <- list()
-        warning (
+        message (
             paste (
                 "The RCOBOL_JARS option is NULL so no additional dependencies have been added. You can add additional dependencies by setting the RCOBOL_JARS as follows: options(RCOBOL_JARS=list(\"C:/Temp/some.jar\")) prior to using this package (that means *before* executing library (\"RCOBOL\").", sep="\n"))
     } else {
-        info (
+        message (
             paste (
                 "Additional jars have been added to the rJava classpath.", sep="\n"))
 
@@ -73,20 +87,29 @@ NULL
     .jpackage(pkgname, lib.loc = libname, morePaths=rcobolJars)
 }
 
-#' This function must be called exactly one time before the package can be used.
+#' This function must be called *exactly one time* before the package can be used.
 #'
 #' @export
 #'
 Initialize <- function () {
 
-    .PrintWelcomeMessage()
+    About()
 
-    jCopyBookConverter <- J("com.coherentlogic.rproject.integration.rcobol.api.JCopyBookConverter")
+    jCopyBookConverter <- .jnew('com/coherentlogic/rproject/integration/rcobol/api/JCopyBookConverter')
+        #J("com.coherentlogic.rproject.integration.rcobol.api.JCopyBookConverter")
 
+    #print (
+    #    paste (
+    #        "11111 jCopyBookConverter: ", jCopyBookConverter, sep="\n"))
+    
     assign("jCopyBookConverter", jCopyBookConverter, envir = .rcobol.env)
 }
 
 #' This function delegates to the R COBOL Java API and returns the results as a data frame. 
+#'
+#' \dontrun{
+#' RCOBOL::ReadCopyBookAsDataFrame("/Users/thospfuller/development/projects/rcobol/download/Examples/SchemaCompare/cobol_copybooks/DTAR020.cbl", "/Users/thospfuller/development/projects/rcobol/download/Source/JRecord/src/net/sf/JRecord/zTest/Common/SampleFiles/DTAR020.bin", "cp037", ",", "\"")
+#' }
 #'
 #' @param copyBookFile The CopyBook file.
 #' @param inFile The binary file.
@@ -100,6 +123,10 @@ ReadCopyBookAsDataFrame <- function (copyBookFile, inFile, font, sep, quote) {
 
     jCopyBookConverter <- .rcobol.env$jCopyBookConverter
 
+    #message (
+    #    paste (
+    #        ">>>>> jCopyBookConverter: ", jCopyBookConverter, sep="\n"))
+
     tryCatch(
         result <- jCopyBookConverter$readCopyBookAsString (copyBookFile, inFile, font, sep, quote), Throwable = function (e) {
             stop(
@@ -107,10 +134,39 @@ ReadCopyBookAsDataFrame <- function (copyBookFile, inFile, font, sep, quote) {
             )
         }
     )
-
-    uncoercedResultDF <- as.data.frame(do.call("rbind", json_file))
+    
+    resultAsJson <- RJSONIO::fromJSON(result)
+    
+    uncoercedResultDF <- as.data.frame(do.call("rbind", resultAsJson))
 
     coercedResultDF <- t(uncoercedResultDF)
 
-    return(as.data.frame(coercedResultDF))
+    return( as.data.frame( coercedResultDF ) )
+}
+
+#' Function prints some information about this package.
+#'
+#' @examples
+#'  \dontrun{
+#'      About()
+#'  }
+#'
+#' @export
+#'
+About <- function () {
+    cat (
+        " Welcome to the RCOBOL Package, brought to you by Coherent Logic Ltd. \n",
+        "                                                                      \n",
+        "Follow Coherent Logic on LinkedIn here:                               \n",
+        "                                                                      \n",
+        "https://www.linkedin.com/company/229316/                              \n",
+        "                                                                      \n",
+        "This package embeds the open-source JRecord API, which is written in  \n",
+        "Java.                                                                 \n",
+        "                                                                      \n",
+        "More information about JRecord can be found here:                     \n",
+        "                                                                      \n",
+        "https://github.com/bmTas/JRecord/                                     \n",
+        "                                                                      \n"
+    )
 }

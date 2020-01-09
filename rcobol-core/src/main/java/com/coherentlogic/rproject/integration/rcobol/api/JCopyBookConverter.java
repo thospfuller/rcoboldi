@@ -49,7 +49,10 @@ public class JCopyBookConverter {
     ) throws IOException {
 
         JDataFrameBuilder<String, String[]> result =
-            new JDataFrameBuilder<String, String[]> (new JDataFrame<String, String[]> (), new RemoteAdapter<String, String[]> ());
+            new JDataFrameBuilder<String, String[]> (
+                new JDataFrame<String, String[]> (),
+                new RemoteAdapter<String, String[]> ()
+            );
 
         AbstractLine line;
 

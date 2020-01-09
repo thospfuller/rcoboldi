@@ -24,7 +24,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * 
+ * Offers functionality for converting COBOL CopyBook files into either JDataFrame or JSON (String).
+ *
  * @see <a href="https://github.com/svn2github/jrecord/blob/master/ReadMe.md">ReadMe.md for JRecord</a>
  * 
  * @author <a href="mailto:thomas.fuller@coherentlogic.com">Thomas P. Fuller</a>
@@ -98,10 +99,29 @@ public class JCopyBookConverter {
      * Invokes the {@link #readCopyBookAsString(String, String, String, String, IUpdateFieldName)} using an instance of
      * PassThroughUpdateFieldName for the updateFldName.
      */
-    public String readCopyBookAsString(String copyBookFile, String inFile, String font, String sep, String quote) throws IOException {
+    public String readCopyBookAsString(
+        String copyBookFile,
+        String inFile,
+        String font,
+        String sep,
+        String quote
+    ) throws IOException {
         return readCopyBookAsString(copyBookFile, inFile, font, sep, quote, new PassThroughUpdateFieldName());
     }
 
+    /**
+     * TODO: Add: binFormat, splitCopybookOption, copybookFormat, inputFileStructure
+     * 
+     * 
+     * @param copyBookFile
+     * @param inFile
+     * @param font
+     * @param sep
+     * @param quote
+     * @param updateFldName
+     * @return
+     * @throws IOException
+     */
     public String readCopyBookAsString(
         String copyBookFile,
         String inFile,
@@ -122,10 +142,10 @@ public class JCopyBookConverter {
 
         schema = conv.loadCopyBook(
             copyBookFile,
-            CopybookLoader.SPLIT_NONE,
+            CopybookLoader.SPLIT_NONE, // splitCopybookOption, see https://github.com/svn2github/jrecord/blob/master/Source/JRecord/src/net/sf/JRecord/External/CopybookLoader.java
             0,
             font,
-            Cb2xmlConstants.USE_STANDARD_COLUMNS,
+            Cb2xmlConstants.USE_STANDARD_COLUMNS, // Copybook line format
             binFormat,
             0,
             new TextLog()
@@ -153,7 +173,7 @@ public class JCopyBookConverter {
          *
          * @see net.sf.JRecord.IO.AbstractLineIOProvider#getStructureName(int)
          */
-        var inputFileStructure = Constants.IO_FIXED_LENGTH;// -IFS IO_DEFAULT;
+        var inputFileStructure = Constants.IO_FIXED_LENGTH;
 
         schema.setFileStructure(inputFileStructure);
 
@@ -162,9 +182,6 @@ public class JCopyBookConverter {
         AbstractLineReader reader = ioProvider.getLineReader(layout);
 
         reader.open(inFile, layout);
-//            "/Users/thospfuller/development/projects/rcobol/download/"
-//            + "Source/JRecord/src/net/sf/JRecord/zTest/Common/SampleFiles/DTAR020.bin", layout);
-//            //+ "Source/JRecord/src/net/sf/JRecord/zTest/Common/SampleFiles/DTAR020.bin", layout);
 
         var result = readCopyBookAsJDataFrameBuilder (reader, layout, font, sep, quote, updateFldName);
 
@@ -173,23 +190,25 @@ public class JCopyBookConverter {
         return (String) result.serialize();
     }
 
-    private String formatField(Object value, String sep, String quote) {
-        String v;
+    static String formatField(Object value, String sep, String quote) {
+
+        String result;
+
         if (value == null) {
-            v = "";
+            result = "";
         } else {
-            v = value.toString();
+            result = value.toString();
             if (quote.length() == 0) {
-                v = value.toString();
-            } else if (v.indexOf(quote) >= 0) {
-                StringBuilder sb = new StringBuilder(v);
+                result = value.toString();
+            } else if (result.indexOf(quote) >= 0) {
+                StringBuilder sb = new StringBuilder(result);
                 Conversion.replace(sb, quote, quote + quote);
-                v = quote + sb.toString() + quote;
-            } else if (v.indexOf(sep) >= 0 || v.indexOf('\n') > 0) {
-                v = quote + v + quote;
+                result = quote + sb.toString() + quote;
+            } else if (result.indexOf(sep) >= 0 || result.indexOf('\n') > 0) {
+                result = quote + result + quote;
             }
         }
 
-        return v;
+        return result;
     }
 }

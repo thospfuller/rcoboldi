@@ -134,6 +134,10 @@ ReadCopyBookAsDataFrame <- function (copyBookFile, inFile, inputFileStructure, f
 
     jCopyBookConverter <- .rcobol.env$jCopyBookConverter
 
+    if (is.null(jCopyBookConverter)) {
+        stop ("The Initialize function must be called exactly once prior to calling this function and it looks like this was not done.")
+    }
+
     tryCatch(
         result <- jCopyBookConverter$readCopyBookAsString (copyBookFile, inFile, inputFileStructure, font, sep, quote), Throwable = function (e) {
             stop(

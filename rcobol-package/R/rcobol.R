@@ -166,13 +166,14 @@ ReadCopyBookAsDataFrame <- function (copyBookFile, inFile, inputFileStructure, f
 #'
 About <- function () {
     cat (
-        " Welcome to the RCOBOL Package, brought to you by Coherent Logic Ltd. \n",
+        " Welcome to the RCOBOLDI (R COBOL Data Integration) Package, brought  \n",
+        "to you by Coherent Logic Ltd.                                         \n",
         "                                                                      \n",
         "Follow Coherent Logic on LinkedIn here:                               \n",
         "                                                                      \n",
         "https://www.linkedin.com/company/229316/                              \n",
         "                                                                      \n",
-        "And connect with the author here:                                     \n",
+        "And connect with the author of this package here:                     \n",
         "                                                                      \n",
         "https://www.linkedin.com/in/thomasfuller/                             \n",
         "                                                                      \n",

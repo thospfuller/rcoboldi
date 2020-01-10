@@ -86,7 +86,7 @@ public class Main {
         var result = jCopyBookConverter.readCopyBookAsString (
             copyBookFile,
             inFile,
-            "ioFixedLength", // 2 ioFixedLength
+            "Fixed Length Binary", // 2 ioFixedLength
             inFont, 
             ",",
             "\"",

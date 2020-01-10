@@ -16,6 +16,7 @@ import net.sf.JRecord.Details.RecordDetail;
 import net.sf.JRecord.External.CobolCopybookLoader;
 import net.sf.JRecord.External.CopybookLoader;
 import net.sf.JRecord.External.ExternalRecord;
+import net.sf.JRecord.External.base.ExternalConversion;
 import net.sf.JRecord.IO.AbstractLineReader;
 import net.sf.JRecord.IO.LineIOProvider;
 import net.sf.JRecord.Log.TextLog;
@@ -205,7 +206,7 @@ public class JCopyBookConverter {
             ", inputFileStructure: " + inputFileStructure + ", font: " + font + ", sep: " + sep + ", quote: " + quote +
             ", updateFldName: " + updateFldName);
 
-        int inputFileStructureNumber = toInt (inputFileStructure);
+        int inputFileStructureNumber = getFileStructure (inputFileStructure);
 
         return readCopyBookAsString(
             copyBookFile,
@@ -218,22 +219,74 @@ public class JCopyBookConverter {
         );
     }
 
-    static int toInt (String inputFileStructure) {
+    static boolean equalsAnyOf (String value, String... anyOfThese) {
+
+        boolean result = false;
+
+        for (String next : anyOfThese)
+            if (value != null && value.equals(next)) {
+                result = true;
+                break;
+            }
+
+        return result;
+    }
+
+    /**
+     * 
+     *
+     * Valid values include:
+     *
+     * "Default"
+     * "Fixed Length Binary"
+     * "Line based Binary"
+     * "Mainframe VB (rdw based) Binary"
+     * "Mainframe VB Dump: includes Block length"
+     * "Fujitsu Cobol VB"
+     * "GNU Cobol VB"
+     *
+     * @param inputFileStructure
+     * @return
+     *
+     * @see https://github.com/thethoughtcoder/jrecord/blob/master/JRecord/src/net/sf/JRecord/External/ExternalConversion.java
+     * @see https://github.com/svn2github/jrecord/blob/master/Source/JRecord/src/net/sf/JRecord/IO/LineIOProvider.java (435)
+     * @see net.sf.JRecord.External.Def.BasicConversion for the list of acceptible string values that can be passed as inputFileStructure.
+     * @see ExternalConversion.getFileStructure (#157)
+     */
+    static int getFileStructure (String inputFileStructure) {
+
+        /*
+         * ioFixedLength,                  // 2 -- #62, See Constants #77
+         * ioVB,                           // 4 -- #66, See Constants #81
+         * ioVBDump,                       // 5 -- #67, See Constants #82
+         * ioStandardTextFile              // 1 -- #??, See Constants #74.
+         * //What about: ioDefault         // standardText; // 58?
+         */
 
         log.debug("inputFileStructure: " + inputFileStructure);
 
-        Integer result = null;
+        if (!equalsAnyOf (
+            inputFileStructure,
+            "Default",
+            "Fixed Length Binary",
+            "Line based Binary",
+            "Mainframe VB (rdw based) Binary",
+            "Mainframe VB Dump: includes Block length",
+            "Fujitsu Cobol VB",
+            "GNU Cobol VB"
+            )
+        ) {
+            log.warn("The inputFileStructure value '" + inputFileStructure + "' is not recognized!");
+        }
 
-        if ("ioStandardTextFile".equals(inputFileStructure))
-            result = 1;
-        else if ("ioFixedLength".equals(inputFileStructure))
-            result = 2;
-        else if ("ioVB".equals(inputFileStructure))
-            result = 4;
-        else if ("ioVBDump".equals(inputFileStructure))
-            result = 5;
-        else
-            result = Integer.parseInt(inputFileStructure);
+        /* Takes a db index param or file structure string and returns the file structure.
+         * 
+         * Warning: Insofar as the code for the ExternalConversion.getFileStructure (#157) method goes, the first param
+         *          is unused and hence has no impact.
+         */
+        int UNUSED = -9999;
+
+        int result = ExternalConversion.getFileStructure(UNUSED, inputFileStructure);
 
         log.debug("result: " + result);
 
@@ -255,7 +308,7 @@ public class JCopyBookConverter {
         String quote
     ) throws IOException {
 
-        int inputFileStructureNumber = toInt (inputFileStructure);
+        int inputFileStructureNumber = getFileStructure (inputFileStructure);
 
         return readCopyBookAsString(
             copyBookFile,

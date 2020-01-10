@@ -108,12 +108,22 @@ Initialize <- function () {
 #' This function delegates to the R COBOL Java API and returns the results as a data frame. 
 #'
 #' \dontrun{
-#' RCOBOL::ReadCopyBookAsDataFrame("/Users/thospfuller/development/projects/rcobol/download/Examples/SchemaCompare/cobol_copybooks/DTAR020.cbl", "/Users/thospfuller/development/projects/rcobol/download/Source/JRecord/src/net/sf/JRecord/zTest/Common/SampleFiles/DTAR020.bin", "2", cp037", ",", "\"")
+#' RCOBOL::ReadCopyBookAsDataFrame("/Users/thospfuller/development/projects/rcobol/download/Examples/SchemaCompare/cobol_copybooks/DTAR020.cbl", "/Users/thospfuller/development/projects/rcobol/download/Source/JRecord/src/net/sf/JRecord/zTest/Common/SampleFiles/DTAR020.bin", "Fixed Length Binary", cp037", ",", "\"")
 #' }
+#'
+#' Valid inputFileStructure values are as follows:
+#'
+#' "Default"
+#' "Fixed Length Binary"
+#' "Line based Binary"
+#' "Mainframe VB (rdw based) Binary"
+#' "Mainframe VB Dump: includes Block length"
+#' "Fujitsu Cobol VB"
+#' "GNU Cobol VB"
 #'
 #' @param copyBookFile The CopyBook file.
 #' @param inFile The binary file.
-#' @param inputFileStructure One of One of: "1" OR "ioStandardTextFile", "2" OR "ioFixedLength", "4" OR "ioVB", or "5" OR "ioVBDump".
+#' @param inputFileStructure The input file structure, see above for possible values.
 #' @param font The font.
 #' @param sep The line separator.
 #' @param quote The quote character. 

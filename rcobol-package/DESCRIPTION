@@ -1,6 +1,6 @@
-Package: RCOBOL
+Package: RCOBOLDI
 Type: Package
-Title: R COBOL Package
+Title: R COBOL Data Integration Package
 Version: 1.0
 Date: 2020-01-07
 Author: Thomas P. Fuller <thomas.fuller@coherentlogic.com>
@@ -19,7 +19,7 @@ LazyLoad: yes
 License: LGPL-3
 Copyright: (C) 2020 Coherent Logic Limited; ALL RIGHTS RESERVED.
 URL: https://github.com/bmTas/JRecord/tree/master/Source/JRecord_Project
-    https://coherentlogic.com/wordpress/middleware-development/RCOBOL?source=cran
+    https://coherentlogic.com/wordpress/middleware-development/RCOBOLDI
 Repository: https://bitbucket.org/CoherentLogic/
 Archs: i386, x64
 RoxygenNote: 7.0.2

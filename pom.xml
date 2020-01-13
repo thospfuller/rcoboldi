@@ -73,7 +73,7 @@
                 <!--<scope>import</scope>-->
             </dependency>
             <dependency>
-                <groupId>com.coherentlogic.rproject.integration</groupId>
+                <groupId>com.coherentlogic.rproject.integration.jdataframe</groupId>
                 <artifactId>jdataframe-core</artifactId>
                 <version>1.0.0-RELEASE</version>
             </dependency>

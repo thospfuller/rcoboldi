@@ -70,7 +70,7 @@ public class JCopyBookConverter {
 
         for (int ctr = 1; ctr < rec.getFieldCount(); ctr++) {
 
-            var header = (sep + updateFldName.updateName(rec.getField(ctr).getName()));
+            var header = (updateFldName.updateName(rec.getField(ctr).getName()));
 
             log.debug ("(first scan) header: " + header);
 
@@ -216,9 +216,8 @@ public class JCopyBookConverter {
             log.trace("serializedResult: " + serializedResult);
         }
 
-        log.info("<info> Java results performance statistics are: " + monitor);
-
-        System.out.println("Java results performance statistics are: " + monitor);
+        log.info("jDataFrame.statistics: " + result.getDataFrame().getStatistics() +
+            ", Java performance statistics are: " + monitor);
 
         return serializedResult;
     }

@@ -4,38 +4,37 @@
           "http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd">
 
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
-    <appender name="consoleAppender" class="org.apache.log4j.ConsoleAppender">
-        <param name="Target" value="System.out"/>
-        <layout class="org.apache.log4j.PatternLayout">
-            <param name="ConversionPattern" value="%d %-5p %c{1} - %m%n"/>
-        </layout>
-    </appender>
-    <appender name="fileAppender" class="org.apache.log4j.RollingFileAppender">
-       <param name="append" value="false" />
-       <param name="maxFileSize" value="200mb" />
-       <param name="maxBackupIndex" value="2" />
-       <param name="file" value="${user.home}/rcobol-package/rcobol.log" />
-       <layout class="org.apache.log4j.PatternLayout">
-        <param name="ConversionPattern" 
-            value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n" />
-       </layout>
-    </appender>
 
-    <logger name="com.coherentlogic.coherent.data.model.core.domain">
-        <level value="info"/>
-        <appender-ref ref="consoleAppender"/>
-        <appender-ref ref="fileAppender"/>
-    </logger>
+    <appenders>
+        <Console name="consoleAppender" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+        <RollingFile name="fileAppender" fileName="${sys:user.home}/rcobol-package-logs/rcobol.log"
+            filePattern="$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
+            <PatternLayout>
+                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="20 MB"/>
+            </Policies>
+        </RollingFile>
+    </appenders>
 
-    <logger name="com.coherentlogic.rproject.integration.rcobol.api">
-        <level value="info"/>
-        <appender-ref ref="consoleAppender"/>
-        <appender-ref ref="fileAppender"/>
-    </logger>
+    <loggers>
+        <logger name="com.coherentlogic.coherent.data.model.core.domain" level="info" additivity="false">
+            <appender-ref ref="consoleAppender"/>
+            <appender-ref ref="fileAppender"/>
+        </logger>
 
-    <root>
-        <priority value ="info" />
-        <appender-ref ref="consoleAppender"/>
-        <appender-ref ref="fileAppender"/>
-    </root>
+        <logger name="com.coherentlogic.rproject.integration.rcobol.api" level="info" additivity="false">
+            <appender-ref ref="consoleAppender"/>
+            <appender-ref ref="fileAppender"/>
+        </logger>
+
+        <root level="info" additivity="false">
+            <appender-ref ref="consoleAppender"/>
+            <appender-ref ref="fileAppender"/>
+        </root>
+    </loggers>
 </log4j:configuration>

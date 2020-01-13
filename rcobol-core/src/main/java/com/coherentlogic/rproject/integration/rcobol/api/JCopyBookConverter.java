@@ -23,6 +23,9 @@ import net.sf.JRecord.Log.TextLog;
 import net.sf.JRecord.Numeric.ICopybookDialects;
 import net.sf.cb2xml.def.Cb2xmlConstants;
 
+import com.jamonapi.Monitor;
+import com.jamonapi.MonitorFactory;
+
 /**
  * Offers functionality for converting COBOL CopyBook files into either JDataFrame or JSON (String).
  *
@@ -41,6 +44,7 @@ public class JCopyBookConverter {
     private final LineIOProvider ioProvider = new LineIOProvider();
 
     private JDataFrameBuilder<String, String[]> readCopyBookAsJDataFrameBuilder (
+        // Note that copyBookFile, inFile, and inputFileStructure are not needed by this method.
         AbstractLineReader reader,
         LayoutDetail layout,
         String font,
@@ -48,6 +52,11 @@ public class JCopyBookConverter {
         String quote,
         IUpdateFieldName updateFldName
     ) throws IOException {
+
+        final Monitor monitor = MonitorFactory.start("readCopyBookAsJDataFrameBuilder method");
+
+        log.debug("readCopyBookAsJDataFrameBuilder: method begins; font: " + font + ", sep: " + sep + ", quote: " +
+            quote + ", updateFldName: " + updateFldName);
 
         JDataFrameBuilder<String, String[]> result =
             new JDataFrameBuilder<String, String[]> (
@@ -92,6 +101,15 @@ public class JCopyBookConverter {
             }
         }
 
+        monitor.stop ();
+
+        log.debug("readCopyBookAsJDataFrameBuilder: method ends; performance monitor: " + monitor +
+            ", result.statistics: " + result.getDataFrame().getStatistics () + ", result: (set level to trace)");
+
+        if (log.isTraceEnabled()) {
+            log.trace("result: " + result);
+        }
+
         return result;
     }
 
@@ -119,7 +137,9 @@ public class JCopyBookConverter {
         IUpdateFieldName updateFldName
     ) throws IOException {
 
-        log.debug("readCopyBookAsString: method invoked; copyBookFile: " + copyBookFile + ", inFile: " + inFile +
+        final Monitor monitor = MonitorFactory.start("readCopyBookAsJDataFrameBuilder method");
+
+        log.debug("readCopyBookAsString: method begins; copyBookFile: " + copyBookFile + ", inFile: " + inFile +
             ", inputFileStructure (int): " + inputFileStructure + ", font: " + font + ", sep: " + sep +
             ", quote: " + quote +
             ", updateFldName: " + updateFldName);
@@ -187,7 +207,18 @@ public class JCopyBookConverter {
 
         String serializedResult = (String) result.serialize();
 
-        log.debug("serializedResult: " + serializedResult);
+        monitor.stop();
+
+        log.debug("readCopyBookAsString: method returns; performance monitor: " + monitor +
+            ", serializedResult: (set level to trace)");
+
+        if (log.isTraceEnabled()) {
+            log.trace("serializedResult: " + serializedResult);
+        }
+
+        log.info("<info> Java results performance statistics are: " + monitor);
+
+        System.out.println("Java results performance statistics are: " + monitor);
 
         return serializedResult;
     }
@@ -294,7 +325,7 @@ public class JCopyBookConverter {
 
         int result = ExternalConversion.getFileStructure(UNUSED, inputFileStructure);
 
-        log.debug("result: " + result);
+        log.debug("getFileStructure: method ends; result: " + result);
 
         return result;
     }

@@ -311,8 +311,6 @@ public class JCopyBookConverter {
                 "or may not complete successfully.";
 
             log.warn(message);
-
-            System.err.println(message);
         }
 
         /* Takes a db index param or file structure string and returns the file structure.

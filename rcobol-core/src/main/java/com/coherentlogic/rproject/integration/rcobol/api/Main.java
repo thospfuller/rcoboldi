@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import com.coherentlogic.rproject.integration.rcobol.api.JCopyBookConverter.PassThroughUpdateFieldName;
 
+import net.sf.JRecord.Common.Conversion;
+
 /**
  * 
 Not all copybook files can be converted into CSV.
@@ -46,7 +48,6 @@ For DTAR020:
 -O G:/Users/ExampleUserTst01/RecordEditor_HSQL/SampleFiles/DTAR020.bin.csv
 
 Also RecordEditor/RecsvEditor can generate Cobol2Csv Scripts from a copybook/file.
-I will do a Wiki for this and let you know when done.
 
  * -----
 ./Source/OtherSource/JRecord_Cobol2Json_package/cobolToJson/src/net/sf/JRecord/cbl2json/zExampleGen/Dtar020ToJson.java
@@ -68,13 +69,30 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-    	// /Users/thospfuller/development/projects/rcobol/download/
-        var copyBookFile = "/Users/thospfuller/development/projects/rcobol/download/Examples/SchemaCompare/cobol_copybooks/DTAR020.cbl";
-        var inFile       = "/Users/thospfuller/development/projects/rcobol/download/Source/JRecord/src/net/sf/JRecord/zTest/Common/SampleFiles/DTAR020.bin";
+
+// WORKING / "Fixed Length Binary", IFS = "cp037"       var copyBookFile = "/Users/thospfuller/development/projects/rcobol/download/Examples/SchemaCompare/cobol_copybooks/DTAR020.cbl";
+//        var inFile       = "/Users/thospfuller/development/projects/rcobol/download/Source/JRecord/src/net/sf/JRecord/zTest/Common/SampleFiles/DTAR020.bin";
+
+// WORKING / "Fixed Length Binary", IFS = "cp037"        var copyBookFile = "/Users/thospfuller/development/projects/rcobol/download/Examples/SchemaCompare/cobol_copybooks/DTAR107.cbl";
+//        var inFile       = "/Users/thospfuller/development/projects/rcobol/download/Source/JRecord/src/net/sf/JRecord/zTest/Common/SampleFiles/DTAR107.bin";
+
+/* WORKING FIS = Text, inFont = Conversion.DEFAULT_ASCII_CHARSET
+        var copyBookFile = "/Users/thospfuller/development/projects/rcobol/download/CopyBook/Cobol/AmsLocation.cbl";
+        var inFile       = "/Users/thospfuller/development/projects/rcobol/download/SampleFiles/Ams_LocDownload_20041228.txt";
+var result = jCopyBookConverter.readCopyBookAsString (
+    copyBookFile,
+    inFile,
+    "Text",
+    inFont, 
+    ",",
+    "\"",
+    new PassThroughUpdateFieldName ()
+);
+*/
 
         var jCopyBookConverter = new JCopyBookConverter ();
 
-        var inFont = "cp037";
+        var inFont = Conversion.DEFAULT_ASCII_CHARSET;//"cp037";
 
         /**
          * https://sourceforge.net/p/jrecord/wiki/Home/
@@ -86,7 +104,7 @@ public class Main {
         var result = jCopyBookConverter.readCopyBookAsString (
             copyBookFile,
             inFile,
-            "Fixed Length Binary", // 2 ioFixedLength
+            "Text",
             inFont, 
             ",",
             "\"",

@@ -125,7 +125,7 @@ Initialize <- function () {
 #' @param inFile The binary file.
 #' @param inputFileStructure The input file structure, see above for possible values.
 #' @param font The font.
-#' @param sep The line separator.
+#' @param sep The separator, for example ",".
 #' @param quote The quote character. 
 #'
 #' @export

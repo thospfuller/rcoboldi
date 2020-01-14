@@ -20,23 +20,6 @@
 #' RCOBOLDI::ReadCopyBookAsDataFrame("/Users/thospfuller/development/projects/rcobol/download/Examples/SchemaCompare/cobol_copybooks/DTAR020.cbl", "/Users/thospfuller/development/projects/rcobol/download/Source/JRecord/src/net/sf/JRecord/zTest/Common/SampleFiles/DTAR020.bin", "cp037", ",", "\"")
 #' }
 #'
-#' \dontrun{
-#' library(rJava)
-#' library(RJSONIO)
-#' .jinit()
-#' .jaddClassPath("/Users/thospfuller/development/projects/rcobol/rcobol-api/rcobol-assembly/target/rcobol-assembly-1.0.0-RELEASE.jar")
-#' jCopyBookConverter <- .jnew('com/coherentlogic/rproject/integration/rcoboldi/api/JCopyBookConverter')
-#' copyBookFile <- "/Users/thospfuller/development/projects/rcobol/download/Examples/SchemaCompare/cobol_copybooks/DTAR020.cbl"
-#' inFile <- "/Users/thospfuller/development/projects/rcobol/download/Source/JRecord/src/net/sf/JRecord/zTest/Common/SampleFiles/DTAR020.bin"
-#' inFont <- "cp037"
-#' result <- jCopyBookConverter$readCopyBookAsString (copyBookFile, inFile, inFont, ",", "\"")
-#' resultAsJson <- RJSONIO::fromJSON(result)
-#' uncoercedResultDF <- as.data.frame(do.call("rbind", resultAsJson))
-#' coercedResultDF <- t(uncoercedResultDF)
-#' resultAsDF <- as.data.frame(coercedResultDF)
-#' head(resultAsDF)
-#' }
-#'
 #' See also: https://github.com/s-u/rJava/issues/151
 #'
 #' sudo R CMD javareconf
@@ -107,13 +90,12 @@ Initialize <- function (disableAbout = FALSE) {
 
 #' This function delegates to the R COBOL Java API and returns the results as a data frame. 
 #'
+#' Note below that "cp1252" = Conversion.DEFAULT_ASCII_CHARSET.
+#'
 #' \dontrun{
-#' result <- RCOBOLDI::ReadCopyBookAsDataFrame("/Users/thospfuller/development/projects/rcobol/download/Examples/SchemaCompare/cobol_copybooks/DTAR020.cbl", "/Users/thospfuller/development/projects/rcobol/download/Source/JRecord/src/net/sf/JRecord/zTest/Common/SampleFiles/DTAR020.bin", "Fixed Length Binary", "cp037")
-#' result <- RCOBOLDI::ReadCopyBookAsDataFrame("/Users/thospfuller/development/projects/rcobol/download/Examples/SchemaCompare/cobol_copybooks/DTAR107.cbl", "/Users/thospfuller/development/projects/rcobol/download/Source/JRecord/src/net/sf/JRecord/zTest/Common/SampleFiles/DTAR107.bin", "Fixed Length Binary", "cp037")
-#' 
-#' Note: cp1252 = Conversion.DEFAULT_ASCII_CHARSET
-#' result <- RCOBOLDI::ReadCopyBookAsDataFrame("/Users/thospfuller/development/projects/rcobol/download/CopyBook/Cobol/AmsLocation.cbl", "/Users/thospfuller/development/projects/rcobol/download/SampleFiles/Ams_LocDownload_20041228.txt", "Text", "cp1252")
-#' 
+#' result <- RCOBOLDI::ReadCopyBookAsDataFrame("../java/rcoboldi-core/src/test/resources/example1/DTAR020.cbl", "../java/rcoboldi-core/src/test/resources/example1/DTAR020.bin", "Fixed Length Binary", "cp037")
+#' result <- RCOBOLDI::ReadCopyBookAsDataFrame("../java/rcoboldi-core/src/test/resources/example2/DTAR107.cbl", "../java/rcoboldi-core/src/test/resources/example2/DTAR107.bin", "Fixed Length Binary", "cp037")
+#' result <- RCOBOLDI::ReadCopyBookAsDataFrame("../java/rcoboldi-core/src/test/resources/example3/AmsLocation.cbl", "../java/rcoboldi-core/src/test/resources/example3/Ams_LocDownload_20041228.txt", "Text", "cp1252")
 #' }
 #'
 #' Valid inputFileStructure values are as follows:

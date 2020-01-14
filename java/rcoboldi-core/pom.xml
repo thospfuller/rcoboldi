@@ -12,11 +12,11 @@
     </parent>
 
     <groupId>com.coherentlogic.rproject.integration.rcobol</groupId>
-    <artifactId>rcobol-core</artifactId>
+    <artifactId>rcoboldi-core</artifactId>
     <version>${project.parent.version}</version>
     <packaging>jar</packaging>
 
-    <name>RCobol-Core</name>
+    <name>R COBOL DI (Data Integration) Core</name>
 
     <url>https://coherentlogic.com/middleware-development/rcobolconnector/</url>
 

@@ -54,8 +54,8 @@
 
     <!-- Ordering is important here. -->
     <modules>
-        <module>rcobol-core</module>
-        <module>rcobol-assembly</module>
+        <module>rcoboldi-core</module>
+        <module>rcoboldi-assembly</module>
     </modules>
 
     <dependencyManagement>
@@ -79,7 +79,7 @@
             </dependency>
             <dependency>
                 <groupId>com.coherentlogic.rproject.integration</groupId>
-                <artifactId>rcobol-core</artifactId>
+                <artifactId>rcoboldi-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>

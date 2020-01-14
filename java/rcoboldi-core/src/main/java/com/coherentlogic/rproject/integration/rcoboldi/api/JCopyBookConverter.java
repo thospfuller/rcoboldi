@@ -1,4 +1,4 @@
-package com.coherentlogic.rproject.integration.rcobol.api;
+package com.coherentlogic.rproject.integration.rcoboldi.api;
 
 import java.io.IOException;
 

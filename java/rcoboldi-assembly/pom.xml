@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.coherentlogic.rproject.integration.rcobol</groupId>
-    <artifactId>rcobol-assembly</artifactId>
+    <artifactId>rcoboldi-assembly</artifactId>
     <packaging>jar</packaging>
 
     <parent>
@@ -22,7 +22,7 @@
     <dependencies>
         <dependency>
             <groupId>com.coherentlogic.rproject.integration.rcobol</groupId>
-            <artifactId>rcobol-core</artifactId>
+            <artifactId>rcoboldi-core</artifactId>
             <version>1.0.0-RELEASE</version>
         </dependency>
     </dependencies>
@@ -53,7 +53,7 @@
                             <transformers>
                                 <transformer
                                     implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>com.coherentlogic.rproject.integration.rcobol.api.Main</mainClass>
+                                    <mainClass>com.coherentlogic.rproject.integration.rcoboldi.api.Main</mainClass>
                                 </transformer>
                                 <transformer
                                     implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">

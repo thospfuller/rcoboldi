@@ -9,7 +9,7 @@
         <Console name="consoleAppender" target="SYSTEM_OUT">
             <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
         </Console>
-        <RollingFile name="fileAppender" fileName="${sys:user.home}/rcobol-package-logs/rcobol.log"
+        <RollingFile name="fileAppender" fileName="${sys:user.home}/rcoboldi-package-logs/rcoboldi.log"
             filePattern="$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
             <PatternLayout>
                 <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
@@ -27,7 +27,7 @@
             <appender-ref ref="fileAppender"/>
         </logger>
 
-        <logger name="com.coherentlogic.rproject.integration.rcobol.api" level="info" additivity="false">
+        <logger name="com.coherentlogic.rproject.integration.rcoboldi.api" level="info" additivity="false">
             <appender-ref ref="consoleAppender"/>
             <appender-ref ref="fileAppender"/>
         </logger>

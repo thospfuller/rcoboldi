@@ -1,8 +1,8 @@
-package com.coherentlogic.rproject.integration.rcobol.api;
+package com.coherentlogic.rproject.integration.rcoboldi.api;
 
 import java.io.IOException;
 
-import com.coherentlogic.rproject.integration.rcobol.api.JCopyBookConverter.PassThroughUpdateFieldName;
+import com.coherentlogic.rproject.integration.rcoboldi.api.JCopyBookConverter.PassThroughUpdateFieldName;
 
 import net.sf.JRecord.Common.Conversion;
 

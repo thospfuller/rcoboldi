@@ -7,7 +7,7 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.coherentlogic.rproject.integration.rcobol</groupId>
-  <artifactId>rcobol-assembly</artifactId>
+  <artifactId>rcoboldi-assembly</artifactId>
   <name>RCOBOL Assembly Module</name>
   <url>https://coherentlogic.com/middleware-development/rcobol/</url>
   <build>
@@ -34,7 +34,7 @@
               </filters>
               <transformers>
                 <transformer>
-                  <mainClass>com.coherentlogic.rproject.integration.rcobol.api.Main</mainClass>
+                  <mainClass>com.coherentlogic.rproject.integration.rcoboldi.api.Main</mainClass>
                 </transformer>
                 <transformer>
                   <resource>META-INF/spring.handlers</resource>

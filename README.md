@@ -22,9 +22,9 @@ RCOBOLDI::Initialize()
 /*
  * Substitute the directory path below with one which points to the test files being used.
  *
- * These test files below can be found here:
+ * The test files below can be found here:
  *
- * https://bitbucket.org/CoherentLogic/rcoboldi/src/master/java/rcoboldi-core/src/test/resources/ 
+ * https://github.com/thospfuller/rcoboldi/tree/master/java/rcoboldi-core/src/test/resources 
  */
 result <- RCOBOLDI::ReadCopyBookAsDataFrame("/Users/thospfuller/development/projects/rcoboldi/java/rcoboldi-core/src/test/resources/example1/DTAR020.cbl", "/Users/thospfuller/development/projects/rcoboldi/java/rcoboldi-core/src/test/resources/example1/DTAR020.bin", "Fixed Length Binary", "cp037")
 head(result)

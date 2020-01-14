@@ -167,7 +167,7 @@ About <- function () {
         "                                                                               \n",
         "  Follow : https://www.linkedin.com/company/229316/                            \n",
         " Connect : https://www.linkedin.com/in/thomasfuller/                           \n",
-        "    Fork : https://github.com/thospfuller/rcoboldi/                            \n",
+        "    Like : https://github.com/thospfuller/rcoboldi/                            \n",
         "           https://github.com/bmTas/JRecord/                                   \n",
         "                                                                               \n"
     )

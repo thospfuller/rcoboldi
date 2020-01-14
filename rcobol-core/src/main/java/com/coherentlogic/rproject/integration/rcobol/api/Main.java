@@ -90,6 +90,9 @@ var result = jCopyBookConverter.readCopyBookAsString (
 );
 */
 
+    	var copyBookFile = "/Users/thospfuller/development/projects/rcobol/download/CopyBook/Cobol/AmsLocation.cbl";
+        var inFile       = "/Users/thospfuller/development/projects/rcobol/download/SampleFiles/Ams_LocDownload_20041228.txt";
+
         var jCopyBookConverter = new JCopyBookConverter ();
 
         var inFont = Conversion.DEFAULT_ASCII_CHARSET;//"cp037";
@@ -105,9 +108,7 @@ var result = jCopyBookConverter.readCopyBookAsString (
             copyBookFile,
             inFile,
             "Text",
-            inFont, 
-            ",",
-            "\"",
+            inFont,
             new PassThroughUpdateFieldName ()
         );
 

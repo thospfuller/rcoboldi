@@ -8,8 +8,9 @@ import org.slf4j.LoggerFactory;
 import com.coherentlogic.rproject.integration.dataframe.adapters.RemoteAdapter;
 import com.coherentlogic.rproject.integration.dataframe.builders.JDataFrameBuilder;
 import com.coherentlogic.rproject.integration.dataframe.domain.JDataFrame;
+import com.jamonapi.Monitor;
+import com.jamonapi.MonitorFactory;
 
-import net.sf.JRecord.Common.Conversion;
 import net.sf.JRecord.Details.AbstractLine;
 import net.sf.JRecord.Details.LayoutDetail;
 import net.sf.JRecord.Details.RecordDetail;
@@ -22,9 +23,6 @@ import net.sf.JRecord.IO.LineIOProvider;
 import net.sf.JRecord.Log.TextLog;
 import net.sf.JRecord.Numeric.ICopybookDialects;
 import net.sf.cb2xml.def.Cb2xmlConstants;
-
-import com.jamonapi.Monitor;
-import com.jamonapi.MonitorFactory;
 
 /**
  * Offers functionality for converting COBOL CopyBook files into either JDataFrame or JSON (String).
@@ -44,19 +42,16 @@ public class JCopyBookConverter {
     private final LineIOProvider ioProvider = new LineIOProvider();
 
     private JDataFrameBuilder<String, String[]> readCopyBookAsJDataFrameBuilder (
-        // Note that copyBookFile, inFile, and inputFileStructure are not needed by this method.
         AbstractLineReader reader,
         LayoutDetail layout,
         String font,
-        String sep,
-        String quote,
         IUpdateFieldName updateFldName
     ) throws IOException {
 
         final Monitor monitor = MonitorFactory.start("readCopyBookAsJDataFrameBuilder method");
 
-        log.debug("readCopyBookAsJDataFrameBuilder: method begins; font: " + font + ", sep: " + sep + ", quote: " +
-            quote + ", updateFldName: " + updateFldName);
+        log.debug("readCopyBookAsJDataFrameBuilder: method begins; font: " + font +
+            ", updateFldName: " + updateFldName);
 
         JDataFrameBuilder<String, String[]> result =
             new JDataFrameBuilder<String, String[]> (
@@ -89,7 +84,7 @@ public class JCopyBookConverter {
 
                     var header = rec.getField(ctr).getName();
 
-                    var value = formatField(line.getFieldValue(idx, ctr).asString(), sep, quote);
+                    var value = formatField(line.getFieldValue(idx, ctr).asString());
 
                     log.debug("header: " + header + ", value: " + value);
 
@@ -121,8 +116,6 @@ public class JCopyBookConverter {
      * @param copyBookFile
      * @param inFile
      * @param font
-     * @param sep
-     * @param quote
      * @param updateFldName
      * @return
      * @throws IOException
@@ -130,19 +123,16 @@ public class JCopyBookConverter {
     public String readCopyBookAsString(
         String copyBookFile,
         String inFile,
-        int inputFileStructure, // Constants.IO_FIXED_LENGTH.
+        int inputFileStructure,
         String font,
-        String sep,
-        String quote,
         IUpdateFieldName updateFldName
     ) throws IOException {
 
         final Monitor monitor = MonitorFactory.start("readCopyBookAsJDataFrameBuilder method");
 
         log.debug("readCopyBookAsString: method begins; copyBookFile: " + copyBookFile + ", inFile: " + inFile +
-            ", inputFileStructure (int): " + inputFileStructure + ", font: " + font + ", sep: " + sep +
-            ", quote: " + quote +
-            ", updateFldName: " + updateFldName);
+            ", inputFileStructure (int): " + inputFileStructure + ", font: " + font + ", updateFldName: " +
+            updateFldName);
 
         // #62 https://github.com/svn2github/jrecord/blob/master/Source/JRecord/src/net/sf/JRecord/zExamples/cobol/toCsv/Cobol2CsvAlternative.java
 
@@ -201,7 +191,7 @@ public class JCopyBookConverter {
 
         reader.open(inFile, layout);
 
-        var result = readCopyBookAsJDataFrameBuilder (reader, layout, font, sep, quote, updateFldName);
+        var result = readCopyBookAsJDataFrameBuilder (reader, layout, font, updateFldName);
 
         reader.close();
 
@@ -227,14 +217,11 @@ public class JCopyBookConverter {
             String inFile,
             String inputFileStructure,
             String font,
-            String sep,
-            String quote,
             IUpdateFieldName updateFldName
         ) throws IOException {
 
         log.debug("readCopyBookAsString: method invoked; copyBookFile: " + copyBookFile + ", inFile: " + inFile +
-            ", inputFileStructure: " + inputFileStructure + ", font: " + font + ", sep: " + sep + ", quote: " + quote +
-            ", updateFldName: " + updateFldName);
+            ", inputFileStructure: " + inputFileStructure + ", font: " + font + ", updateFldName: " + updateFldName);
 
         int inputFileStructureNumber = getFileStructure (inputFileStructure);
 
@@ -243,8 +230,6 @@ public class JCopyBookConverter {
             inFile,
             inputFileStructureNumber,
             font,
-            sep,
-            quote,
             updateFldName
         );
     }
@@ -337,9 +322,7 @@ public class JCopyBookConverter {
         String copyBookFile,
         String inFile,
         String inputFileStructure,
-        String font,
-        String sep,
-        String quote
+        String font
     ) throws IOException {
 
         int inputFileStructureNumber = getFileStructure (inputFileStructure);
@@ -349,31 +332,41 @@ public class JCopyBookConverter {
             inFile,
             inputFileStructureNumber,
             font,
-            sep,
-            quote,
             new PassThroughUpdateFieldName()
         );
     }
 
-    static String formatField(Object value, String sep, String quote) {
+    static String formatField(Object value) {
 
-        String result;
+        log.debug("formatField: method invoked; value: " + value);
 
-        if (value == null) {
-            result = "";
-        } else {
-            result = value.toString();
-            if (quote.length() == 0) {
-                result = value.toString();
-            } else if (result.indexOf(quote) >= 0) {
-                StringBuilder sb = new StringBuilder(result);
-                Conversion.replace(sb, quote, quote + quote);
-                result = quote + sb.toString() + quote;
-            } else if (result.indexOf(sep) >= 0 || result.indexOf('\n') > 0) {
-                result = quote + result + quote;
-            }
-        }
+//        String result;
+//
+//        if (value == null) {
+//            result = "";
+//        } else {
+//
+//            result = value.toString();
+//
+//            // TPF: TBD: looks like we could delete the following if/else if/else as when testing this it looks like
+//            //           only the else is ever executed, which means this method simply returns the value.toString and
+//            //           the rest is unnecessary.
+//
+////            if (quote.length() == 0) {
+////                result = value.toString();
+////            } else if (result.indexOf(quote) >= 0) {
+////                StringBuilder sb = new StringBuilder(result);
+////                Conversion.replace(sb, quote, quote + quote);
+////                result = quote + sb.toString() + quote;
+////            } else {
+////            }
+////            else if (result.indexOf(sep) >= 0 || result.indexOf('\n') > 0) {
+////                result = quote + result + quote;
+////            }
+//        }
+//
+//        log.debug("formatField: method ends; result: " + result);
 
-        return result;
+        return value == null ? "" : value.toString();
     }
 }

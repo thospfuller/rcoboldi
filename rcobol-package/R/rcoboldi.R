@@ -104,7 +104,7 @@ Initialize <- function () {
 #' This function delegates to the R COBOL Java API and returns the results as a data frame. 
 #'
 #' \dontrun{
-#' result <- RCOBOLDI::ReadCopyBookAsDataFrame("/Users/thospfuller/development/projects/rcobol/download/Examples/SchemaCompare/cobol_copybooks/DTAR020.cbl", "/Users/thospfuller/development/projects/rcobol/download/Source/JRecord/src/net/sf/JRecord/zTest/Common/SampleFiles/DTAR020.bin", "Fixed Length Binary", cp037")
+#' result <- RCOBOLDI::ReadCopyBookAsDataFrame("/Users/thospfuller/development/projects/rcobol/download/Examples/SchemaCompare/cobol_copybooks/DTAR020.cbl", "/Users/thospfuller/development/projects/rcobol/download/Source/JRecord/src/net/sf/JRecord/zTest/Common/SampleFiles/DTAR020.bin", "Fixed Length Binary", "cp037")
 #' result <- RCOBOLDI::ReadCopyBookAsDataFrame("/Users/thospfuller/development/projects/rcobol/download/Examples/SchemaCompare/cobol_copybooks/DTAR107.cbl", "/Users/thospfuller/development/projects/rcobol/download/Source/JRecord/src/net/sf/JRecord/zTest/Common/SampleFiles/DTAR107.bin", "Fixed Length Binary", "cp037")
 #' 
 #' Note: cp1252 = Conversion.DEFAULT_ASCII_CHARSET

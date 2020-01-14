@@ -97,10 +97,6 @@ Initialize <- function () {
 
     jCopyBookConverter <- .jnew('com/coherentlogic/rproject/integration/rcobol/api/JCopyBookConverter')
         #J("com.coherentlogic.rproject.integration.rcobol.api.JCopyBookConverter")
-
-    #print (
-    #    paste (
-    #        "11111 jCopyBookConverter: ", jCopyBookConverter, sep="\n"))
     
     assign("jCopyBookConverter", jCopyBookConverter, envir = .rcobol.env)
 }
@@ -130,12 +126,10 @@ Initialize <- function () {
 #' @param inFile The binary file.
 #' @param inputFileStructure The input file structure, see above for possible values.
 #' @param font The font.
-#' @param sep The separator, for example ",".
-#' @param quote The quote character. 
 #'
 #' @export
 #'
-ReadCopyBookAsDataFrame <- function (copyBookFile, inFile, inputFileStructure, font, sep, quote) {
+ReadCopyBookAsDataFrame <- function (copyBookFile, inFile, inputFileStructure, font) {
 
     jCopyBookConverter <- .rcobol.env$jCopyBookConverter
 
@@ -144,15 +138,15 @@ ReadCopyBookAsDataFrame <- function (copyBookFile, inFile, inputFileStructure, f
     }
 
     tryCatch(
-        result <- jCopyBookConverter$readCopyBookAsString (copyBookFile, inFile, inputFileStructure, font, sep, quote), Throwable = function (e) {
+        result <- jCopyBookConverter$readCopyBookAsString (copyBookFile, inFile, inputFileStructure, font), Throwable = function (e) {
             stop(
-                paste ("Unable to read the copyBook and convert it into JSON; copyBookFile: ", copyBookFile, ", inFile: ", inFile, ", inputFileStructure: ", inputFileStructure,", font: ", font, ", sep: ", sep, ", quote: ", quote, " -- details follow. ", e$getMessage(), sep="")
+                paste ("Unable to read the copyBook and convert it into JSON; copyBookFile: ", copyBookFile, ", inFile: ", inFile, ", inputFileStructure: ", inputFileStructure,", font: ", font, " -- details follow. ", e$getMessage(), sep="")
             )
         }
     )
-    
+
     resultAsJson <- RJSONIO::fromJSON(result)
-    
+
     uncoercedResultDF <- as.data.frame(do.call("rbind", resultAsJson))
 
     coercedResultDF <- t(uncoercedResultDF)

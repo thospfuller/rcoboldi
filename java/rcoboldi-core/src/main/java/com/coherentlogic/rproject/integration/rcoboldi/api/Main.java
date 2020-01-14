@@ -1,5 +1,6 @@
 package com.coherentlogic.rproject.integration.rcoboldi.api;
 
+import java.io.File;
 import java.io.IOException;
 
 import com.coherentlogic.rproject.integration.rcoboldi.api.JCopyBookConverter.PassThroughUpdateFieldName;
@@ -67,8 +68,11 @@ public class Main {
 
     static String executeExample1 (JCopyBookConverter jCopyBookConverter) throws IOException {
 
-        var copyBookFile = "/Users/thospfuller/development/projects/rcobol/download/Examples/SchemaCompare/cobol_copybooks/DTAR020.cbl";
-        var inFile       = "/Users/thospfuller/development/projects/rcobol/download/Source/JRecord/src/net/sf/JRecord/zTest/Common/SampleFiles/DTAR020.bin";
+        var copyBookFile = new File ("src/test/resources/example1/DTAR020.cbl").getAbsolutePath();
+        var inFile       = new File ("src/test/resources/example1/DTAR020.bin").getAbsolutePath();
+
+//        var copyBookFile = "/Users/thospfuller/development/projects/rcobol/download/Examples/SchemaCompare/cobol_copybooks/DTAR020.cbl";
+//        var inFile       = "/Users/thospfuller/development/projects/rcobol/download/Source/JRecord/src/net/sf/JRecord/zTest/Common/SampleFiles/DTAR020.bin";
 
         var inFont = "cp037";
 
@@ -92,8 +96,11 @@ public class Main {
 
     static String executeExample2 (JCopyBookConverter jCopyBookConverter) throws IOException {
 
-        var copyBookFile = "/Users/thospfuller/development/projects/rcobol/download/Examples/SchemaCompare/cobol_copybooks/DTAR107.cbl";
-        var inFile       = "/Users/thospfuller/development/projects/rcobol/download/Source/JRecord/src/net/sf/JRecord/zTest/Common/SampleFiles/DTAR107.bin";
+        var copyBookFile = new File ("src/test/resources/example2/DTAR107.cbl").getAbsolutePath();
+        var inFile       = new File ("src/test/resources/example2/DTAR107.bin").getAbsolutePath();
+
+//        var copyBookFile = "/Users/thospfuller/development/projects/rcobol/download/Examples/SchemaCompare/cobol_copybooks/DTAR107.cbl";
+//        var inFile       = "/Users/thospfuller/development/projects/rcobol/download/Source/JRecord/src/net/sf/JRecord/zTest/Common/SampleFiles/DTAR107.bin";
 
         var inFont = "cp037";
 
@@ -117,8 +124,11 @@ public class Main {
 
     static String executeExample3 (JCopyBookConverter jCopyBookConverter) throws IOException {
 
-        var copyBookFile = "/Users/thospfuller/development/projects/rcobol/download/CopyBook/Cobol/AmsLocation.cbl";
-        var inFile       = "/Users/thospfuller/development/projects/rcobol/download/SampleFiles/Ams_LocDownload_20041228.txt";
+        var copyBookFile = new File ("src/test/resources/example3/AmsLocation.cbl").getAbsolutePath();
+        var inFile       = new File ("src/test/resources/example3/Ams_LocDownload_20041228.txt").getAbsolutePath();
+
+//        var copyBookFile = "/Users/thospfuller/development/projects/rcobol/download/CopyBook/Cobol/AmsLocation.cbl";
+//        var inFile       = "/Users/thospfuller/development/projects/rcobol/download/SampleFiles/Ams_LocDownload_20041228.txt";
 
         var inFont = Conversion.DEFAULT_ASCII_CHARSET;//"cp037";
 

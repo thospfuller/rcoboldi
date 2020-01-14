@@ -67,7 +67,7 @@ NULL
 
     targetDir = paste ("-Djava.util.logging.config.file=", tempdir (), sep="")
 
-    packageDir = paste ("-DrpackagePath=", system.file(package="rcobol"), sep="")
+    packageDir = paste ("-DrpackagePath=", system.file(package="rcoboldi"), sep="")
 
     rcobolJars = getOption ("RCOBOLDI_JARS")
 
@@ -75,7 +75,7 @@ NULL
         rcobol <- list()
         message (
             paste (
-                "The RCOBOLDI_JARS option is NULL so no additional dependencies have been added. You can add additional dependencies by setting the RCOBOLDI_JARS as follows: options(RCOBOLDI_JARS=list(\"C:/Temp/some.jar\")) prior to using this package (that means *before* executing library (\"RCOBOLDI\").", sep="\n"))
+                "The RCOBOLDI_JARS option is NULL so no additional dependencies have been added. You can add additional dependencies by setting the RCOBOLDI_JARS as follows: options(RCOBOLDI_JARS=list(\"C:/Temp/some.jar\")) prior to using this package (that means *before* executing 'library (\"RCOBOLDI\")'.", sep="\n"))
     } else {
         message (
             paste (
@@ -89,11 +89,15 @@ NULL
 
 #' This function must be called *exactly one time* before the package can be used.
 #'
+#' @param disableAbout When true the function will not print the about message (default: false).
+#'
 #' @export
 #'
-Initialize <- function () {
+Initialize <- function (disableAbout = FALSE) {
 
-    About()
+    if(!disableAbout) {
+        About()
+    }
 
     jCopyBookConverter <- .jnew('com/coherentlogic/rproject/integration/rcoboldi/api/JCopyBookConverter')
         #J("com.coherentlogic.rproject.integration.rcoboldi.api.JCopyBookConverter")
@@ -180,8 +184,9 @@ About <- function () {
         " McLean, VA USA                                                                \n",
         "                                                                               \n",
         "  Follow : https://www.linkedin.com/company/229316/                            \n",
-        " Network : https://www.linkedin.com/in/thomasfuller/                           \n",
-        "  GitHub : https://github.com/thospfuller/rcoboldi                             \n",
+        " Connect : https://www.linkedin.com/in/thomasfuller/                           \n",
+        "    Fork : https://github.com/thospfuller/rcoboldi/                            \n",
+        "           https://github.com/bmTas/JRecord/                                   \n",
         "                                                                               \n"
     )
 }

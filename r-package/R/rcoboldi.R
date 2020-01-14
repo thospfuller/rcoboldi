@@ -25,7 +25,7 @@
 #' library(RJSONIO)
 #' .jinit()
 #' .jaddClassPath("/Users/thospfuller/development/projects/rcobol/rcobol-api/rcobol-assembly/target/rcobol-assembly-1.0.0-RELEASE.jar")
-#' jCopyBookConverter <- .jnew('com/coherentlogic/rproject/integration/rcobol/api/JCopyBookConverter')
+#' jCopyBookConverter <- .jnew('com/coherentlogic/rproject/integration/rcoboldi/api/JCopyBookConverter')
 #' copyBookFile <- "/Users/thospfuller/development/projects/rcobol/download/Examples/SchemaCompare/cobol_copybooks/DTAR020.cbl"
 #' inFile <- "/Users/thospfuller/development/projects/rcobol/download/Source/JRecord/src/net/sf/JRecord/zTest/Common/SampleFiles/DTAR020.bin"
 #' inFont <- "cp037"
@@ -95,8 +95,8 @@ Initialize <- function () {
 
     About()
 
-    jCopyBookConverter <- .jnew('com/coherentlogic/rproject/integration/rcobol/api/JCopyBookConverter')
-        #J("com.coherentlogic.rproject.integration.rcobol.api.JCopyBookConverter")
+    jCopyBookConverter <- .jnew('com/coherentlogic/rproject/integration/rcoboldi/api/JCopyBookConverter')
+        #J("com.coherentlogic.rproject.integration.rcoboldi.api.JCopyBookConverter")
     
     assign("jCopyBookConverter", jCopyBookConverter, envir = .rcobol.env)
 }

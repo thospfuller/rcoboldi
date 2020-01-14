@@ -61,39 +61,64 @@ Also RecordEditor/RecsvEditor can generate Cobol2Csv Scripts from a copybook/fil
   * *             Split: SPLIT_NONE
   * * File Organization: IO_FIXED_LENGTH
   * *              Font: cp037
-
-
  *
  */
 public class Main {
 
-    public static void main(String[] args) throws IOException {
+    static String executeExample1 (JCopyBookConverter jCopyBookConverter) throws IOException {
 
+        var copyBookFile = "/Users/thospfuller/development/projects/rcobol/download/Examples/SchemaCompare/cobol_copybooks/DTAR020.cbl";
+        var inFile       = "/Users/thospfuller/development/projects/rcobol/download/Source/JRecord/src/net/sf/JRecord/zTest/Common/SampleFiles/DTAR020.bin";
 
-// WORKING / "Fixed Length Binary", IFS = "cp037"       var copyBookFile = "/Users/thospfuller/development/projects/rcobol/download/Examples/SchemaCompare/cobol_copybooks/DTAR020.cbl";
-//        var inFile       = "/Users/thospfuller/development/projects/rcobol/download/Source/JRecord/src/net/sf/JRecord/zTest/Common/SampleFiles/DTAR020.bin";
+        var inFont = "cp037";
 
-// WORKING / "Fixed Length Binary", IFS = "cp037"        var copyBookFile = "/Users/thospfuller/development/projects/rcobol/download/Examples/SchemaCompare/cobol_copybooks/DTAR107.cbl";
-//        var inFile       = "/Users/thospfuller/development/projects/rcobol/download/Source/JRecord/src/net/sf/JRecord/zTest/Common/SampleFiles/DTAR107.bin";
+        /**
+         * https://sourceforge.net/p/jrecord/wiki/Home/
+         * https://sourceforge.net/p/jrecord/wiki/Cobol2Csv%2C%20Csv2Cobol/
+         * https://github.com/svn2github/jrecord/blob/master/Source/JRecord_Cbl2Csv/src/net/sf/JRecord/cbl2csv/Cobol2Csv.java -- binFormat is the dialect.
+         *
+         * String copyBookFile, String font, String sep, String quote, IUpdateFieldName updateFldName
+         */
+        var result = jCopyBookConverter.readCopyBookAsString (
+            copyBookFile,
+            inFile,
+            "Fixed Length Binary",
+            inFont,
+            new PassThroughUpdateFieldName ()
+        );
 
-/* WORKING FIS = Text, inFont = Conversion.DEFAULT_ASCII_CHARSET
+        return result;
+    }
+
+    static String executeExample2 (JCopyBookConverter jCopyBookConverter) throws IOException {
+
+        var copyBookFile = "/Users/thospfuller/development/projects/rcobol/download/Examples/SchemaCompare/cobol_copybooks/DTAR107.cbl";
+        var inFile       = "/Users/thospfuller/development/projects/rcobol/download/Source/JRecord/src/net/sf/JRecord/zTest/Common/SampleFiles/DTAR107.bin";
+
+        var inFont = "cp037";
+
+        /**
+         * https://sourceforge.net/p/jrecord/wiki/Home/
+         * https://sourceforge.net/p/jrecord/wiki/Cobol2Csv%2C%20Csv2Cobol/
+         * https://github.com/svn2github/jrecord/blob/master/Source/JRecord_Cbl2Csv/src/net/sf/JRecord/cbl2csv/Cobol2Csv.java -- binFormat is the dialect.
+         *
+         * String copyBookFile, String font, String sep, String quote, IUpdateFieldName updateFldName
+         */
+        var result = jCopyBookConverter.readCopyBookAsString (
+            copyBookFile,
+            inFile,
+            "Fixed Length Binary",
+            inFont,
+            new PassThroughUpdateFieldName ()
+        );
+
+        return result;
+    }
+
+    static String executeExample3 (JCopyBookConverter jCopyBookConverter) throws IOException {
+
         var copyBookFile = "/Users/thospfuller/development/projects/rcobol/download/CopyBook/Cobol/AmsLocation.cbl";
         var inFile       = "/Users/thospfuller/development/projects/rcobol/download/SampleFiles/Ams_LocDownload_20041228.txt";
-var result = jCopyBookConverter.readCopyBookAsString (
-    copyBookFile,
-    inFile,
-    "Text",
-    inFont, 
-    ",",
-    "\"",
-    new PassThroughUpdateFieldName ()
-);
-*/
-
-    	var copyBookFile = "/Users/thospfuller/development/projects/rcobol/download/CopyBook/Cobol/AmsLocation.cbl";
-        var inFile       = "/Users/thospfuller/development/projects/rcobol/download/SampleFiles/Ams_LocDownload_20041228.txt";
-
-        var jCopyBookConverter = new JCopyBookConverter ();
 
         var inFont = Conversion.DEFAULT_ASCII_CHARSET;//"cp037";
 
@@ -112,6 +137,59 @@ var result = jCopyBookConverter.readCopyBookAsString (
             new PassThroughUpdateFieldName ()
         );
 
-        System.out.println (result);
+        return result;
+    }
+
+    public static void main(String[] args) throws IOException {
+
+        var jCopyBookConverter = new JCopyBookConverter ();
+
+        System.out.println ("Example 1: " + executeExample1 (jCopyBookConverter));
+        System.out.println ("Example 2: " + executeExample2 (jCopyBookConverter));
+        System.out.println ("Example 3: " + executeExample3 (jCopyBookConverter));
     }
 }
+
+//WORKING / "Fixed Length Binary", IFS = "cp037"       var copyBookFile = "/Users/thospfuller/development/projects/rcobol/download/Examples/SchemaCompare/cobol_copybooks/DTAR020.cbl";
+//var inFile       = "/Users/thospfuller/development/projects/rcobol/download/Source/JRecord/src/net/sf/JRecord/zTest/Common/SampleFiles/DTAR020.bin";
+
+//WORKING / "Fixed Length Binary", IFS = "cp037"        var copyBookFile = "/Users/thospfuller/development/projects/rcobol/download/Examples/SchemaCompare/cobol_copybooks/DTAR107.cbl";
+//var inFile       = "/Users/thospfuller/development/projects/rcobol/download/Source/JRecord/src/net/sf/JRecord/zTest/Common/SampleFiles/DTAR107.bin";
+
+/* WORKING FIS = Text, inFont = Conversion.DEFAULT_ASCII_CHARSET
+var copyBookFile = "/Users/thospfuller/development/projects/rcobol/download/CopyBook/Cobol/AmsLocation.cbl";
+var inFile       = "/Users/thospfuller/development/projects/rcobol/download/SampleFiles/Ams_LocDownload_20041228.txt";
+var result = jCopyBookConverter.readCopyBookAsString (
+copyBookFile,
+inFile,
+"Text",
+inFont, 
+",",
+"\"",
+new PassThroughUpdateFieldName ()
+);
+*/
+
+//var copyBookFile = "/Users/thospfuller/development/projects/rcobol/download/CopyBook/Cobol/AmsLocation.cbl";
+//var inFile       = "/Users/thospfuller/development/projects/rcobol/download/SampleFiles/Ams_LocDownload_20041228.txt";
+//
+//var jCopyBookConverter = new JCopyBookConverter ();
+//
+//var inFont = Conversion.DEFAULT_ASCII_CHARSET;//"cp037";
+//
+///**
+//* https://sourceforge.net/p/jrecord/wiki/Home/
+//* https://sourceforge.net/p/jrecord/wiki/Cobol2Csv%2C%20Csv2Cobol/
+//* https://github.com/svn2github/jrecord/blob/master/Source/JRecord_Cbl2Csv/src/net/sf/JRecord/cbl2csv/Cobol2Csv.java -- binFormat is the dialect.
+//*
+//* String copyBookFile, String font, String sep, String quote, IUpdateFieldName updateFldName
+//*/
+//var result = jCopyBookConverter.readCopyBookAsString (
+//  copyBookFile,
+//  inFile,
+//  "Text",
+//  inFont,
+//  new PassThroughUpdateFieldName ()
+//);
+//
+//System.out.println (result);

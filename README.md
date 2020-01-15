@@ -4,6 +4,7 @@ R COBOL DI (Data Integration) Package: An R package that facilitates the importa
 
 ## Preconditions:
 - Java 11
+- The drat package has been installed.
 
 # Example:
 

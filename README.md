@@ -2,6 +2,10 @@
 
 R COBOL DI (Data Integration) Package: An R package that facilitates the importation of COBOL CopyBook data directly into the R Project for Statistical Computing as properly structured data frames.
 
+## Releases in Progress:
+- Docker (based on Rocker)
+- Linux
+
 ## Preconditions:
 - Java 11
 - The drat package has been installed.

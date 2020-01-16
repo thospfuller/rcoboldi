@@ -4,9 +4,6 @@ R COBOL DI (Data Integration) Package: An R package that facilitates the importa
 
 Note that not all copybook files can be converted into CSV -- for example single-record type files can be converted to CSV however complicated multi-record type files will NOT map to CSV.
 
-# Work in Progress
-- Docker (based on Rocker)
-
 # Example
 
 ![An example of the R COBOL DI (Data Integration) Package in use.](https://github.com/thospfuller/rcoboldi/blob/master/images/RCOBOLDIPackageInAction.png "An example of the R COBOL DI (Data Integration) Package in use.")
@@ -51,6 +48,9 @@ result <- RCOBOLDI::ReadCopyBookAsDataFrame("/Users/thospfuller/development/proj
 # Logging
 
 The Java API uses Log4J and writes files to the ~/rcoboldi-package-logs/ directory.
+
+# Work in Progress
+- Docker (based on Rocker)
 
 # Development Notes
 

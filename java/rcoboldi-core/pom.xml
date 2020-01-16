@@ -61,6 +61,13 @@
             <artifactId>jdataframe-core</artifactId>
         </dependency>
 
+        <!--
+          NOTE: The artifactId must be written as we have it below, the case is crucial.
+ 
+          mvn install:install-file -Dfile=JRecord.jar -DgroupId=net.sf -DartifactId=JRecord -Dversion=0.90.2 -Dpackaging=jar
+          mvn install:install-file -Dfile=cb2xml.jar -DgroupId=net.sf -DartifactId=cb2xml -Dversion=0.90.2 -Dpackaging=jar
+          mvn install:install-file -Dfile=./JRecordCodeGen.jar -DgroupId=net.sf -DartifactId=JRecordCodeGen -Dversion=0.90.2 -Dpackaging=jar
+         -->
         <dependency>
             <groupId>net.sf</groupId>
             <artifactId>JRecord</artifactId>

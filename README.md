@@ -6,9 +6,21 @@ R COBOL DI (Data Integration) Package: An R package that facilitates the importa
 - Docker (based on Rocker)
 - Linux
 
+## Development Notes
+
+### Linux Only
+
+1. sudo add-apt-repository -y ppa:cran/poppler
+2. sudo apt-get update
+3. sudo sudo apt-get install -y libpoppler-cpp-dev
+4. sudo apt-get install -y libxml2-dev
+5. install.packages(c("rversions", "xml2", "roxygen2"))
+6. At this point "Configure Build Tools" should show the option to use Roxygen.
+7. install.packages("pdftools") // May not be necessary.
+
 ## Preconditions:
 - Java 11
-- The drat package has been installed.
+- install.packages(c("drat", "RJSONIO", "rJava"))
 
 # Example:
 

@@ -4,16 +4,23 @@ R COBOL DI (Data Integration) Package: An R package that facilitates the importa
 
 Note that not all copybook files can be converted into CSV -- for example single-record type files can be converted to CSV however complicated multi-record type files will NOT map to CSV.
 
-## Work in Progress
+# Work in Progress
 - Docker (based on Rocker)
 
 # Example
 
+![An example of the R COBOL DI (Data Integration) Package in use.](https://github.com/thospfuller/rcoboldi/blob/master/images/RCOBOLDIPackageInAction.png "An example of the R COBOL DI (Data Integration) Package in use.")
+
 ## Preconditions
+
+The following should be executed prior to attempting to run the R script, below.
+
 - Java 11
 - install.packages(c("drat", "RJSONIO", "rJava"))
 
 ## R Script
+
+The following example should work with the only change needed being the path to the files.
 
 ```library(drat)
 drat::addRepo("thospfuller")

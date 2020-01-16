@@ -26,7 +26,6 @@
 #'
 #' @import RJSONIO
 #' @import rJava
-#' @import rGroovy
 #'
 #' @docType package
 #'

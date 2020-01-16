@@ -2,27 +2,18 @@
 
 R COBOL DI (Data Integration) Package: An R package that facilitates the importation of COBOL CopyBook data directly into the R Project for Statistical Computing as properly structured data frames.
 
-## Releases in Progress:
+Note that not all copybook files can be converted into CSV -- for example single-record type files can be converted to CSV however complicated multi-record type files will NOT map to CSV.
+
+## Work in Progress
 - Docker (based on Rocker)
-- Linux
 
-## Development Notes
+# Example
 
-### Linux Only
-
-1. sudo add-apt-repository -y ppa:cran/poppler
-2. sudo apt-get update
-3. sudo sudo apt-get install -y libpoppler-cpp-dev
-4. sudo apt-get install -y libxml2-dev
-5. install.packages(c("rversions", "xml2", "roxygen2"))
-6. At this point "Configure Build Tools" should show the option to use Roxygen.
-7. install.packages("pdftools") // May not be necessary.
-
-## Preconditions:
+## Preconditions
 - Java 11
 - install.packages(c("drat", "RJSONIO", "rJava"))
 
-# Example:
+## R Script
 
 ```library(drat)
 drat::addRepo("thospfuller")
@@ -49,3 +40,19 @@ result <- RCOBOLDI::ReadCopyBookAsDataFrame("/Users/thospfuller/development/proj
 head(result)
 result <- RCOBOLDI::ReadCopyBookAsDataFrame("/Users/thospfuller/development/projects/rcoboldi/java/rcoboldi-core/src/test/resources/example3/AmsLocation.cbl", "/Users/thospfuller/development/projects/rcoboldi/java/rcoboldi-core/src/test/resources/example3/Ams_LocDownload_20041228.txt", "Text", "cp1252")
 ```
+
+# Logging
+
+The Java API uses Log4J and writes files to the ~/rcoboldi-package-logs/ directory.
+
+# Development Notes
+
+## Linux Only
+
+1. sudo add-apt-repository -y ppa:cran/poppler
+2. sudo apt-get update
+3. sudo sudo apt-get install -y libpoppler-cpp-dev
+4. sudo apt-get install -y libxml2-dev
+5. install.packages(c("rversions", "xml2", "roxygen2"))
+6. At this point "Configure Build Tools" should show the option to use Roxygen.
+7. install.packages("pdftools") // May not be necessary.

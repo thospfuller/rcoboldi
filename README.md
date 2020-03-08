@@ -66,3 +66,7 @@ The Java API uses Log4J and writes files to the ~/rcoboldi-package-logs/ directo
 5. install.packages(c("rversions", "xml2", "roxygen2"))
 6. At this point "Configure Build Tools" should show the option to use Roxygen.
 7. install.packages("pdftools") // May not be necessary.
+
+# See Also
+
+[AbsaOSS cobrix: A COBOL parser and Mainframe/EBCDIC data source for Apache Spark](https://github.com/AbsaOSS/cobrix)

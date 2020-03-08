@@ -72,3 +72,7 @@ The Java API uses Log4J and writes files to the ~/rcoboldi-package-logs/ directo
 # See Also
 
 [AbsaOSS cobrix: A COBOL parser and Mainframe/EBCDIC data source for Apache Spark](https://github.com/AbsaOSS/cobrix)
+
+# Further Examples
+
+![An example of the R COBOL DI (Data Integration) Package loading a file with the inputFileStructure set to "Text" and the font set to "cp1252".](https://github.com/thospfuller/rcoboldi/blob/master/images/RCOBOLDIPackageInActionForTextAndCP1252.png "An example of the R COBOL DI (Data Integration) Package loading a file with the inputFileStructure set to 'Text' and the font set to 'cp1252'.")

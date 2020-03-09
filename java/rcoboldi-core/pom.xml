@@ -67,21 +67,21 @@
           mvn install:install-file -Dfile=JRecord.jar -DgroupId=net.sf -DartifactId=JRecord -Dversion=0.90.2 -Dpackaging=jar
           mvn install:install-file -Dfile=cb2xml.jar -DgroupId=net.sf -DartifactId=cb2xml -Dversion=0.90.2 -Dpackaging=jar
           mvn install:install-file -Dfile=./JRecordCodeGen.jar -DgroupId=net.sf -DartifactId=JRecordCodeGen -Dversion=0.90.2 -Dpackaging=jar
-         -->
+          -->
         <dependency>
             <groupId>net.sf</groupId>
-            <artifactId>JRecord</artifactId>
+            <artifactId>jrecord-base</artifactId>
             <version>0.90.2</version>
         </dependency>
-        <dependency>
+        <!-- dependency>
             <groupId>net.sf</groupId>
             <artifactId>JRecordCodeGen</artifactId>
             <version>0.90.2</version>
-        </dependency>
+        </dependency -->
         <dependency>
             <groupId>net.sf</groupId>
-            <artifactId>cb2xml</artifactId>
-            <version>0.90.2</version>
+            <artifactId>cb2xml_src</artifactId>
+            <version>1.01.1</version>
         </dependency>
 
         <dependency>

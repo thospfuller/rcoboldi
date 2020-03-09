@@ -88,6 +88,7 @@ public class Main {
             inFile,
             "Fixed Length Binary",
             inFont,
+            1, // MAINFRAME
             new PassThroughUpdateFieldName ()
         );
 
@@ -116,6 +117,7 @@ public class Main {
             inFile,
             "Fixed Length Binary",
             inFont,
+            1, // MAINFRAME
             new PassThroughUpdateFieldName ()
         );
 
@@ -144,6 +146,7 @@ public class Main {
             inFile,
             "Text",
             inFont,
+            1, // MAINFRAME
             new PassThroughUpdateFieldName ()
         );
 

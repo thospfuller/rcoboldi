@@ -125,6 +125,7 @@ public class JCopyBookConverter {
         String inFile,
         int inputFileStructure,
         String font,
+        int copybookDialect,
         IUpdateFieldName updateFldName
     ) throws IOException {
 
@@ -141,7 +142,7 @@ public class JCopyBookConverter {
         ExternalRecord schema;
 
         // #126 https://github.com/bmTas/JRecord/blob/master/Source/JRecord_Project/JRecord/src/net/sf/JRecord/zExamples/cobol/toCsv/ParseArgsCobol2Csv.java
-        var binFormat = ICopybookDialects.FMT_MAINFRAME; 
+        var binFormat = copybookDialect; // ICopybookDialects.FMT_MAINFRAME; 
 
         schema = conv.loadCopyBook(
             copyBookFile,
@@ -217,6 +218,7 @@ public class JCopyBookConverter {
             String inFile,
             String inputFileStructure,
             String font,
+            int copybookDialect,
             IUpdateFieldName updateFldName
         ) throws IOException {
 
@@ -230,6 +232,7 @@ public class JCopyBookConverter {
             inFile,
             inputFileStructureNumber,
             font,
+            copybookDialect,
             updateFldName
         );
     }
@@ -322,7 +325,8 @@ public class JCopyBookConverter {
         String copyBookFile,
         String inFile,
         String inputFileStructure,
-        String font
+        String font,
+        String copybookDialect
     ) throws IOException {
 
         int inputFileStructureNumber = getFileStructure (inputFileStructure);
@@ -332,6 +336,7 @@ public class JCopyBookConverter {
             inFile,
             inputFileStructureNumber,
             font,
+            Integer.valueOf (copybookDialect),
             new PassThroughUpdateFieldName()
         );
     }

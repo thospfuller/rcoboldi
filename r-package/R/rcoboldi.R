@@ -111,10 +111,11 @@ Initialize <- function (disableAbout = FALSE) {
 #' @param inFile The binary file.
 #' @param inputFileStructure The input file structure, see above for possible values.
 #' @param font The font.
+#' @param copybookDialect The copybook dialect which can be found [here](https://github.com/bmTas/JRecord/blob/master/Source/JRecord_Project/JRecord_Common/src/net/sf/JRecord/Numeric/ICopybookDialects.java). The default value is 1 (FMT_MAINFRAME).
 #'
 #' @export
 #'
-ReadCopyBookAsDataFrame <- function (copyBookFile, inFile, inputFileStructure, font) {
+ReadCopyBookAsDataFrame <- function (copyBookFile, inFile, inputFileStructure, font, copybookDialect=1) {
 
     jCopyBookConverter <- .rcobol.env$jCopyBookConverter
 
@@ -123,7 +124,7 @@ ReadCopyBookAsDataFrame <- function (copyBookFile, inFile, inputFileStructure, f
     }
 
     tryCatch(
-        result <- jCopyBookConverter$readCopyBookAsString (copyBookFile, inFile, inputFileStructure, font), Throwable = function (e) {
+        result <- jCopyBookConverter$readCopyBookAsString (copyBookFile, inFile, inputFileStructure, font, copybookDialect), Throwable = function (e) {
             stop(
                 paste ("Unable to read the copyBook and convert it into JSON; copyBookFile: ", copyBookFile, ", inFile: ", inFile, ", inputFileStructure: ", inputFileStructure,", font: ", font, " -- details follow. ", e$getMessage(), sep="")
             )

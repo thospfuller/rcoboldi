@@ -2,6 +2,7 @@ package com.coherentlogic.rproject.integration.rcoboldi.api;
 
 import java.io.IOException;
 
+import net.sf.JRecord.Details.fieldValue.FieldValueSmallBin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -84,14 +85,19 @@ public class JCopyBookConverter {
 
                     var header = rec.getField(ctr).getName();
 
-                    var value = formatField(line.getFieldValue(idx, ctr).asString());
+                    var value = line.getFieldValue(idx, ctr);
 
-                    log.debug("header: " + header + ", value: " + value);
+                    var formattedValue = (String) null;
+
+                    if (value != null && !(value.isSpaces () || value.isLowValues() || value.isHighValues()) && value.isFieldPresent())
+                        formattedValue = value.asString();
+
+                    log.debug("header: " + header + ", value: " + value + ", formattedValue: " + formattedValue);
 
                     result
                         .getDataFrame()
                         .addOrReturnExistingColumn(header)
-                        .addValues( new String [] { value.toString() });
+                        .addValues( new String [] { formattedValue });
                 }
             }
         }
@@ -339,39 +345,5 @@ public class JCopyBookConverter {
             Integer.valueOf (copybookDialect),
             new PassThroughUpdateFieldName()
         );
-    }
-
-    static String formatField(Object value) {
-
-        log.debug("formatField: method invoked; value: " + value);
-
-//        String result;
-//
-//        if (value == null) {
-//            result = "";
-//        } else {
-//
-//            result = value.toString();
-//
-//            // TPF: TBD: looks like we could delete the following if/else if/else as when testing this it looks like
-//            //           only the else is ever executed, which means this method simply returns the value.toString and
-//            //           the rest is unnecessary.
-//
-////            if (quote.length() == 0) {
-////                result = value.toString();
-////            } else if (result.indexOf(quote) >= 0) {
-////                StringBuilder sb = new StringBuilder(result);
-////                Conversion.replace(sb, quote, quote + quote);
-////                result = quote + sb.toString() + quote;
-////            } else {
-////            }
-////            else if (result.indexOf(sep) >= 0 || result.indexOf('\n') > 0) {
-////                result = quote + result + quote;
-////            }
-//        }
-//
-//        log.debug("formatField: method ends; result: " + result);
-
-        return value == null ? "" : value.toString();
     }
 }

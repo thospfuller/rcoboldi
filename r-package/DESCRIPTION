@@ -1,8 +1,8 @@
 Package: RCOBOLDI
 Type: Package
 Title: R COBOL DI (Data Integration) Package
-Version: 1.0
-Date: 2020-01-07
+Version: 1.0.1
+Date: 2020-03-15
 Author: Thomas P. Fuller <thomas.fuller@coherentlogic.com>
 Maintainer: Thomas P. Fuller <thomas.fuller@coherentlogic.com>
 Description: Facilitates the importation of COBOL CopyBook files as data frames in the R Project for Statistical Computing.

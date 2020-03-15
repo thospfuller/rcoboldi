@@ -78,6 +78,14 @@
             <artifactId>JRecordCodeGen</artifactId>
             <version>0.90.2</version>
         </dependency -->
+        <!--
+          mvn install:install-file -Dfile=/Users/thospfuller/development/temp/Cobol2Csv_0.90/Cobol2Csv/lib/Cobol2Csv.jar -DgroupId=net.sf -DartifactId=cb2csv -Dversion=0.90 -Dpackaging=jar
+          -->
+        <dependency>
+            <groupId>net.sf</groupId>
+            <artifactId>cb2csv</artifactId>
+            <version>0.90</version>
+        </dependency>
         <dependency>
             <groupId>net.sf</groupId>
             <artifactId>cb2xml_src</artifactId>

@@ -6,7 +6,7 @@ Note that not all copybook files can be converted into CSV -- for example single
 
 # Example
 
-The following example is running in R version 3.6.2 (2019-12-12) -- "Dark and Stormy Night" with Java version "11.0.2".
+The following example is running in R version 3.6.3 with Java version "11.0.2".
 
 ![An example of the R COBOL DI (Data Integration) Package in use.](https://github.com/thospfuller/rcoboldi/blob/master/images/RCOBOLDIPackageInAction.png "An example of the R COBOL DI (Data Integration) Package in use.")
 
@@ -14,7 +14,7 @@ The following example is running in R version 3.6.2 (2019-12-12) -- "Dark and St
 
 The following should be executed prior to attempting to run the R script, below.
 
-- R version 3.6.2 (2019-12-12) -- "Dark and Stormy Night"
+- [R version 3.6.3](https://cran.r-project.org/bin/)
 - Java 11
 - install.packages(c("drat", "RJSONIO", "rJava"))
 

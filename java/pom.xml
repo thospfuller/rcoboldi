@@ -11,9 +11,9 @@
 
     <groupId>com.coherentlogic.rproject.integration</groupId>
     <artifactId>rcobol</artifactId>
-    <version>1.0.0-RELEASE</version>
+    <version>1.0.1-RELEASE</version>
     <packaging>pom</packaging>
-    <name>RCobol Package API</name>
+    <name>R COBOL Data Integration Package API</name>
     <description></description>
     <url>https://coherentlogic.com/middleware-development/rcobol/</url>
 

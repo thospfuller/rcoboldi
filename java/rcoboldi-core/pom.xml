@@ -8,7 +8,7 @@
     <parent>
         <groupId>com.coherentlogic.rproject.integration</groupId>
         <artifactId>rcobol</artifactId>
-        <version>1.0.0-RELEASE</version>
+        <version>1.0.1-RELEASE</version>
     </parent>
 
     <groupId>com.coherentlogic.rproject.integration.rcobol</groupId>

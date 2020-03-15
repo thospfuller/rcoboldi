@@ -66,10 +66,12 @@ Also RecordEditor/RecsvEditor can generate Cobol2Csv Scripts from a copybook/fil
  */
 public class Main {
 
+    static final String PATH_PREFIX = "/Users/thospfuller/development/projects/rcoboldi-gh/rcoboldi/java/rcoboldi-core/";
+
     static String executeExample1 (JCopyBookConverter jCopyBookConverter) throws IOException {
 
-        var copyBookFile = new File ("src/test/resources/example1/DTAR020.cbl").getAbsolutePath();
-        var inFile       = new File ("src/test/resources/example1/DTAR020.bin").getAbsolutePath();
+        var copyBookFile = new File (PATH_PREFIX + "src/test/resources/example1/DTAR020.cbl").toString();
+        var inFile       = new File (PATH_PREFIX + "src/test/resources/example1/DTAR020.bin").toString();
 
 //        var copyBookFile = "/Users/thospfuller/development/projects/rcobol/download/Examples/SchemaCompare/cobol_copybooks/DTAR020.cbl";
 //        var inFile       = "/Users/thospfuller/development/projects/rcobol/download/Source/JRecord/src/net/sf/JRecord/zTest/Common/SampleFiles/DTAR020.bin";
@@ -97,8 +99,8 @@ public class Main {
 
     static String executeExample2 (JCopyBookConverter jCopyBookConverter) throws IOException {
 
-        var copyBookFile = new File ("src/test/resources/example2/DTAR107.cbl").getAbsolutePath();
-        var inFile       = new File ("src/test/resources/example2/DTAR107.bin").getAbsolutePath();
+        var copyBookFile = new File (PATH_PREFIX + "src/test/resources/example2/DTAR107.cbl").toString();
+        var inFile       = new File (PATH_PREFIX + "src/test/resources/example2/DTAR107.bin").toString();
 
 //        var copyBookFile = "/Users/thospfuller/development/projects/rcobol/download/Examples/SchemaCompare/cobol_copybooks/DTAR107.cbl";
 //        var inFile       = "/Users/thospfuller/development/projects/rcobol/download/Source/JRecord/src/net/sf/JRecord/zTest/Common/SampleFiles/DTAR107.bin";
@@ -126,8 +128,8 @@ public class Main {
 
     static String executeExample3 (JCopyBookConverter jCopyBookConverter) throws IOException {
 
-        var copyBookFile = new File ("src/test/resources/example3/AmsLocation.cbl").getAbsolutePath();
-        var inFile       = new File ("src/test/resources/example3/Ams_LocDownload_20041228.txt").getAbsolutePath();
+        var copyBookFile = new File (PATH_PREFIX + "src/test/resources/example3/AmsLocation.cbl").toString();
+        var inFile       = new File (PATH_PREFIX + "src/test/resources/example3/Ams_LocDownload_20041228.txt").toString();
 
 //        var copyBookFile = "/Users/thospfuller/development/projects/rcobol/download/CopyBook/Cobol/AmsLocation.cbl";
 //        var inFile       = "/Users/thospfuller/development/projects/rcobol/download/SampleFiles/Ams_LocDownload_20041228.txt";
@@ -153,6 +155,38 @@ public class Main {
         return result;
     }
 
+    static String executeExample4 (JCopyBookConverter jCopyBookConverter) throws IOException {
+
+        var copyBookFile = new File (PATH_PREFIX + "src/test/resources/example4/absaoss_cobrix_test1_copybook.cob").toString();//.getAbsolutePath();
+        var inFile       = new File (PATH_PREFIX + "src/test/resources/example4/absaoss_cobrix_test1_example.bin").toString();//.getAbsolutePath();
+
+        var inFont = "cp037";
+
+        /**
+         * https://sourceforge.net/p/jrecord/wiki/Home/
+         * https://sourceforge.net/p/jrecord/wiki/Cobol2Csv%2C%20Csv2Cobol/
+         * https://github.com/svn2github/jrecord/blob/master/Source/JRecord_Cbl2Csv/src/net/sf/JRecord/cbl2csv/Cobol2Csv.java -- binFormat is the dialect.
+         *
+         * String copyBookFile, String font, String sep, String quote, IUpdateFieldName updateFldName
+         */
+        var result = jCopyBookConverter.readCopyBookAsString (
+                copyBookFile,
+                inFile,
+                "Fixed Length Binary",
+                inFont,
+                1, // MAINFRAME
+                new PassThroughUpdateFieldName ()
+        );
+
+        return result;
+    }
+
+    /**
+     * /Users/thospfuller/development/projects/rcoboldi-gh/rcoboldi/java/rcoboldi-core/src
+     * /Users/thospfuller/development/projects/rcoboldi-gh/rcoboldi/java/
+     * @param args
+     * @throws IOException
+     */
     public static void main(String[] args) throws IOException {
 
         var jCopyBookConverter = new JCopyBookConverter ();
@@ -160,5 +194,6 @@ public class Main {
         System.out.println ("Example 1: " + executeExample1 (jCopyBookConverter));
         System.out.println ("Example 2: " + executeExample2 (jCopyBookConverter));
         System.out.println ("Example 3: " + executeExample3 (jCopyBookConverter));
+        System.out.println ("Example 4: " + executeExample4 (jCopyBookConverter));
     }
 }

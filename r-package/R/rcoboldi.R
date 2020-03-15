@@ -107,12 +107,6 @@ Initialize <- function (disableAbout = FALSE) {
 #' "Fujitsu Cobol VB"
 #' "GNU Cobol VB"
 #'
-#' @param copyBookFile The CopyBook file.
-#' @param inFile The binary file.
-#' @param inputFileStructure The input file structure, see above for possible values.
-#' @param font The font.
-#' @param copybookDialect The copybook dialect which can be found [here](https://github.com/bmTas/JRecord/blob/master/Source/JRecord_Project/JRecord_Common/src/net/sf/JRecord/Numeric/ICopybookDialects.java). The default value is 1 (FMT_MAINFRAME).
-#'
 #' @export
 #'
 ReadCopyBookAsDataFrame <- function (copyBookFile, inFile, inputFileStructure, font, copybookDialect=1) {

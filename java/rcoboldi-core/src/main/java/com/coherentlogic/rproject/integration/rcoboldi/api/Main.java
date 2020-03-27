@@ -6,6 +6,9 @@ import java.io.IOException;
 import com.coherentlogic.rproject.integration.rcoboldi.api.JCopyBookConverter.PassThroughUpdateFieldName;
 
 import net.sf.JRecord.Common.Conversion;
+import net.sf.JRecord.cbl2csv.Cobol2Csv;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 
@@ -65,6 +68,8 @@ Also RecordEditor/RecsvEditor can generate Cobol2Csv Scripts from a copybook/fil
  *
  */
 public class Main {
+
+    private static final Logger log = LoggerFactory.getLogger(Main.class);
 
     static final String PATH_PREFIX = "/Users/thospfuller/development/projects/rcoboldi-gh/rcoboldi/java/rcoboldi-core/";
 
@@ -187,7 +192,7 @@ public class Main {
      * @param args
      * @throws IOException
      */
-    public static void main(String[] args) throws IOException {
+    public static void test(String[] args) throws IOException {
 
         var jCopyBookConverter = new JCopyBookConverter ();
 
@@ -195,5 +200,22 @@ public class Main {
         System.out.println ("Example 2: " + executeExample2 (jCopyBookConverter));
         System.out.println ("Example 3: " + executeExample3 (jCopyBookConverter));
         System.out.println ("Example 4: " + executeExample4 (jCopyBookConverter));
+    }
+
+    /**
+     * Method delegates to {Cobol2Csv#main}.
+     *
+     * https://sourceforge.net/p/jrecord/wiki/Cobol2Csv%2C%20Csv2Cobol/
+     */
+    public static void main(String[] args) throws IOException {
+
+        log.info ("The main method delegates to Cobol2Csv#main");
+        log.info ("See:");
+        log.info ("https://sourceforge.net/p/jrecord/wiki/Cobol2Csv%2C%20Csv2Cobol/");
+        log.info ("main: method begins; args: " + args);
+
+        Cobol2Csv.main(args);
+
+        log.info ("main: method ends.");
     }
 }

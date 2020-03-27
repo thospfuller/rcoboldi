@@ -54,14 +54,26 @@
                                     </includes>
                                 </filter>
                                 <filter>
-                                    <artifact>net.sf:JRecord</artifact>
+                                    <artifact>net.sf:jrecord-base</artifact>
                                     <includes>
                                         <include>**</include>
                                     </includes>
                                 </filter>
-                                
                                 <filter>
-                                    <artifact>net.sf:cb2xml</artifact>
+                                    <artifact>net.sf:jrecord-common</artifact>
+                                    <includes>
+                                        <include>**</include>
+                                    </includes>
+                                </filter>
+
+                                <filter>
+                                    <artifact>net.sf:cb2csv</artifact>
+                                    <includes>
+                                        <include>**</include>
+                                    </includes>
+                                </filter>
+                                <filter>
+                                    <artifact>net.sf:cb2xml_src</artifact>
                                     <includes>
                                         <include>**</include>
                                     </includes>

@@ -73,6 +73,11 @@
             <artifactId>jrecord-base</artifactId>
             <version>0.90.2</version>
         </dependency>
+        <dependency>
+            <groupId>net.sf</groupId>
+            <artifactId>jrecord-common</artifactId>
+            <version>0.90.2</version>
+        </dependency>
         <!-- dependency>
             <groupId>net.sf</groupId>
             <artifactId>JRecordCodeGen</artifactId>

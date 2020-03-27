@@ -3,6 +3,8 @@ package com.coherentlogic.rproject.integration.rcoboldi.api;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 import net.sf.JRecord.Common.FieldDetail;
 import net.sf.JRecord.Details.fieldValue.FieldValueSmallBin;
@@ -10,6 +12,7 @@ import net.sf.JRecord.JRecordInterface1;
 import net.sf.JRecord.Option.IReformatFieldNames;
 import net.sf.JRecord.Types.Type;
 import net.sf.JRecord.Types.TypeManager;
+import net.sf.JRecord.cbl2csv.Cobol2Csv;
 import net.sf.JRecord.cbl2csv.args.FieldNameUpdaters;
 import net.sf.JRecord.cbl2csv.args.ParseArgsCobol2Csv;
 import static net.sf.JRecord.cbl2csv.args.ParseArgsCobol2Csv.Option;
@@ -368,69 +371,165 @@ public class JCopyBookConverter {
         );
     }
 
+//    /**
+//     * @see <a href="https://github.com/bmTas/JRecord/blob/master/Source/JRecord_Utilities/JRecord_Cbl2Csv/src/net/sf/JRecord/cbl2csv/Cobol2Csv.java">Cobol2Csv.java (development/temp/Cobol2Csv_0.90/Cobol2Csv)</a>
+//     */
+//    public void cobolToCSV(String inputFile, String outputFile, String copybook, String delimiter, String quote, String inputCharacterSet, String outputCharacterSet, String inputFileStructure, String outputFileStructure, String dialect, String rename, String csvParser) {
+//
+//        log.debug("cobolToCSV: method begins; inputFile: " + inputFile + ", outputFile: " + outputFile + ", copybook: " + copybook + ", delimiter: " + delimiter + ", quote: " + quote + ", inputCharacterSet: " + inputCharacterSet + ", outputCharacterSet: " + outputCharacterSet + "inputFileStructure: " + inputFileStructure + ", outputFileStructure: " + outputFileStructure + ", dialect: " + dialect + ", rename: " + rename + ", csvParser: " + csvParser);
+//
+//        ICobolIOBuilder iobCbl = JRecordInterface1.COBOL
+//                .newIOBuilder(copybook)
+//                .setOptimizeTypes(false);
+//
+//        iobCbl.setFileOrganization(Integer.parseInt(inputFileStructure))
+//                .setFont(inputCharacterSet)//inFont)
+//                .setDialect(Integer.parseInt(dialect));//csvArgs.binFormat);
+//
+//        ICsvIOBuilder iobCsv = JRecordInterface1.CSV
+//                .newIOBuilder(delimiter, quote)//csvArgs.sep, csvArgs.quote)
+//                .setFont(outputCharacterSet)//csvArgs.outFont)
+//                .setParser(Integer.parseInt(csvParser))//csvArgs.csvParser)
+//                .setFileOrganization(Integer.parseInt(outputFileStructure));//csvArgs.outputFileStructure);
+//
+//        IDefineCsvFields defineFields = iobCsv.defineFields();
+//        LayoutDetail cobolLayout = null;
+//
+//        try {
+//            cobolLayout = iobCbl.getLayout();
+//        } catch (IOException ioException) {
+//            throw new IORuntimeException("Unable to get the iobCbl layout using the following params: inputFile: " + inputFile
+//                    + ", outputFile: " + outputFile + ", copybook: " + copybook + ", delimiter: " + delimiter
+//                    + ", quote: " + quote + ", inputCharacterSet: " + inputCharacterSet + ", outputCharacterSet: "
+//                    + outputCharacterSet + "inputFileStructure: " + inputFileStructure + ", outputFileStructure: "
+//                    + outputFileStructure + ", dialect: " + dialect + ", rename: " + rename + ", csvParser: "
+//                    + csvParser,
+//                    ioException);
+//        }
+//
+//        IUpdateFieldName updateFieldName;
+//
+//        if (cobolLayout.getRecordCount() != 1) {
+//            log.error("Expecting exactly one record, not " + cobolLayout.getRecordCount());
+//        } else {
+////            TODO: For now we're not updating CSV names -- we can sort this out later.
+////            updateCsvNames(cobolLayout, csvArgs, defineFields);    // Update the field names (change -(,) to _)
+//            defineFields.endOfRecord();
+//            try {
+//                Copy.copyFileByFieldNumber(
+//                    iobCbl.newReader(inputFile),//new FileInputStream(inputFile)),
+//                    iobCsv.newWriter(outputFile),//new FileOutputStream(outputFile),
+//                    iobCsv.getLayout()
+//                );
+//
+//            } catch (IOException ioException) {
+//                throw new IORuntimeException("Unable to get the iobCsv layout using the following params: inputFile: " + inputFile
+//                        + ", outputFile: " + outputFile + ", copybook: " + copybook + ", delimiter: " + delimiter
+//                        + ", quote: " + quote + ", inputCharacterSet: " + inputCharacterSet + ", outputCharacterSet: "
+//                        + outputCharacterSet + "inputFileStructure: " + inputFileStructure + ", outputFileStructure: "
+//                        + outputFileStructure + ", dialect: " + dialect + ", rename: " + rename + ", csvParser: "
+//                        + csvParser,
+//                        ioException);
+//            }
+//        }
+//
+//        log.debug("cobolToCSV: method ends.");
+//    }
+
     /**
-     * @see <a href="https://github.com/bmTas/JRecord/blob/master/Source/JRecord_Utilities/JRecord_Cbl2Csv/src/net/sf/JRecord/cbl2csv/Cobol2Csv.java">Cobol2Csv.java (development/temp/Cobol2Csv_0.90/Cobol2Csv)</a>
+     * Crack a command line.
+     *
+     * @param toProcess the command line to process.
+     *
+     * @return the command line broken into strings.
+     * An empty or null toProcess parameter results in a zero sized array.
+     *
+     * @see <a href="https://github.com/apache/ant/blob/master/src/main/org/apache/tools/ant/types/Commandline.java">Borrowed from Ant CommandLine.java</>
      */
-    public void cobolToCSV(String inputFile, String outputFile, String copybook, String delimiter, String quote, String inputCharacterSet, String outputCharacterSet, String inputFileStructure, String outputFileStructure, String dialect, String rename, String csvParser) {
-
-        log.debug("cobolToCSV: method begins; inputFile: " + inputFile + ", outputFile: " + outputFile + ", copybook: " + copybook + ", delimiter: " + delimiter + ", quote: " + quote + ", inputCharacterSet: " + inputCharacterSet + ", outputCharacterSet: " + outputCharacterSet + "inputFileStructure: " + inputFileStructure + ", outputFileStructure: " + outputFileStructure + ", dialect: " + dialect + ", rename: " + rename + ", csvParser: " + csvParser);
-
-        ICobolIOBuilder iobCbl = JRecordInterface1.COBOL
-                .newIOBuilder(copybook)
-                .setOptimizeTypes(false);
-
-        iobCbl.setFileOrganization(Integer.parseInt(inputFileStructure))
-                .setFont(inputCharacterSet)//inFont)
-                .setDialect(Integer.parseInt(dialect));//csvArgs.binFormat);
-
-        ICsvIOBuilder iobCsv = JRecordInterface1.CSV
-                .newIOBuilder(delimiter, quote)//csvArgs.sep, csvArgs.quote)
-                .setFont(outputCharacterSet)//csvArgs.outFont)
-                .setParser(Integer.parseInt(csvParser))//csvArgs.csvParser)
-                .setFileOrganization(Integer.parseInt(outputFileStructure));//csvArgs.outputFileStructure);
-
-        IDefineCsvFields defineFields = iobCsv.defineFields();
-        LayoutDetail cobolLayout = null;
-
-        try {
-            cobolLayout = iobCbl.getLayout();
-        } catch (IOException ioException) {
-            throw new IORuntimeException("Unable to get the iobCbl layout using the following params: inputFile: " + inputFile
-                    + ", outputFile: " + outputFile + ", copybook: " + copybook + ", delimiter: " + delimiter
-                    + ", quote: " + quote + ", inputCharacterSet: " + inputCharacterSet + ", outputCharacterSet: "
-                    + outputCharacterSet + "inputFileStructure: " + inputFileStructure + ", outputFileStructure: "
-                    + outputFileStructure + ", dialect: " + dialect + ", rename: " + rename + ", csvParser: "
-                    + csvParser,
-                    ioException);
+    public static String[] translateCommandline(String toProcess) {
+        if (toProcess == null || toProcess.isEmpty()) {
+            //no command? no string
+            return new String[0];
         }
+        // parse with a simple finite state machine
 
-        IUpdateFieldName updateFieldName;
+        final int normal = 0;
+        final int inQuote = 1;
+        final int inDoubleQuote = 2;
+        int state = normal;
+        final StringTokenizer tok = new StringTokenizer(toProcess, "\"\' ", true);
+        final ArrayList<String> result = new ArrayList<>();
+        final StringBuilder current = new StringBuilder();
+        boolean lastTokenHasBeenQuoted = false;
 
-        if (cobolLayout.getRecordCount() != 1) {
-            log.error("Expecting exactly one record, not " + cobolLayout.getRecordCount());
-        } else {
-//            TODO: For now we're not updating CSV names -- we can sort this out later.
-//            updateCsvNames(cobolLayout, csvArgs, defineFields);    // Update the field names (change -(,) to _)
-            defineFields.endOfRecord();
-            try {
-                Copy.copyFileByFieldNumber(
-                    iobCbl.newReader(inputFile),//new FileInputStream(inputFile)),
-                    iobCsv.newWriter(outputFile),//new FileOutputStream(outputFile),
-                    iobCsv.getLayout()
-                );
-
-            } catch (IOException ioException) {
-                throw new IORuntimeException("Unable to get the iobCsv layout using the following params: inputFile: " + inputFile
-                        + ", outputFile: " + outputFile + ", copybook: " + copybook + ", delimiter: " + delimiter
-                        + ", quote: " + quote + ", inputCharacterSet: " + inputCharacterSet + ", outputCharacterSet: "
-                        + outputCharacterSet + "inputFileStructure: " + inputFileStructure + ", outputFileStructure: "
-                        + outputFileStructure + ", dialect: " + dialect + ", rename: " + rename + ", csvParser: "
-                        + csvParser,
-                        ioException);
+        while (tok.hasMoreTokens()) {
+            String nextTok = tok.nextToken();
+            switch (state) {
+                case inQuote:
+                    if ("\'".equals(nextTok)) {
+                        lastTokenHasBeenQuoted = true;
+                        state = normal;
+                    } else {
+                        current.append(nextTok);
+                    }
+                    break;
+                case inDoubleQuote:
+                    if ("\"".equals(nextTok)) {
+                        lastTokenHasBeenQuoted = true;
+                        state = normal;
+                    } else {
+                        current.append(nextTok);
+                    }
+                    break;
+                default:
+                    if ("\'".equals(nextTok)) {
+                        state = inQuote;
+                    } else if ("\"".equals(nextTok)) {
+                        state = inDoubleQuote;
+                    } else if (" ".equals(nextTok)) {
+                        if (lastTokenHasBeenQuoted || current.length() > 0) {
+                            result.add(current.toString());
+                            current.setLength(0);
+                        }
+                    } else {
+                        current.append(nextTok);
+                    }
+                    lastTokenHasBeenQuoted = false;
+                    break;
             }
         }
+        if (lastTokenHasBeenQuoted || current.length() > 0) {
+            result.add(current.toString());
+        }
+        if (state == inQuote || state == inDoubleQuote) {
+            throw new StringTokenizationException("unbalanced quotes in " + toProcess);
+        }
+        return result.toArray(new String[result.size()]);
+    }
 
-        log.debug("cobolToCSV: method ends.");
+    public void cobol2Csv(String argsText) throws IOException {
+
+        log.info ("cobol2Csv: method begins; argsText: " + argsText);
+
+        String args[] = translateCommandline(argsText);
+
+        cobol2Csv(args);
+
+        log.info ("main: method ends.");
+    }
+
+    private void cobol2Csv(String[] args) throws IOException {
+
+        log.info ("The cobol2Csv method delegates to Cobol2Csv#main");
+        log.info ("See:");
+        log.info ("https://sourceforge.net/p/jrecord/wiki/Cobol2Csv%2C%20Csv2Cobol/");
+        log.info ("and");
+        log.info ("https://github.com/bmTas/JRecord/blob/master/Source/JRecord_Utilities/JRecord_Cbl2Csv/src/net/sf/JRecord/cbl2csv/Cobol2Csv.java");
+        log.info ("main: method begins; args: " + args);
+
+        Cobol2Csv.main(args);
+
+        log.info ("cobol2Csv: method ends.");
     }
 
 //    private final Option[] SPLIT_OPTS = {

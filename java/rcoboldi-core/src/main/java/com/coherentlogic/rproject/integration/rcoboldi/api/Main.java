@@ -205,6 +205,8 @@ public class Main {
     /**
      * Method delegates to {Cobol2Csv#main}.
      *
+     * https://github.com/bmTas/JRecord/blob/master/Source/JRecord_Utilities/JRecord_Cbl2Csv/src/net/sf/JRecord/cbl2csv/Cobol2Csv.java
+     *
      * https://sourceforge.net/p/jrecord/wiki/Cobol2Csv%2C%20Csv2Cobol/
      */
     public static void main(String[] args) throws IOException {
@@ -212,6 +214,8 @@ public class Main {
         log.info ("The main method delegates to Cobol2Csv#main");
         log.info ("See:");
         log.info ("https://sourceforge.net/p/jrecord/wiki/Cobol2Csv%2C%20Csv2Cobol/");
+        log.info ("and");
+        log.info ("https://github.com/bmTas/JRecord/blob/master/Source/JRecord_Utilities/JRecord_Cbl2Csv/src/net/sf/JRecord/cbl2csv/Cobol2Csv.java");
         log.info ("main: method begins; args: " + args);
 
         Cobol2Csv.main(args);

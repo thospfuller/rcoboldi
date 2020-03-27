@@ -135,54 +135,23 @@ ReadCopyBookAsDataFrame <- function (copyBookFile, inFile, inputFileStructure, f
     return( as.data.frame( coercedResultDF ) )
 }
 
-#' Function delegates to the Cobol2Csv.runCobol2Csv method.
+#' Function delegates to the Cobol2Csv.runCobol2Csv method passing the args as a single string. Note that the args are exactly the same as those passed to Cobol2Csv.runCobol2Csv.
+#'
+#' All args can be found here:
+#' 
+#' <a href="https://sourceforge.net/p/jrecord/wiki/Cobol2Csv%2C%20Csv2Cobol/">Cobol2Csv, Csv2Cobol programs</a>
 #'
 #' [See net.sf.JRecord.cbl2csv.Cobol2Csv.runCobol2Csv on GitHub.](https://github.com/bmTas/JRecord/blob/master/Source/JRecord_Utilities/JRecord_Cbl2Csv/src/net/sf/JRecord/cbl2csv/Cobol2Csv.java)
 #'
-#' @param inputFile 	: Input file
-#' @param outputFile	: Output file
-#' @param copybook 	: Cobol Copybook file
-#' @param delimiter 	: Field Separator (space, tab or value)
-#' @param quote 	: Quote, you can use DoubleQuote SingleQuote as well
-#' @param inputCharacterSet  	: Input font or character set
-#' @param outputCharacterSet  	: Output font or character set
+#' For example:
 #'
-#' @param inputFileStructure	: Input File Structure:
-#' @param outputFileStructure	: Output File Structure:
-#'  Default	: Determine by
-#'  Text	: Use Standard Text IO
-#'  Fixed_Length	: Fixed record Length binary
-#'  Binary	: Binary File, length based on record
-#'  Mainframe_VB	: Mainframe VB File
-#'  Mainframe_VB_As_RECFMU	: Mainframe VB File including BDW (block descriptor word)
-#'  FUJITSU_VB	: Fujitsu Cobol VB File
-#'  Gnu_Cobol_VB	: Gnu Cobol VB File
-#'  UNICODE_CSV_NAME_1ST_LINE	Standard Csv file with colum names on the first line
-#'  Text_Unicode	Csv file with out colum names on the first line
-#' @param dialect	: Cobol Dialect
-#'  0  or Intel	: Intel little endian
-#'  1  or Mainframe	: Mainframe big endian (Default)
-#'  4  or GNU_Cobol_Little_Endian_(Intel)	: Gnu:Cobol
-#'  2 or Fujitsu	: Fujitsu Cobol
-#' @param rename  : How to update cobol variable names
-#'  0 or Asis	: Use the COBOL name
-#'  0 or Leave_Asis	: Use the COBOL name
-#'  1 or _	: Change '-(),' to '_'
-#'  1 or Change_Minus_To_Underscore	: Change '-(),' to '_'
-#'  2 or No-	: Drop minus ('-') from the name
-#'  2 or Drop_Minus	: Drop minus ('-') from the name
-#'  3 or camelCase	: Camel Case
-#' @param csvParser  : Controls how Csv fields are parsed
-#'  14 or Basic_Parser	: Parse Csv - when a field starts with " look for "<FieldSeparator> or "<eol>
-#'   1 or Standard_Parser	: Parse CSV matching Quotes
-#'   2 or Standard_Parse_Quote_4_Char_Fields	: Standard Parser, add Quotes to all Char fields
-#'   3 or Basic_Parser_Column_names_in_quotes	: Basic Parser, Field (Column) names in Quotes
-#'   4 or Standard_Parser_Column_names_in_quotes	: Standard Parser, Field (Column) names in Quotes
-#'   5 or Standard_Parser_Quote_4_Char_Fields_Column_names_in_quotes	: Standard Parser, Char fields in Quotes,  Field (Column) names in Quotes
-#'   6 or Basic_Parser_Delimiter_all_fields	: Basic Parser, Field Separator for all fields
-#'   7 or Basic_Parser_Delimiter_all_fields+1	: Basic Parser, Field Separator for all fields + extra Separator at the End-of-Line
+#' dontrun {
+#'   RCOBOLDI::CobolToCSV("-I /Users/thospfuller/development/projects/rcoboldi-gh/rcoboldi/java/rcoboldi-core/src/test/resources/example4/absaoss_cobrix_test1_example.bin -C /Users/thospfuller/development/projects/rcoboldi-gh/rcoboldi/java/rcoboldi-core/src/test/resources/example4/absaoss_cobrix_test1_copybook.cob -FS Fixed_Length -IC cp037 -O /Users/thospfuller/temp/absaoss_cobrix_test1.csv")
+#' }
 #'
-CobolToCSV <- function (inputFile, outputFile, copybook, delimiter, quote, inputCharacterSet, outputCharacterSet, inputFileStructure, outputFileStructure, dialect, rename, csvParser) {
+#' @export
+#'
+CobolToCSV <- function (args) {
   
   jCopyBookConverter <- .rcobol.env$jCopyBookConverter
   
@@ -191,13 +160,30 @@ CobolToCSV <- function (inputFile, outputFile, copybook, delimiter, quote, input
   }
   
   tryCatch(
-    result <- jCopyBookConverter$cobolToCSV (inputFile, outputFile, copybook, delimiter, quote, inputCharacterSet, outputCharacterSet, inputFileStructure, outputFileStructure, dialect, rename, csvParser), Throwable = function (e) {
+    result <- jCopyBookConverter$cobol2Csv (args), Throwable = function (e) {
       stop(
-        paste ("The call to cobolToCSV failed; inputFile: ", inputFile, ", outputFile: ", outputFile, ", copybook: ", copybook, ", delimiter: ", delimiter, ", quote: ", quote, ", inputCharacterSet: ", inputCharacterSet, ", outputCharacterSet: ", outputCharacterSet, "inputFileStructure: ", inputFileStructure, ", outputFileStructure: ", outputFileStructure, ", dialect: ", dialect, ", rename: ", rename, ", csvParser: ", csvParser, " -- details follow. ", e$getMessage(), sep="")
+        paste ("The call to cobolToCSV failed; args: ", args, e$getMessage(), sep=", ")
       )
     }
   )
 }
+
+#CobolToCSV <- function (inputFile, outputFile, copybook, delimiter, quote, inputCharacterSet, outputCharacterSet, inputFileStructure, outputFileStructure, dialect, rename, csvParser) {
+#  
+#  jCopyBookConverter <- .rcobol.env$jCopyBookConverter
+#  
+#  if (is.null(jCopyBookConverter)) {
+#    stop ("The Initialize function must be called exactly once prior to calling this function and it looks like this was not done.")
+#  }
+#  
+#  tryCatch(
+#    result <- jCopyBookConverter$cobolToCSV (inputFile, outputFile, copybook, delimiter, quote, inputCharacterSet, outputCharacterSet, inputFileStructure, outputFileStructure, dialect, rename, csvParser), Throwable = function (e) {
+#      stop(
+#        paste ("The call to cobolToCSV failed; inputFile: ", inputFile, ", outputFile: ", outputFile, ", copybook: ", copybook, ", delimiter: ", delimiter, ", quote: ", quote, ", inputCharacterSet: ", inputCharacterSet, ", outputCharacterSet: ", outputCharacterSet, "inputFileStructure: ", inputFileStructure, ", outputFileStructure: ", outputFileStructure, ", dialect: ", dialect, ", rename: ", rename, ", csvParser: ", csvParser, " -- details follow. ", e$getMessage(), sep="")
+#      )
+#    }
+#  )
+#}
 
 #' Function prints some information about this package.
 #'

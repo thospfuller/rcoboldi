@@ -71,9 +71,9 @@ The Java API uses Log4J and writes files to the ~/rcoboldi-package-logs/ directo
 
 # See Also
 
-[AbsaOSS cobrix: A COBOL parser and Mainframe/EBCDIC data source for Apache Spark](https://github.com/AbsaOSS/cobrix)
-[JRecord on SourceForge](https://sourceforge.net/projects/jrecord/)
-[JRecord on GitHub](https://github.com/bmTas/JRecord)
+- [AbsaOSS cobrix: A COBOL parser and Mainframe/EBCDIC data source for Apache Spark](https://github.com/AbsaOSS/cobrix)
+- [JRecord: Read Cobol data files in Java on SourceForge](https://sourceforge.net/projects/jrecord/)
+- [JRecord: Read Cobol data files in Java on GitHub](https://github.com/bmTas/JRecord)
 
 # Further Examples
 

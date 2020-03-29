@@ -8,21 +8,18 @@
 #' single record type files can be converted to CSV however complicated multi-record files will not map to
 #' CSV.
 #'
-#' This package uses the open-source JRecord API, which is written in Java.
+#' This package uses the open-source \href{https://github.com/bmTas/JRecord/}{JRecord API}, which is written in Java.
 #'
-#' More information about JRecord can be found here:
+#' See also: \href{https://github.com/s-u/rJava/issues/151}{library(rJava) fails on Mac with JDK 8 or 10} -- if this happens then execute: \emph{sudo R CMD javareconf}
 #'
-#' https://github.com/bmTas/JRecord/
-#'
-#' \dontrun{
-#' library(RCOBOLDI)
-#' RCOBOLDI::Initialize()
-#' RCOBOLDI::ReadCopyBookAsDataFrame("/Users/thospfuller/development/projects/rcobol/download/Examples/SchemaCompare/cobol_copybooks/DTAR020.cbl", "/Users/thospfuller/development/projects/rcobol/download/Source/JRecord/src/net/sf/JRecord/zTest/Common/SampleFiles/DTAR020.bin", "cp037", ",", "\"")
+#' @examples{
+#'  \dontrun{
+#'   library(RCOBOLDI)
+#'   RCOBOLDI::Initialize()
+#'   RCOBOLDI::ReadCopyBookAsDataFrame("~/temp/cobol_copybooks/DTAR020.cbl", "~/temp/DTAR020.bin", "cp037", ",", "\"")
+#'   RCOBOLDI::CobolToCSV("-I ~/absaoss_cobrix_test1_example.bin -C ~/temp/absaoss_cobrix_test1_copybook.cob -FS Fixed_Length -IC cp037 -O ~/temp/absaoss_cobrix_test1.csv")
+#'   }
 #' }
-#'
-#' See also: https://github.com/s-u/rJava/issues/151
-#'
-#' sudo R CMD javareconf
 #'
 #' @import RJSONIO
 #' @import rJava
@@ -33,10 +30,9 @@
 #'
 NULL
 
-#'
 #' An environment which is used by this package when managing package-scope variables.
 #'
-.rcobol.env <- new.env()
+.rcoboldi.env <- new.env()
 
 #' Function instantiates the client which is used to bridge the gap between the
 #' R script and the underlying API.
@@ -69,9 +65,15 @@ NULL
     .jpackage(pkgname, lib.loc = libname, morePaths=rcobolJars)
 }
 
-#' This function must be called *exactly one time* before the package can be used.
+#' This function must be called \emph{exactly one time} before the package can be used.
 #'
 #' @param disableAbout When true the function will not print the about message (default: false).
+#'
+#' @examples{
+#'  \dontrun{
+#'   RCOBOLDI::Initialize()
+#'  }
+#' }
 #'
 #' @export
 #'
@@ -84,35 +86,40 @@ Initialize <- function (disableAbout = FALSE) {
     jCopyBookConverter <- .jnew('com/coherentlogic/rproject/integration/rcoboldi/api/JCopyBookConverter')
         #J("com.coherentlogic.rproject.integration.rcoboldi.api.JCopyBookConverter")
     
-    assign("jCopyBookConverter", jCopyBookConverter, envir = .rcobol.env)
+    assign("jCopyBookConverter", jCopyBookConverter, envir = .rcoboldi.env)
 }
 
-#' This function delegates to the R COBOL Java API and returns the results as a data frame. 
+#' This function converts the COBOL file into a data frame and returns this to the user. Note below that "cp1252" = \href{https://github.com/svn2github/jrecord/blob/master/Source/JRecord_Common/src/net/sf/JRecord/Common/Conversion.java}{Conversion.DEFAULT_ASCII_CHARSET}.
 #'
-#' Note below that "cp1252" = Conversion.DEFAULT_ASCII_CHARSET.
+#' @param copyBookFile The path to the copybook file, for example: "~/temp/DTAR020.cbl".
+#' @param inFile The path to the inFile, for example: "~/temp/DTAR020.bin".
+#' @param inputFileStructure The input file structure, for example: "Fixed Length Binary". Valid inputFileStructure values are as follows:
+#'  "Default"
+#'  "Fixed Length Binary"
+#'  "Line based Binary"
+#'  "Mainframe VB (rdw based) Binary"
+#'  "Mainframe VB Dump: includes Block length"
+#'  "Fujitsu Cobol VB"
+#'  "GNU Cobol VB"
+#' @param font The font, for example: "cp037"; see \href{https://github.com/svn2github/jrecord/blob/master/Source/JRecord_Common/src/net/sf/JRecord/Common/Conversion.java}{net.sf.JRecord.Common.Conversion} For example, "cp037", 
+#' @param copybookDialect The copybookDialect defaults to 1 and it's unlikely that this will need to be changed; see \href{https://github.com/svn2github/jrecord/blob/master/Source/JRecord_Common/src/net/sf/JRecord/Numeric/ICopybookDialects.java}{ICopybookDialects.java}.
 #'
-#' \dontrun{
-#' result <- RCOBOLDI::ReadCopyBookAsDataFrame("../java/rcoboldi-core/src/test/resources/example1/DTAR020.cbl", "../java/rcoboldi-core/src/test/resources/example1/DTAR020.bin", "Fixed Length Binary", "cp037")
-#' result <- RCOBOLDI::ReadCopyBookAsDataFrame("../java/rcoboldi-core/src/test/resources/example2/DTAR107.cbl", "../java/rcoboldi-core/src/test/resources/example2/DTAR107.bin", "Fixed Length Binary", "cp037")
-#' result <- RCOBOLDI::ReadCopyBookAsDataFrame("../java/rcoboldi-core/src/test/resources/example3/AmsLocation.cbl", "../java/rcoboldi-core/src/test/resources/example3/Ams_LocDownload_20041228.txt", "Text", "cp1252")
-#' result <- RCOBOLDI::ReadCopyBookAsDataFrame("/Users/thospfuller/development/projects/rcoboldi-gh/rcoboldi/java/rcoboldi-core/src/test/resources/example4/absaoss_cobrix_test1_copybook.cob", "/Users/thospfuller/development/projects/rcoboldi-gh/rcoboldi/java/rcoboldi-core/src/test/resources/example4/absaoss_cobrix_test1_example.bin", "Fixed Length Binary", "cp037")
+#' @return The resultant data frame.
+#'
+#' @examples{
+#'  \dontrun{
+#'   result <- RCOBOLDI::ReadCopyBookAsDataFrame("../java/rcoboldi-core/src/test/resources/example1/DTAR020.cbl", "../java/rcoboldi-core/src/test/resources/example1/DTAR020.bin", "Fixed Length Binary", "cp037")
+#'   result <- RCOBOLDI::ReadCopyBookAsDataFrame("../java/rcoboldi-core/src/test/resources/example2/DTAR107.cbl", "../java/rcoboldi-core/src/test/resources/example2/DTAR107.bin", "Fixed Length Binary", "cp037")
+#'   result <- RCOBOLDI::ReadCopyBookAsDataFrame("../java/rcoboldi-core/src/test/resources/example3/AmsLocation.cbl", "../java/rcoboldi-core/src/test/resources/example3/Ams_LocDownload_20041228.txt", "Text", "cp1252")
+#'   result <- RCOBOLDI::ReadCopyBookAsDataFrame("/Users/thospfuller/development/projects/rcoboldi-gh/rcoboldi/java/rcoboldi-core/src/test/resources/example4/absaoss_cobrix_test1_copybook.cob", "/Users/thospfuller/development/projects/rcoboldi-gh/rcoboldi/java/rcoboldi-core/src/test/resources/example4/absaoss_cobrix_test1_example.bin", "Fixed Length Binary", "cp037")
+#'  }
 #' }
-#'
-#' Valid inputFileStructure values are as follows:
-#'
-#' "Default"
-#' "Fixed Length Binary"
-#' "Line based Binary"
-#' "Mainframe VB (rdw based) Binary"
-#' "Mainframe VB Dump: includes Block length"
-#' "Fujitsu Cobol VB"
-#' "GNU Cobol VB"
 #'
 #' @export
 #'
 ReadCopyBookAsDataFrame <- function (copyBookFile, inFile, inputFileStructure, font, copybookDialect="1") {
 
-    jCopyBookConverter <- .rcobol.env$jCopyBookConverter
+    jCopyBookConverter <- .rcoboldi.env$jCopyBookConverter
 
     if (is.null(jCopyBookConverter)) {
         stop ("The Initialize function must be called exactly once prior to calling this function and it looks like this was not done.")
@@ -135,25 +142,27 @@ ReadCopyBookAsDataFrame <- function (copyBookFile, inFile, inputFileStructure, f
     return( as.data.frame( coercedResultDF ) )
 }
 
-#' Function delegates to the Cobol2Csv.runCobol2Csv method passing the args as a single string. Note that the args are exactly the same as those passed to Cobol2Csv.runCobol2Csv.
+#' Function delegates via the JCopyBookConverter to the Cobol2Csv.runCobol2Csv method passing the args as a single string. Note that the args are *exactly* the same as those passed to Cobol2Csv.runCobol2Csv.
 #'
-#' All args can be found here:
+#' Documentation for all args can be found here:
 #' 
-#' <a href="https://sourceforge.net/p/jrecord/wiki/Cobol2Csv%2C%20Csv2Cobol/">Cobol2Csv, Csv2Cobol programs</a>
+#' SF: \href{https://sourceforge.net/p/jrecord/wiki/Cobol2Csv%2C%20Csv2Cobol/}{Cobol2Csv, Csv2Cobol programs}
 #'
-#' [See net.sf.JRecord.cbl2csv.Cobol2Csv.runCobol2Csv on GitHub.](https://github.com/bmTas/JRecord/blob/master/Source/JRecord_Utilities/JRecord_Cbl2Csv/src/net/sf/JRecord/cbl2csv/Cobol2Csv.java)
+#' GH: \href{https://github.com/bmTas/JRecord/blob/master/Source/JRecord_Utilities/JRecord_Cbl2Csv/src/net/sf/JRecord/cbl2csv/Cobol2Csv.java}{See net.sf.JRecord.cbl2csv.Cobol2Csv.runCobol2Csv on GitHub}
 #'
-#' For example:
+#' @param args The same args that would be passed in when executing Cobol2Csv from the command line.
 #'
-#' dontrun {
-#'   RCOBOLDI::CobolToCSV("-I /Users/thospfuller/development/projects/rcoboldi-gh/rcoboldi/java/rcoboldi-core/src/test/resources/example4/absaoss_cobrix_test1_example.bin -C /Users/thospfuller/development/projects/rcoboldi-gh/rcoboldi/java/rcoboldi-core/src/test/resources/example4/absaoss_cobrix_test1_copybook.cob -FS Fixed_Length -IC cp037 -O /Users/thospfuller/temp/absaoss_cobrix_test1.csv")
+#' \examples{
+#'   \dontrun{
+#'     RCOBOLDI::CobolToCSV("-I ~/temp/absaoss_cobrix_test1_example.bin -C ~/temp/absaoss_cobrix_test1_copybook.cob -FS Fixed_Length -IC cp037 -O ~/temp/absaoss_cobrix_test1.csv")
+#'   }
 #' }
 #'
 #' @export
 #'
 CobolToCSV <- function (args) {
   
-  jCopyBookConverter <- .rcobol.env$jCopyBookConverter
+  jCopyBookConverter <- .rcoboldi.env$jCopyBookConverter
   
   if (is.null(jCopyBookConverter)) {
     stop ("The Initialize function must be called exactly once prior to calling this function and it looks like this was not done.")
@@ -167,23 +176,6 @@ CobolToCSV <- function (args) {
     }
   )
 }
-
-#CobolToCSV <- function (inputFile, outputFile, copybook, delimiter, quote, inputCharacterSet, outputCharacterSet, inputFileStructure, outputFileStructure, dialect, rename, csvParser) {
-#  
-#  jCopyBookConverter <- .rcobol.env$jCopyBookConverter
-#  
-#  if (is.null(jCopyBookConverter)) {
-#    stop ("The Initialize function must be called exactly once prior to calling this function and it looks like this was not done.")
-#  }
-#  
-#  tryCatch(
-#    result <- jCopyBookConverter$cobolToCSV (inputFile, outputFile, copybook, delimiter, quote, inputCharacterSet, outputCharacterSet, inputFileStructure, outputFileStructure, dialect, rename, csvParser), Throwable = function (e) {
-#      stop(
-#        paste ("The call to cobolToCSV failed; inputFile: ", inputFile, ", outputFile: ", outputFile, ", copybook: ", copybook, ", delimiter: ", delimiter, ", quote: ", quote, ", inputCharacterSet: ", inputCharacterSet, ", outputCharacterSet: ", outputCharacterSet, "inputFileStructure: ", inputFileStructure, ", outputFileStructure: ", outputFileStructure, ", dialect: ", dialect, ", rename: ", rename, ", csvParser: ", csvParser, " -- details follow. ", e$getMessage(), sep="")
-#      )
-#    }
-#  )
-#}
 
 #' Function prints some information about this package.
 #'
@@ -217,4 +209,3 @@ About <- function () {
         "                                                                               \n"
     )
 }
-

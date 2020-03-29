@@ -3,6 +3,6 @@ Package RCOBOL
 Version: 1.0.0 [2020-01-10]
 o  Initial development release.
 
-Version 1.0.1 [2020-03-15]
+Version 1.0.1 [2020-03-29]
 o  Further implementation and testing.
-o  Added the  Cobol2Csv function.
+o  Added the  Cobol2CSV function.

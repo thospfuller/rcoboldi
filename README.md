@@ -61,6 +61,14 @@ The Java API uses Log4J and writes files to the ~/rcoboldi-package-logs/ directo
 
 # Development Notes
 
+1.) Install [CobolToCsv](https://sourceforge.net/projects/coboltocsv/files/CobolToCsv/Version_0.90/).
+2.) Install [JRecord](https://github.com/svn2github/jrecord).
+3.) From rcoboldi/java execute: mvn clean package.
+
+See also:
+
+[JRecord_Utilities](https://sourceforge.net/p/jrecord/code/HEAD/tree/Source/JRecord_Utilities/)
+
 ## Linux Only
 
 1. sudo add-apt-repository -y ppa:cran/poppler

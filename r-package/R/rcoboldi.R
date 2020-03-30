@@ -195,7 +195,7 @@ About <- function () {
         " / /___/ /_/ / / / /  __/ /  /  __/ / / / /_   / /__/ /_/ / /_/ / / /__        \n",
         " \\____/\\____/_/ /_/\\___/_/   \\___/_/ /_/\\__/  /_____|____/\\__, /_/\\___/ \n",
         "                                                         /____/                \n",
-        " RCOBOLDI (R COBOL Data Integration) Package 1.0.0-RELEASE                     \n",
+        " RCOBOLDI (R COBOL Data Integration) Package 1.0.1-RELEASE                     \n",
         "                                                                               \n",
         " Brought to you by: https://coherentlogic.com                                  \n",
         "                                                                               \n",

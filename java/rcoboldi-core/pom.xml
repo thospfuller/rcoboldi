@@ -62,27 +62,21 @@
         </dependency>
 
         <!--
-          NOTE: The artifactId must be written as we have it below, the case is crucial.
- 
-          mvn install:install-file -Dfile=JRecord.jar -DgroupId=net.sf -DartifactId=JRecord -Dversion=0.90.2 -Dpackaging=jar
-          mvn install:install-file -Dfile=cb2xml.jar -DgroupId=net.sf -DartifactId=cb2xml -Dversion=0.90.2 -Dpackaging=jar
-          mvn install:install-file -Dfile=./JRecordCodeGen.jar -DgroupId=net.sf -DartifactId=JRecordCodeGen -Dversion=0.90.2 -Dpackaging=jar
+          mvn install:install-file -Dfile=/Users/thospfuller/development/download/JRecord_Version_0.90.2_08.Mar.2020/lib/JRecord.jar -DgroupId=net.sf -DartifactId=jrecord -Dversion=0.90.2 -Dpackaging=jar
           -->
         <dependency>
             <groupId>net.sf</groupId>
-            <artifactId>jrecord-base</artifactId>
+            <artifactId>jrecord</artifactId>
             <version>0.90.2</version>
         </dependency>
+        <!--
+          mvn install:install-file -Dfile=/Users/thospfuller/development/download/JRecord_Version_0.90.2_08.Mar.2020/lib/cb2xml.jar -DgroupId=net.sf -DartifactId=cb2xml -Dversion=0.90.2 -Dpackaging=jar
+           -->
         <dependency>
             <groupId>net.sf</groupId>
-            <artifactId>jrecord-common</artifactId>
+            <artifactId>cb2xml</artifactId>
             <version>0.90.2</version>
         </dependency>
-        <!-- dependency>
-            <groupId>net.sf</groupId>
-            <artifactId>JRecordCodeGen</artifactId>
-            <version>0.90.2</version>
-        </dependency -->
         <!--
           mvn install:install-file -Dfile=/Users/thospfuller/development/temp/Cobol2Csv_0.90/Cobol2Csv/lib/Cobol2Csv.jar -DgroupId=net.sf -DartifactId=cb2csv -Dversion=0.90 -Dpackaging=jar
           -->
@@ -91,12 +85,7 @@
             <artifactId>cb2csv</artifactId>
             <version>0.90</version>
         </dependency>
-        <dependency>
-            <groupId>net.sf</groupId>
-            <artifactId>cb2xml_src</artifactId>
-            <version>1.01.1</version>
-        </dependency>
-        <!-- TPF: Not sure why we need this in Idea when this works fine elsewhere. -->
+
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>

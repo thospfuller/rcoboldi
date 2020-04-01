@@ -18,14 +18,14 @@ The following should be executed prior to attempting to run the R script, below.
 - Java 11
 - install.packages(c("drat", "RJSONIO", "rJava"))
 
-## R Script
+## R Script Example
 
 The following example should work with the only change needed being the path to the files.
 
 ```library(drat)
 drat::addRepo("thospfuller")
 
-// The following should work for Mac OSX El Capitan.
+// The following should work for Mac OSX (El Capitan) and on Linux.
 install.packages("RCOBOLDI")
 
 // Or install via source.

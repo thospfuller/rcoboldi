@@ -5,7 +5,7 @@ Version: 1.0.1
 Date: 2020-03-29
 Author: Thomas P. Fuller <thomas.fuller@coherentlogic.com>
 Maintainer: Thomas P. Fuller <thomas.fuller@coherentlogic.com>
-Description: Facilitates the importation of COBOL CopyBook files as data frames in the R Project for Statistical Computing.
+Description: Facilitates the importation of COBOL data files as data frames in the R Project for Statistical Computing.
 SystemRequirements: Java (>= 11)
 Depends:
     rJava,

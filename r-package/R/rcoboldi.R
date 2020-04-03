@@ -128,7 +128,7 @@ ReadCopyBookAsDataFrame <- function (copyBookFile, inFile, inputFileStructure, f
     tryCatch(
         result <- jCopyBookConverter$readCopyBookAsString (copyBookFile, inFile, inputFileStructure, font, copybookDialect), Throwable = function (e) {
             stop(
-                paste ("Unable to read the copyBook and convert it into JSON; copyBookFile: ", copyBookFile, ", inFile: ", inFile, ", inputFileStructure: ", inputFileStructure,", font: ", font, " -- details follow. ", e$getMessage(), sep="")
+                paste ("Unable to read the copyBook and convert it into JSON; copyBookFile: ", copyBookFile, ", inFile: ", inFile, ", inputFileStructure: ", inputFileStructure,", font: ", font, " -- details follow. Keep in mind that single-record type files can be converted to CSV however complicated multi-record type files will NOT map to CSV.", e$getMessage(), sep="")
             )
         }
     )
@@ -171,7 +171,12 @@ CobolToCSV <- function (args) {
   tryCatch(
     result <- jCopyBookConverter$cobol2Csv (args), Throwable = function (e) {
       stop(
-        paste ("The call to cobolToCSV failed; args: ", args, e$getMessage(), sep=", ")
+        paste (
+          "The call to cobolToCSV failed; args: ",
+          args,
+          "!! Note that not all copybook files can be converted into CSV. Keep in mind that single-record type files can be converted to CSV however complicated multi-record type files will NOT map to CSV.",
+          e$getMessage(), sep="\n"
+        )
       )
     }
   )

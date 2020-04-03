@@ -17,9 +17,6 @@
 #
 FROM rocker/verse:latest
 
-#
-# docker exec -it clrstudio /bin/bash
-#
 RUN su -
 RUN apt-get update
 RUN sudo apt-get -y install apt-utils

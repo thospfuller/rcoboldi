@@ -80,5 +80,11 @@ The Java API uses Log4J and writes files to the ~/rcoboldi-package-logs/ directo
 
 # Further Examples
 
-![An example of the R COBOL DI (Data Integration) Package loading a file with the inputFileStructure set to "Text" and the font set to "cp1252".](https://github.com/thospfuller/rcoboldi/blob/master/images/RCOBOLDIPackageInActionForTextAndCP1252.png "An example of the R COBOL DI (Data Integration) Package loading a file with the inputFileStructure set to 'Text' and the font set to 'cp1252'.")
 ![An example of the R COBOL DI (Data Integration) Package loading DTAR107 files (example 2) with the inputFileStructure set to "Fixed Length Binary" and the font set to "cp037".](https://github.com/thospfuller/rcoboldi/blob/master/images/RCOBOLDI_Example2_DTAR107.png "An example of the R COBOL DI (Data Integration) Package loading DTAR107 files (example 2) with the inputFileStructure set to 'Fixed Length Binary' and the font set to 'cp037'.")
+![An example of the R COBOL DI (Data Integration) Package loading a file with the inputFileStructure set to "Text" and the font set to "cp1252".](https://github.com/thospfuller/rcoboldi/blob/master/images/RCOBOLDIPackageInActionForTextAndCP1252.png "An example of the R COBOL DI (Data Integration) Package loading a file with the inputFileStructure set to 'Text' and the font set to 'cp1252'.")
+
+## Docker (rcoboldi:rocker-rstudio)
+
+result <- RCOBOLDI::ReadCopyBookAsDataFrame("/home/rstudio/rcoboldi/java/rcoboldi-core/src/test/resources/example1/DTAR020.cbl", "/home/rstudio/rcoboldi/java/rcoboldi-core/src/test/resources/example1/DTAR020.bin", "Fixed Length Binary", "cp037")
+
+![An example of the R COBOL DI (Data Integration) Package loading a file with the inputFileStructure set to "Fixed Length Binary" and the font set to "cp037". This should work out-of-the-box with a container built from the rcoboldi:rocker-rstudio image."](https://github.com/thospfuller/rcoboldi/blob/master/images/RCOBOLDI-RockerRStudio.png "An example of the R COBOL DI (Data Integration) Package loading a file with the inputFileStructure set to 'Fixed Length Binary' and the font set to 'cp037'. This should work out-of-the-box with a container built from the rcoboldi:rocker-rstudio image.")

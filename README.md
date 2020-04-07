@@ -18,7 +18,7 @@ All you'll need to run this example is Docker and an Internet connection.
 
 # Logging
 
-The Java API uses Log4J and writes files to the ~/rcoboldi-package-logs/ directory. This file can be found [here](java/rcoboldi-core/src/main/resources).
+The Java API uses Log4J and writes files to the ~/rcoboldi-package-logs/ directory. The Log4J configuration file can be found [here](java/rcoboldi-core/src/main/resources).
 
 # See Also
 

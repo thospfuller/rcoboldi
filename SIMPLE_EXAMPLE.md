@@ -19,7 +19,7 @@ If you have trouble with rJava and Java 11 then you might need to execute the fo
 
 The following example should work with the only change needed being the path to the files.
 
-Test files can be found [here](tree/master/java/rcoboldi-core/src/test/resources).
+Test files can be found [here](java/rcoboldi-core/src/test/resources).
 
 ```
 library(drat)

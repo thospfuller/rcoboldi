@@ -85,6 +85,8 @@ The Java API uses Log4J and writes files to the ~/rcoboldi-package-logs/ directo
 
 ## Docker (rcoboldi:rocker-rstudio)
 
+Follow [this link for instructions pertaining to setting up a Docker image and running a container using the R COBOL DI package](images/RCOBOLDI_StepOneBuildDockerImage.png).
+
 result <- RCOBOLDI::ReadCopyBookAsDataFrame("/home/rstudio/rcoboldi/java/rcoboldi-core/src/test/resources/example1/DTAR020.cbl", "/home/rstudio/rcoboldi/java/rcoboldi-core/src/test/resources/example1/DTAR020.bin", "Fixed Length Binary", "cp037")
 
 ![An example of the R COBOL DI (Data Integration) Package loading a file with the inputFileStructure set to "Fixed Length Binary" and the font set to "cp037". This should work out-of-the-box with a container built from the rcoboldi:rocker-rstudio image."](https://github.com/thospfuller/rcoboldi/blob/master/images/RCOBOLDI-RockerRStudio.png "An example of the R COBOL DI (Data Integration) Package loading a file with the inputFileStructure set to 'Fixed Length Binary' and the font set to 'cp037'. This should work out-of-the-box with a container built from the rcoboldi:rocker-rstudio image.")

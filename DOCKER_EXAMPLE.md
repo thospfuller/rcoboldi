@@ -4,6 +4,14 @@ In this video we will demonstrate the open-source R COBOL Data Integration packa
 
 The Dockerfile in this example is based on Rocker / RStudio and will be running locally on port 8787.
 
+# YouTube
+
+Below is a video which demonstrates the R COBOL Data Integration package running in Docker.
+
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=rBIrvUA788M" target="_blank"><img src="http://img.youtube.com/vi/rBIrvUA788M/0.jpg" alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>
+
+# R Script Example
+
 Step 1.) Build the image (this can take up to 20 minutes).
 
 ```

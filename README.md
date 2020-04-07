@@ -12,11 +12,13 @@ Load the RCOBOLDI package locally and use it to convert COBOL data files into da
 
 This example also includes a call to ```CobolToCSV```.
 
-## 
+## [Docker Example](DOCKER_EXAMPLE.md) : If you just want to try the package on some test data, start here.
+
+All you'll need to run this example is Docker and an Internet connection.
 
 # Logging
 
-The Java API uses Log4J and writes files to the ~/rcoboldi-package-logs/ directory.
+The Java API uses Log4J and writes files to the ~/rcoboldi-package-logs/ directory. This file can be found [here](java/rcoboldi-core/src/main/resources).
 
 # See Also
 

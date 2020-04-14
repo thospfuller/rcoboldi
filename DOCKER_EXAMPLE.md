@@ -8,7 +8,7 @@ The Dockerfile in this example is based on Rocker / RStudio and will be running 
 
 Below is a video which demonstrates the R COBOL Data Integration package running in Docker.
 
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=rBIrvUA788M" target="_blank"><img src="http://img.youtube.com/vi/rBIrvUA788M/0.jpg" alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=rBIrvUA788M" target="_blank"><img src="images/Introduction_To_RCOBOLDI_Data_Integration_Package_Static_Movie_Image.png" alt="Introduction To RCOBOLDI Data Integration Package" width="240" height="180" border="10" /></a>
 
 # R Script Example
 

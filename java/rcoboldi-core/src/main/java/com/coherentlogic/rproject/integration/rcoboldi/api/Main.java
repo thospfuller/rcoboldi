@@ -73,10 +73,14 @@ public class Main {
 
     static final String PATH_PREFIX = "/Users/thospfuller/development/projects/rcoboldi-gh/rcoboldi/java/rcoboldi-core/";
 
+    static final String TEST_RESOURCES_PREFIX = PATH_PREFIX + "src/test/resources/";
+
+    static final String COBRIX_DATA_PREFIX = TEST_RESOURCES_PREFIX + "/cobrix-data/";
+
     static String executeExample1 (JCopyBookConverter jCopyBookConverter) throws IOException {
 
-        var copyBookFile = new File (PATH_PREFIX + "src/test/resources/example1/DTAR020.cbl").toString();
-        var inFile       = new File (PATH_PREFIX + "src/test/resources/example1/DTAR020.bin").toString();
+        var copyBookFile = new File (TEST_RESOURCES_PREFIX + "example1/DTAR020.cbl").toString();
+        var inFile       = new File (TEST_RESOURCES_PREFIX + "example1/DTAR020.bin").toString();
 
 //        var copyBookFile = "/Users/thospfuller/development/projects/rcobol/download/Examples/SchemaCompare/cobol_copybooks/DTAR020.cbl";
 //        var inFile       = "/Users/thospfuller/development/projects/rcobol/download/Source/JRecord/src/net/sf/JRecord/zTest/Common/SampleFiles/DTAR020.bin";
@@ -104,11 +108,8 @@ public class Main {
 
     static String executeExample2 (JCopyBookConverter jCopyBookConverter) throws IOException {
 
-        var copyBookFile = new File (PATH_PREFIX + "src/test/resources/example2/DTAR107.cbl").toString();
-        var inFile       = new File (PATH_PREFIX + "src/test/resources/example2/DTAR107.bin").toString();
-
-//        var copyBookFile = "/Users/thospfuller/development/projects/rcobol/download/Examples/SchemaCompare/cobol_copybooks/DTAR107.cbl";
-//        var inFile       = "/Users/thospfuller/development/projects/rcobol/download/Source/JRecord/src/net/sf/JRecord/zTest/Common/SampleFiles/DTAR107.bin";
+        var copyBookFile = new File (TEST_RESOURCES_PREFIX + "example2/DTAR107.cbl").toString();
+        var inFile       = new File (TEST_RESOURCES_PREFIX + "example2/DTAR107.bin").toString();
 
         var inFont = "cp037";
 
@@ -133,11 +134,8 @@ public class Main {
 
     static String executeExample3 (JCopyBookConverter jCopyBookConverter) throws IOException {
 
-        var copyBookFile = new File (PATH_PREFIX + "src/test/resources/example3/AmsLocation.cbl").toString();
-        var inFile       = new File (PATH_PREFIX + "src/test/resources/example3/Ams_LocDownload_20041228.txt").toString();
-
-//        var copyBookFile = "/Users/thospfuller/development/projects/rcobol/download/CopyBook/Cobol/AmsLocation.cbl";
-//        var inFile       = "/Users/thospfuller/development/projects/rcobol/download/SampleFiles/Ams_LocDownload_20041228.txt";
+        var copyBookFile = new File (TEST_RESOURCES_PREFIX + "example3/AmsLocation.cbl").toString();
+        var inFile       = new File (TEST_RESOURCES_PREFIX + "example3/Ams_LocDownload_20041228.txt").toString();
 
         var inFont = Conversion.DEFAULT_ASCII_CHARSET;//"cp037";
 
@@ -160,10 +158,62 @@ public class Main {
         return result;
     }
 
-    static String executeExample4 (JCopyBookConverter jCopyBookConverter) throws IOException {
+    static String executeCobrixTest1(JCopyBookConverter jCopyBookConverter) throws IOException {
 
-        var copyBookFile = new File (PATH_PREFIX + "src/test/resources/example4/absaoss_cobrix_test1_copybook.cob").toString();//.getAbsolutePath();
-        var inFile       = new File (PATH_PREFIX + "src/test/resources/example4/absaoss_cobrix_test1_example.bin").toString();//.getAbsolutePath();
+        var copyBookFile = new File (COBRIX_DATA_PREFIX + "test1_copybook.cob").toString();
+        var inFile       = new File (COBRIX_DATA_PREFIX + "test1_data/example.bin").toString();
+
+        var inFont = "cp037";
+
+        /**
+         * https://sourceforge.net/p/jrecord/wiki/Home/
+         * https://sourceforge.net/p/jrecord/wiki/Cobol2Csv%2C%20Csv2Cobol/
+         * https://github.com/svn2github/jrecord/blob/master/Source/JRecord_Cbl2Csv/src/net/sf/JRecord/cbl2csv/Cobol2Csv.java -- binFormat is the dialect.
+         *
+         * String copyBookFile, String font, String sep, String quote, IUpdateFieldName updateFldName
+         */
+        var result = jCopyBookConverter.readCopyBookAsString (
+                copyBookFile,
+                inFile,
+                "Fixed Length Binary",
+                inFont,
+                1, // MAINFRAME
+                new PassThroughUpdateFieldName ()
+        );
+
+        return result;
+    }
+
+    static String executeCobrixTest2(JCopyBookConverter jCopyBookConverter) throws IOException {
+
+        var copyBookFile = new File (COBRIX_DATA_PREFIX + "test2_copybook.cob").toString();
+        var inFile       = new File (COBRIX_DATA_PREFIX + "test2_data/example.bin").toString();
+
+        var inFont = "cp037";
+
+        /**
+         * https://sourceforge.net/p/jrecord/wiki/Home/
+         * https://sourceforge.net/p/jrecord/wiki/Cobol2Csv%2C%20Csv2Cobol/
+         * https://github.com/svn2github/jrecord/blob/master/Source/JRecord_Cbl2Csv/src/net/sf/JRecord/cbl2csv/Cobol2Csv.java -- binFormat is the dialect.
+         *
+         * String copyBookFile, String font, String sep, String quote, IUpdateFieldName updateFldName
+         */
+        var result = jCopyBookConverter.readCopyBookAsString (
+                copyBookFile,
+                inFile,
+                "Fixed Length Binary",
+                inFont,
+                1, // MAINFRAME
+                new PassThroughUpdateFieldName ()
+        );
+
+        return result;
+    }
+
+    static String executeCobrixTest21(JCopyBookConverter jCopyBookConverter) throws IOException {
+
+        var copyBookFile = new File (COBRIX_DATA_PREFIX + "test21_copybook.cob").toString();
+        var inFile       = new File (COBRIX_DATA_PREFIX + "test21_data/example.bin").toString();
 
         var inFont = "cp037";
 
@@ -196,10 +246,12 @@ public class Main {
 
         var jCopyBookConverter = new JCopyBookConverter ();
 
-        System.out.println ("Example 1: " + executeExample1 (jCopyBookConverter));
-        System.out.println ("Example 2: " + executeExample2 (jCopyBookConverter));
-        System.out.println ("Example 3: " + executeExample3 (jCopyBookConverter));
-        System.out.println ("Example 4: " + executeExample4 (jCopyBookConverter));
+        System.out.println ("Example 1         : " + executeExample1 (jCopyBookConverter));
+        System.out.println ("Example 2         : " + executeExample2 (jCopyBookConverter));
+        System.out.println ("Example 3         : " + executeExample3 (jCopyBookConverter));
+        System.out.println ("Example Cobrix 1  : " + executeCobrixTest1 (jCopyBookConverter));
+        System.out.println ("Example Cobrix 2  : " + executeCobrixTest2 (jCopyBookConverter));
+        System.out.println ("Example Cobrix 21 : " + executeCobrixTest2 (jCopyBookConverter));
     }
 
     /**

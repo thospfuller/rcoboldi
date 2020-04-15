@@ -38,7 +38,9 @@
             <groupId>com.jamonapi</groupId>
             <artifactId>jamon</artifactId>
         </dependency>
-
+        <!-- When running Main in IntelliJ Idea select "Include dependencies with 'Provided' scope."
+             in the middle of the screen otherwise you'll see SLF4J related CNF exceptions at runtime.
+          -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>

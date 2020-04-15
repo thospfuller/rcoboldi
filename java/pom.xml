@@ -66,11 +66,6 @@
                 <type>pom</type>
                 <version>3.0.2-SNAPSHOT</version>
                 <scope>import</scope>
-                <!--<groupId>com.coherentlogic.coherent.data-model</groupId>-->
-                <!--<artifactId>bom</artifactId>-->
-                <!--<version>1.0.18-RELEASE</version>-->
-                <!--<type>pom</type>-->
-                <!--<scope>import</scope>-->
             </dependency>
             <dependency>
                 <groupId>com.coherentlogic.rproject.integration.jdataframe</groupId>

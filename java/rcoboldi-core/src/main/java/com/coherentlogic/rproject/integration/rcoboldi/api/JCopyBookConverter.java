@@ -312,6 +312,7 @@ public class JCopyBookConverter {
         if (!equalsAnyOf(
                 inputFileStructure,
                 "Default",
+                "Text",
                 "Fixed Length Binary",
                 "Line based Binary",
                 "Mainframe VB (rdw based) Binary",

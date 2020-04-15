@@ -248,6 +248,9 @@ public class Main {
     /**
      * Method delegates to {Cobol2Csv#main}.
      *
+     * When running Main in IntelliJ Idea select "Include dependencies with 'Provided' scope."
+     * in the middle of the screen otherwise you'll see SLF4J related CNF exceptions at runtime.
+     *
      * https://github.com/bmTas/JRecord/blob/master/Source/JRecord_Utilities/JRecord_Cbl2Csv/src/net/sf/JRecord/cbl2csv/Cobol2Csv.java
      *
      * https://sourceforge.net/p/jrecord/wiki/Cobol2Csv%2C%20Csv2Cobol/

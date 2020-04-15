@@ -8,11 +8,12 @@
     <parent>
         <groupId>com.coherentlogic.rproject.integration</groupId>
         <artifactId>rcobol</artifactId>
-        <version>1.0.2-RELEASE</version>
+        <version>1.0.1-RELEASE</version>
     </parent>
 
     <groupId>com.coherentlogic.rproject.integration.rcobol</groupId>
     <artifactId>rcoboldi-core</artifactId>
+    <version>${project.parent.version}</version>
     <packaging>jar</packaging>
 
     <name>R COBOL DI (Data Integration) Core</name>

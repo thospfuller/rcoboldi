@@ -79,7 +79,7 @@ RUN mkdir /home/rstudio/rcoboldi/r-package/inst/java
 
 RUN sudo chown -R rstudio:rstudio /home/rstudio/rcoboldi/r-package/*
 
-RUN cd /home/rstudio/rcoboldi/java && mvn clean package && cp rcoboldi-assembly/target/rcoboldi-assembly-1.0.1-RELEASE.jar /home/rstudio/rcoboldi/r-package/inst/java
+RUN cd /home/rstudio/rcoboldi/java && mvn clean package && cp rcoboldi-assembly/target/rcoboldi-assembly-1.0.2-RELEASE.jar /home/rstudio/rcoboldi/r-package/inst/java
 
 RUN R -e 'install.packages("RJSONIO")'
 RUN R -e 'roxygen2::roxygenize("/home/rstudio/rcoboldi/r-package/", roclets = c("rd", "collate", "namespace", "vignette"))'

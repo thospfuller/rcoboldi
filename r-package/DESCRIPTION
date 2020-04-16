@@ -1,7 +1,7 @@
 Package: RCOBOLDI
 Type: Package
 Title: R COBOL DI (Data Integration) Package
-Version: 1.0.1
+Version: 1.0.2
 Date: 2020-03-29
 Author: Thomas P. Fuller <thomas.fuller@coherentlogic.com>
 Maintainer: Thomas P. Fuller <thomas.fuller@coherentlogic.com>

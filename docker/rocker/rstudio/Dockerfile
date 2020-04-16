@@ -53,9 +53,11 @@ RUN chown -R rstudio:rstudio /usr/local/lib/R/site-library/*
 
 RUN cd /home/rstudio/
 
+#
 # This needs to be done on one line otherwise the R session is lost and the install.packages call will try to get
 # RCOBOLDI from CRAN and it won't be available.
-RUN R -e 'drat::addRepo("thospfuller"); install.packages("https://github.com/thospfuller/drat/blob/gh-pages/src/contrib/RCOBOLDI_1.0.2.tar.gz", type="source")'
+#
+RUN R -e 'drat::addRepo("thospfuller"); install.packages("RCOBOLDI", type="source")'
 
 RUN chown -R rstudio:rstudio /usr/local/lib/R/site-library/*
 

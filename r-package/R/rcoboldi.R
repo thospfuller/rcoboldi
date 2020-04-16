@@ -82,11 +82,33 @@ Initialize <- function (disableAbout = FALSE) {
     if(!disableAbout) {
         About()
     }
+  
+    if (!is.null (.rcoboldi.env$jCopyBookConverter)) {
+        warning ("Initialize only needs to be called once per R session.")
+    }
 
     jCopyBookConverter <- .jnew('com/coherentlogic/rproject/integration/rcoboldi/api/JCopyBookConverter')
-        #J("com.coherentlogic.rproject.integration.rcoboldi.api.JCopyBookConverter")
-    
+
     assign("jCopyBookConverter", jCopyBookConverter, envir = .rcoboldi.env)
+}
+
+#' This function should be called when the R session is ending and removes the
+#' reference to the jCopyBookConverter from the package environment.
+#'
+#' Note that this function can be called many times and will not have any side
+#' effects. We added this function in order to facilitate unit testing and to
+#' add balance to the API.
+#'
+#' @examples{
+#'  \dontrun{
+#'   RCOBOLDI::Finalize()
+#'  }
+#' }
+#'
+#' @export
+#'
+Finalize <- function () {
+  assign("jCopyBookConverter", NULL, envir = .rcoboldi.env)
 }
 
 #' This function converts the COBOL file into a data frame and returns this to the user. Note below that "cp1252" = \href{https://github.com/svn2github/jrecord/blob/master/Source/JRecord_Common/src/net/sf/JRecord/Common/Conversion.java}{Conversion.DEFAULT_ASCII_CHARSET}.
@@ -200,7 +222,7 @@ About <- function () {
         " / /___/ /_/ / / / /  __/ /  /  __/ / / / /_   / /__/ /_/ / /_/ / / /__        \n",
         " \\____/\\____/_/ /_/\\___/_/   \\___/_/ /_/\\__/  /_____|____/\\__, /_/\\___/ \n",
         "                                                         /____/                \n",
-        " RCOBOLDI (R COBOL Data Integration) Package 1.0.1-RELEASE                     \n",
+        " RCOBOLDI (R COBOL Data Integration) Package 1.0.2-RELEASE                     \n",
         "                                                                               \n",
         " Brought to you by: https://coherentlogic.com                                  \n",
         "                                                                               \n",

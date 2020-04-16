@@ -1,5 +1,6 @@
 package com.coherentlogic.rproject.integration.rcoboldi.api;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -163,6 +164,9 @@ public class JCopyBookConverter {
         log.debug("readCopyBookAsString: method begins; copyBookFile: " + copyBookFile + ", inFile: " + inFile +
                 ", inputFileStructure (int): " + inputFileStructure + ", font: " + font + ", updateFldName: " +
                 updateFldName);
+
+        log.debug("copyBookFile (absolute path): " + new File(copyBookFile).getAbsolutePath());
+        log.debug("      inFile (absolute path): " + new File(inFile).getAbsolutePath());
 
         // #62 https://github.com/svn2github/jrecord/blob/master/Source/JRecord/src/net/sf/JRecord/zExamples/cobol/toCsv/Cobol2CsvAlternative.java
 

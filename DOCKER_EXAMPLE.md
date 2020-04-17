@@ -1,12 +1,14 @@
 # Docker Examples
 
-## Use the RCOBOLDI RStudio image on DockerHub
+Below we include two examples for working with images in Docker along with a demonstration video showing the package in action.
+
+## Using The RCOBOLDI RStudio Image On DockerHub
 
 [The RCOBOLDI Rocker/RStudio image is available on DockerHub here.](https://hub.docker.com/repository/docker/thospfuller/rcoboldi-rocker-rstudio/general)
 
 The following is a fully working example.
 
-## From the command line:
+### From the command line:
 
 ```docker pull thospfuller/rcoboldi-rocker-rstudio:latest```
 
@@ -27,7 +29,7 @@ then
 
 ```docker run -d -p 8787:8787 -e PASSWORD=password --name rstudio -i -t 3f8c1c269940```
 
-## From the browser:
+### From the browser:
 
 The next step is to test this in R so point your browser to [http://localhost:8787](http://localhost:8787) and use "rstudio" and "password" to login and then execute the following:
 
@@ -38,9 +40,9 @@ result <- RCOBOLDI::ReadCopyBookAsDataFrame("/home/rstudio/rcoboldi/java/rcobold
 head(result)
 ```
 
-## Build the RCOBOLDI RStudio Docker Image Locally
+## Building the RCOBOLDI RStudio Docker Image Locally
 
-Step 1.) Build the image (this can take up to 20 minutes).
+### Step 1.) Build the image (this can take up to 20 minutes).
 
 ```
 docker build -t rcoboldi/rocker-rstudio:1.0.1 https://raw.githubusercontent.com/thospfuller/rcoboldi/master/docker/rocker/rstudio/Dockerfile
@@ -49,29 +51,29 @@ docker build -t rcoboldi/rocker-rstudio:1.0.1 https://raw.githubusercontent.com/
 
 ![Build the Docker image from the R COBOL Data Integration package Dockerfile."](https://github.com/thospfuller/rcoboldi/tree/master/images/RCOBOLDI_StepOneBuildDockerImage.png "Build the Docker image from the R COBOL Data Integration package Dockerfile.")
 
-Step 2.) Launch a container based on this image.
+### Step 2.) Launch a container based on this image.
 
 ```
 docker run -d -p 8787:8787 -e PASSWORD=password --name rstudio -i -t [some image id]
 [some container id]
 ```
 
-Step 3.) Browse to http://localhost:8787 and enter the username & password combination rstudio & password.
+### Step 3.) Browse to http://localhost:8787 and enter the username & password combination rstudio & password.
 
 The next three steps appear in the video.
 
 Steps 4-7.) From the R CLI execute:
 ```
-# Step 4.)
+### Step 4.)
 library(RCOBOLDI)
 
-# Step 5.)
+### Step 5.)
 RCOBOLDI::Initialize()
 
-# Step 6.)
+### Step 6.)
 result <- RCOBOLDI::ReadCopyBookAsDataFrame("DTAR020.cbl", "DTAR020.bin", "Fixed Length Binary", "cp037")
 
-# Step 7.)
+### Step 7.)
 head(result)
 ```
 

@@ -64,6 +64,7 @@
 
         <!--
           mvn install:install-file -Dfile=/Users/thospfuller/development/download/JRecord_Version_0.90.2_08.Mar.2020/lib/JRecord.jar -DgroupId=net.sf -DartifactId=jrecord -Dversion=0.90.2 -Dpackaging=jar
+          mvn install:install-file -Dfile=/home/thospfuller/development/download/JRecord_0.90.2/lib/JRecord.jar -DgroupId=net.sf -DartifactId=jrecord -Dversion=0.90.2 -Dpackaging=jar
           -->
         <dependency>
             <groupId>net.sf</groupId>
@@ -72,7 +73,8 @@
         </dependency>
         <!--
           mvn install:install-file -Dfile=/Users/thospfuller/development/download/JRecord_Version_0.90.2_08.Mar.2020/lib/cb2xml.jar -DgroupId=net.sf -DartifactId=cb2xml -Dversion=0.90.2 -Dpackaging=jar
-           -->
+          mvn install:install-file -Dfile=/home/thospfuller/development/download/JRecord_0.90.2/lib/cb2xml.jar -DgroupId=net.sf -DartifactId=cb2xml -Dversion=0.90.2 -Dpackaging=jar 
+          -->
         <dependency>
             <groupId>net.sf</groupId>
             <artifactId>cb2xml</artifactId>
@@ -80,6 +82,7 @@
         </dependency>
         <!--
           mvn install:install-file -Dfile=/Users/thospfuller/development/temp/Cobol2Csv_0.90/Cobol2Csv/lib/Cobol2Csv.jar -DgroupId=net.sf -DartifactId=cb2csv -Dversion=0.90 -Dpackaging=jar
+          mvn install:install-file -Dfile=/home/thospfuller/development/download/Cobol2Csv_0.90/lib/Cobol2Csv.jar -DgroupId=net.sf -DartifactId=cb2csv -Dversion=0.90 -Dpackaging=jar
           -->
         <dependency>
             <groupId>net.sf</groupId>

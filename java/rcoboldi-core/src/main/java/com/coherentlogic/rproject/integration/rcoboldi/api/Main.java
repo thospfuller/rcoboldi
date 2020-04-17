@@ -210,6 +210,32 @@ public class Main {
         return result;
     }
 
+    static String executeCobrixTest3(JCopyBookConverter jCopyBookConverter) throws IOException {
+
+        var copyBookFile = new File (COBRIX_DATA_PREFIX + "test3_copybook.cob").toString();
+        var inFile       = new File (COBRIX_DATA_PREFIX + "test3_data/TRAN2.AUG31.DATA.dat").toString();
+
+        var inFont = "cp037";
+
+        /**
+         * https://sourceforge.net/p/jrecord/wiki/Home/
+         * https://sourceforge.net/p/jrecord/wiki/Cobol2Csv%2C%20Csv2Cobol/
+         * https://github.com/svn2github/jrecord/blob/master/Source/JRecord_Cbl2Csv/src/net/sf/JRecord/cbl2csv/Cobol2Csv.java -- binFormat is the dialect.
+         *
+         * String copyBookFile, String font, String sep, String quote, IUpdateFieldName updateFldName
+         */
+        var result = jCopyBookConverter.readCopyBookAsString (
+                copyBookFile,
+                inFile,
+                "Fixed Length Binary",
+                inFont,
+                1, // MAINFRAME
+                new PassThroughUpdateFieldName ()
+        );
+
+        return result;
+    }
+
     static String executeCobrixTest21(JCopyBookConverter jCopyBookConverter) throws IOException {
 
         var copyBookFile = new File (COBRIX_DATA_PREFIX + "test21_copybook.cob").toString();
@@ -242,6 +268,7 @@ public class Main {
         System.out.println ("Example 3         : " + executeExample3 (jCopyBookConverter));
         System.out.println ("Example Cobrix 1  : " + executeCobrixTest1 (jCopyBookConverter));
         System.out.println ("Example Cobrix 2  : " + executeCobrixTest2 (jCopyBookConverter));
+        System.out.println ("Example Cobrix 3  : " + executeCobrixTest3 (jCopyBookConverter));
         System.out.println ("Example Cobrix 21 : " + executeCobrixTest21 (jCopyBookConverter));
     }
 

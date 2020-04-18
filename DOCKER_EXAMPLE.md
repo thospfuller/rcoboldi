@@ -10,11 +10,7 @@ The following is a fully working example.
 
 ### From the command line:
 
-```docker pull thospfuller/rcoboldi-rocker-rstudio:latest```
-
-or
-
-```docker pull thospfuller/rcoboldi-rocker-rstudio:1.0.2```
+```docker pull thospfuller/rcoboldi-rocker-rstudio:[latest or 1.0.2 or some other tag]```
 
 then
 

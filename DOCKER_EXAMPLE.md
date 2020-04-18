@@ -4,7 +4,7 @@ Below we include two examples for working with images in Docker along with a dem
 
 ## Using The RCOBOLDI RStudio Image On DockerHub
 
-[The RCOBOLDI Rocker/RStudio image is available on DockerHub here.](https://hub.docker.com/repository/docker/thospfuller/rcoboldi-rocker-rstudio/general)
+[The RCOBOLDI Rocker/RStudio image is available on DockerHub here.](https://hub.docker.com/r/thospfuller/rcoboldi-rocker-rstudio)
 
 The following is a fully working example.
 

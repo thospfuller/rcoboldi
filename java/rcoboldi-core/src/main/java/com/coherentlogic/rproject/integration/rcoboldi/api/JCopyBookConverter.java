@@ -325,11 +325,8 @@ public class JCopyBookConverter {
                 "GNU Cobol VB"
         )
         ) {
-            String message = "The inputFileStructure value '" + inputFileStructure + "' is not recognized!" +
-                    " A default value will be used instead of the inputFileStructure provided and hence the conversion may " +
-                    "or may not complete successfully.";
-
-            log.warn(message);
+            throw new UnrecognizedFileStructureRuntimeException("The inputFileStructure value '" + inputFileStructure +
+                "' is not recognized!");
         }
 
         /* Takes a db index param or file structure string and returns the file structure.

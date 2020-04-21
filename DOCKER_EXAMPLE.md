@@ -4,9 +4,9 @@ Below we include two examples for working with images in Docker along with a dem
 
 ## Using The RCOBOLDI RStudio Image On DockerHub
 
-The RCOBOLDI [Rocker/RStudio image is available on DockerHub.](https://hub.docker.com/r/thospfuller/rcoboldi-rocker-rstudio) This image is built using dependencies which have been deployed in the Drat repository.
+The RCOBOLDI [Rocker/RStudio image](https://hub.docker.com/r/thospfuller/rcoboldi-rocker-rstudio) is available on DockerHub. This image is built using dependencies which have been deployed in the Drat repository.
 
-The RCOBOLDI [Rocker/Verse image is a complete build using source code cloned from the GitHub repository](https://hub.docker.com/r/thospfuller/rcoboldi-rocker-verse).
+The RCOBOLDI [Rocker/Verse image](https://hub.docker.com/r/thospfuller/rcoboldi-rocker-verse) is a complete build using source code cloned from the GitHub repository.
 
 The following is a fully working example based on the Rocker/RStudio image.
 
@@ -86,3 +86,8 @@ The Dockerfile in this example is based on Rocker / RStudio and will be running 
 Below is a video which demonstrates the R COBOL Data Integration package running in Docker.
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=rBIrvUA788M" target="_blank"><img src="images/Introduction_To_RCOBOLDI_Data_Integration_Package_Static_Movie_Image.png" alt="Introduction To RCOBOLDI Data Integration Package" width="240" height="180" border="10" /></a>
+
+# See Also
+
+- [Rocker/RStudio](https://hub.docker.com/r/rocker/rstudio/)
+- [Rocker/Verse](https://hub.docker.com/r/rocker/verse/)

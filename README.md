@@ -26,3 +26,4 @@ The Java API uses Log4J and writes files to the ~/rcoboldi-package-logs/ directo
 - [JRecord: Read Cobol data files in Java on SourceForge](https://sourceforge.net/projects/jrecord/)
 - [JRecord: Read Cobol data files in Java on GitHub](https://github.com/bmTas/JRecord)
 - [EBCDIC](https://en.wikipedia.org/wiki/EBCDIC)
+- [Cobol hits 50 and keeps counting](https://www.theguardian.com/technology/2009/apr/09/cobol-internet-programming)

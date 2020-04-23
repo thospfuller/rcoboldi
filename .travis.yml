@@ -11,10 +11,9 @@ r:
 r_packages:
   - testthat
   - RJSONIO
-before_script:
-  - cd r-package
 script:
-  - mkdir ./inst/
+  - cd r-package
+    mkdir ./inst/
     mkdir ./inst/java
     cp ../java/rcoboldi-assembly/target/rcoboldi-assembly-*-RELEASE.jar ./inst/java
     R -e 'roxygen2::roxygenize("./", roclets = c("rd", "collate", "namespace", "vignette"))'

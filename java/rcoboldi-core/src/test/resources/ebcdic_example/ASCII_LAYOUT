@@ -1,0 +1,13 @@
+  LOAD DATA LOG NO INDDN SYSREC00 INTO TABLE                                    
+      TBLNAME                                                                   
+   (                                                                            
+   STATE_CODE                             POSITION(       1         )           
+   CHAR(                      2)        ,                                       
+   ZIP_CODE                               POSITION(       3         )           
+   CHAR(                      9)        ,                                       
+   EFF_DT                                 POSITION(      12         )           
+   DATE EXTERNAL(            10)        ,                                       
+   EXP_DT                                 POSITION(      22         )           
+   DATE EXTERNAL(            10)                                                
+        NULLIF(      32)='?'                                                    
+   )                                                                            

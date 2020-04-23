@@ -5,6 +5,7 @@ before_script:
 script:
   - cd ./java && mvn clean package
 
+language: r
 r:
   - devel
 r_packages:

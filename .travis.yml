@@ -5,8 +5,8 @@ before_script:
 script:
   - cd ./java && mvn clean package
 
-language: r
-  - 3.6.3
+r:
+  - devel
 r_packages:
   - testthat
   - RJSONIO

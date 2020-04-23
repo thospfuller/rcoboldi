@@ -8,16 +8,16 @@ script:
 language: r
 r:
   - release
-r_packages:
-  - testthat
-  - RJSONIO
-script:
+cache: packages
+install:
+  - Rscript -e 'install.packages(c("devtools","roxygen2","testthat", "RJSONIO"));devtools::install_deps("r-package")'
+before_script:
   - cd r-package
     mkdir ./inst/
     mkdir ./inst/java
     cp ../java/rcoboldi-assembly/target/rcoboldi-assembly-*-RELEASE.jar ./inst/java
-    R -e 'roxygen2::roxygenize("./", roclets = c("rd", "collate", "namespace", "vignette"))'
-    cd .. && R CMD INSTALL --preclean --no-multiarch --with-keep.source r-package
+script:
+  - Rscript -e 'devtools::check("r-package")'
 
 dist: bionic
 

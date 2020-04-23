@@ -6,8 +6,6 @@ script:
   - cd ./java && mvn clean package
 
 language: r
-r:
-  - 3.6.3
 r_packages:
   - testthat
   - RJSONIO

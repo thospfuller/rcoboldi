@@ -1,6 +1,5 @@
 language: java
-env: JDK='Oracle JDK 11'
-install: ~/bin/install-jdk.sh --target "/home/travis/oraclejdk11" --feature "11" --license "BCL"
+jdk: oraclejdk11
 before_script:
   ./install-java-dependencies.sh
 script:

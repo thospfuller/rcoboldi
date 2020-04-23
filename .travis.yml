@@ -20,7 +20,7 @@ script:
     R -e 'roxygen2::roxygenize("./", roclets = c("rd", "collate", "namespace", "vignette"))'
     cd .. && R CMD INSTALL --preclean --no-multiarch --with-keep.source r-package
 
-dist: trusty
+dist: bionic
 
 notifications:
   email:

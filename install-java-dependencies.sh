@@ -10,6 +10,10 @@ wget https://sourceforge.net/projects/jrecord/files/jrecord/Version_0.90.3/JReco
 unzip ./temp/Cobol2Csv_0.90.zip -d ~/temp/Cobol2Csv/
 unzip ./temp/JRecord_Version_0.90.3.zip -d ~/temp/jrecord
 
+#
+# The TLSv1.2 is here to fix a 'peer not authenticated' error which causes the build to fail
+# when attempting to download dependencies from FuseSource.
+#
 cd ~/temp/eda/ && mvn clean install -DskipTests=true -U -Dhttps.protocols=TLSv1.2
 cd ~/temp/jdataframe/ && mvn clean install -DskipTests=true -U
 

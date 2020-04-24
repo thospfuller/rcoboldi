@@ -1,23 +1,32 @@
-language: java
-jdk: oraclejdk11
-before_script:
-  ./install-java-dependencies.sh
-script:
-  - cd ./java && mvn clean package
+stages:
+  - buildJavaDependencies
+  - buildRPackage
 
-language: r
-r:
-  - release
-cache: packages
-install:
-  - Rscript -e 'install.packages(c("devtools","roxygen2","testthat", "RJSONIO"));devtools::install_deps("r-package")'
-before_script:
-  - cd r-package
-    mkdir ./inst/
-    mkdir ./inst/java
-    cp ../java/rcoboldi-assembly/target/rcoboldi-assembly-*-RELEASE.jar ./inst/java
-script:
-  - Rscript -e 'devtools::check(".")'
+jobs:
+  include:
+    - stage: "buildJavaDependencies"
+      name: "Build Java Dependencies"
+      language: java
+      jdk: oraclejdk11
+      before_script:
+        ./install-java-dependencies.sh
+      script:
+        - cd ./java && mvn clean package
+    - stage: "buildRPackage"
+      name: "Build R Package"
+      language: r
+      r:
+        - release
+      cache: packages
+      install:
+        - Rscript -e 'install.packages(c("devtools","roxygen2","testthat", "RJSONIO"));devtools::install_deps("r-package")'
+      before_script:
+        - cd r-package
+          mkdir ./inst/
+          mkdir ./inst/java
+          cp ../java/rcoboldi-assembly/target/rcoboldi-assembly-*-RELEASE.jar ./inst/java
+      script:
+        - Rscript -e 'devtools::check(".")'
 
 dist: bionic
 

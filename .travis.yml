@@ -7,11 +7,14 @@ jobs:
     - stage: "buildJavaDependencies"
       name: "Build Java Dependencies"
       language: java
+      cache: packages
       jdk: oraclejdk11
       before_script:
-        ./travis-install-java-dependencies.sh
+        - $HOME/build/thospfuller/rcoboldi/travis-install-java-dependencies.sh
       script:
         - cd ./java && mvn clean package && cd /home/travis/build/thospfuller/rcoboldi
+      after_success:
+        - $HOME/build/thospfuller/rcoboldi/cp-jar-to-inst-java.sh
     - stage: "buildRPackage"
       name: "Build R Package"
       language: r
@@ -20,8 +23,6 @@ jobs:
       cache: packages
       install:
         - Rscript -e 'install.packages(c("devtools","roxygen2","testthat", "RJSONIO"));devtools::install_deps("r-package")'
-      before_script:
-        - pwd && mkdir $HOME/build/thospfuller/rcoboldi/r-package/inst/ && mkdir $HOME/build/thospfuller/rcoboldi/r-package/inst/java && $HOME/build/thospfuller/rcoboldi/cp-jar-to-inst-java.sh
       script:
         - Rscript -e 'devtools::check(".")'
 

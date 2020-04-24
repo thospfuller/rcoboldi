@@ -8,17 +8,11 @@ jobs:
       name: "Build Java Dependencies"
       language: java
       jdk: oraclejdk11
-#      env:		
-#        global:		
-          #
-          # This is here to fix a 'peer not authenticated' error which causes the build to fail
-          # when attempting to download dependencies from FuseSource.
-          #
-#          - JAVA_TOOL_OPTIONS=-Dhttps.protocols=TLSv1.2
       before_script:
-        ./install-java-dependencies.sh
+        ./travis-install-java-dependencies.sh
       script:
         - cd ./java && mvn clean package
+          cd /home/travis/build/thospfuller/rcoboldi
     - stage: "buildRPackage"
       name: "Build R Package"
       language: r
@@ -28,10 +22,9 @@ jobs:
       install:
         - Rscript -e 'install.packages(c("devtools","roxygen2","testthat", "RJSONIO"));devtools::install_deps("r-package")'
       before_script:
-        - cd r-package
-          mkdir ./inst/
-          mkdir ./inst/java
-          cp ../java/rcoboldi-assembly/target/rcoboldi-assembly-*-RELEASE.jar ./inst/java
+        - mkdir ./r-package/inst/
+          mkdir ./r-package/inst/java
+          ./cp-jar-to-inst-java.sh
       script:
         - Rscript -e 'devtools::check(".")'
 

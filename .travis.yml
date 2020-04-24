@@ -21,7 +21,7 @@ jobs:
       install:
         - Rscript -e 'install.packages(c("devtools","roxygen2","testthat", "RJSONIO"));devtools::install_deps("r-package")'
       before_script:
-        - mkdir ./r-package/inst/ && mkdir ./r-package/inst/java && ./cp-jar-to-inst-java.sh
+        - mkdir ./r-package/inst/ && mkdir ./r-package/inst/java && cd /home/travis/build/thospfuller/rcoboldi && ./cp-jar-to-inst-java.sh
       script:
         - Rscript -e 'devtools::check(".")'
 

@@ -12,9 +12,9 @@ jobs:
       before_script:
         - $HOME/build/thospfuller/rcoboldi/travis-install-java-dependencies.sh
       script:
-        - cd ./java && mvn clean package && cd /home/travis/build/thospfuller/rcoboldi
-      after_success:
-        - $HOME/build/thospfuller/rcoboldi/cp-jar-to-inst-java.sh
+        - packages cd ./java && mvn clean package && cd /home/travis/build/thospfuller/rcoboldi
+      # after_success:
+      #  - $HOME/build/thospfuller/rcoboldi/cp-jar-to-inst-java.sh
     - stage: "buildRPackage"
       name: "Build R Package"
       language: r
@@ -23,6 +23,8 @@ jobs:
       cache: packages
       install:
         - Rscript -e 'install.packages(c("devtools","roxygen2","testthat", "RJSONIO"));devtools::install_deps("r-package")'
+      before_script:
+        - packages $HOME/build/thospfuller/rcoboldi/cp-jar-to-inst-java.sh
       script:
         - Rscript -e 'devtools::check("/home/travis/build/thospfuller/rcoboldi/r-package/")'
 

@@ -24,7 +24,7 @@ jobs:
       install:
         - Rscript -e 'install.packages(c("devtools","roxygen2","testthat", "RJSONIO"));devtools::install_deps("r-package")'
       script:
-        - Rscript -e 'devtools::check(".")'
+        - Rscript -e 'devtools::check("/home/travis/build/thospfuller/rcoboldi/r-package/")'
 
 dist: bionic
 

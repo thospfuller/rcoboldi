@@ -17,8 +17,7 @@ before_script:
     mkdir ./inst/java
     cp ../java/rcoboldi-assembly/target/rcoboldi-assembly-*-RELEASE.jar ./inst/java
 script:
-  - pwd
-    Rscript -e 'devtools::check("./rcoboldi/r-package")'
+  - Rscript -e 'devtools::check(".")'
 
 dist: bionic
 

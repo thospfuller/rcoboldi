@@ -10,7 +10,7 @@ wget https://sourceforge.net/projects/jrecord/files/jrecord/Version_0.90.3/JReco
 unzip ./temp/Cobol2Csv_0.90.zip -d ~/temp/Cobol2Csv/
 unzip ./temp/JRecord_Version_0.90.3.zip -d ~/temp/jrecord
 
-cd ~/temp/eda/ && mvn clean install -DskipTests=true -U
+cd ~/temp/eda/ && mvn clean install -DskipTests=true -U -Dhttps.protocols=TLSv1.2
 cd ~/temp/jdataframe/ && mvn clean install -DskipTests=true -U
 
 mvn install:install-file -Dfile=~/temp/jrecord/lib/JRecord.jar -DgroupId=net.sf -DartifactId=jrecord -Dversion=0.90.2 -Dpackaging=jar

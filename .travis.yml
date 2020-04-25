@@ -14,6 +14,7 @@ jobs:
       jdk: oraclejdk11
       before_script:
         - $HOME/build/thospfuller/rcoboldi/travis-install-java-dependencies.sh
+      #
       script:
         - cd ./java && mvn clean package && cd /home/travis/build/thospfuller/rcoboldi
       # after_success:

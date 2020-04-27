@@ -31,3 +31,4 @@ The Java API uses Log4J and writes files to the ~/rcoboldi-package-logs/ directo
 - [EBCDIC on Wikipedia](https://en.wikipedia.org/wiki/EBCDIC)
 - [Cobol hits 50 and keeps counting](https://www.theguardian.com/technology/2009/apr/09/cobol-internet-programming)
 - [ProLeap ANTLR4-based parser for COBOL](https://github.com/uwol/proleap-cobol-parser)
+- [EBCDIC Character Format - A Guide](https://niallbunting.com/ebcdic/cobol/packing/copybooks/2019/12/09/ebcdic-character-format-guide.html)

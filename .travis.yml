@@ -9,8 +9,9 @@ jobs:
       language: java
       # https://docs.travis-ci.com/user/caching/#how-does-caching-work
       # https://docs.travis-ci.com/user/caching/
-      cache: packages
-        directories:
+      cache: 
+        - packages
+        - directories:
           - /home/travis/build/thospfuller/rcoboldi/java/rcoboldi-assembly/target/
       jdk: oraclejdk11
       before_script:
@@ -26,7 +27,7 @@ jobs:
       language: r
       r:
         - release
-      cache: packages
+      # cache: packages
       install:
         - Rscript -e 'install.packages(c("devtools","roxygen2","testthat", "RJSONIO"));devtools::install_deps("r-package")'
       before_script:

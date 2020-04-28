@@ -1,20 +1,18 @@
-matrix:
-  include:
-    - language: java
-      jdk: oraclejdk11
-      before_script:
-        - $HOME/build/thospfuller/rcoboldi/travis-install-java-dependencies.sh
-      script:
-        - cd ./java && mvn clean package && cd /home/travis/build/thospfuller/rcoboldi
-    - language: r
-      r:
-        - release
-      install:
-        - Rscript -e 'install.packages(c("devtools","roxygen2","testthat", "RJSONIO"));devtools::install_deps("r-package")'
-      before_script:
-        - $HOME/build/thospfuller/rcoboldi/cp-jar-to-inst-java.sh
-      script:
-        - Rscript -e 'devtools::check("/home/travis/build/thospfuller/rcoboldi/r-package/")'
+- language: java
+  jdk: oraclejdk11
+  before_script:
+  - $HOME/build/thospfuller/rcoboldi/travis-install-java-dependencies.sh
+    script:
+      - cd ./java && mvn clean package && cd /home/travis/build/thospfuller/rcoboldi
+- language: r
+  r:
+    - release
+  install:
+    - Rscript -e 'install.packages(c("devtools","roxygen2","testthat", "RJSONIO"));devtools::install_deps("r-package")'
+  before_script:
+    - $HOME/build/thospfuller/rcoboldi/cp-jar-to-inst-java.sh
+  script:
+    - Rscript -e 'devtools::check("/home/travis/build/thospfuller/rcoboldi/r-package/")'
 
 dist: bionic
 

@@ -1,4 +1,4 @@
-# RCOBOLDI [![Build Status](https://travis-ci.org/thospfuller/rcoboldi.svg)](https://travis-ci.org/thospfuller/rcoboldi) [![License](http://img.shields.io/badge/license-LGPL-brightgreen.svg?style=flat)](http://www.gnu.org/licenses/gpl-2.0.html)
+# RCOBOLDI [![Build Status](https://travis-ci.org/thospfuller/rcoboldi.svg)](https://travis-ci.org/thospfuller/rcoboldi) [![License](http://img.shields.io/badge/license-LGPL-brightgreen.svg?style=flat)](http://www.gnu.org/licenses/gpl-2.0.html) | [![Twitter](https://img.shields.io/badge/Follow-@CoherentLogicCo-blue)](https://twitter.com/CoherentLogicCo) | [![LinkedIn](https://img.shields.io/badge/Network-ThosPFuller-blue)](https://www.linkedin.com/in/thomasfuller/)
 
 R COBOL DI (Data Integration) Package: An R package that facilitates the importation of COBOL CopyBook data directly into the R Project for Statistical Computing as properly structured data frames.
 

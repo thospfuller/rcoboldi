@@ -1,36 +1,14 @@
-stages:
-  - buildJavaDependencies
-  - buildRPackage
-
-jobs:
+matrix:
   include:
-    - stage: "buildJavaDependencies"
-      name: "Build Java Dependencies"
-      language: java
-      # https://docs.travis-ci.com/user/caching/#how-does-caching-work
-      # https://docs.travis-ci.com/user/caching/
-      cache: 
-        - packages
-        - directories:
-          - /home/travis/build/thospfuller/rcoboldi/java/rcoboldi-assembly/target/
+    - language: java
       jdk: oraclejdk11
       before_script:
         - $HOME/build/thospfuller/rcoboldi/travis-install-java-dependencies.sh
-      #
-      #
       script:
         - cd ./java && mvn clean package && cd /home/travis/build/thospfuller/rcoboldi
-      # after_success:
-      #  - $HOME/build/thospfuller/rcoboldi/cp-jar-to-inst-java.sh
-    - stage: "buildRPackage"
-      name: "Build R Package"
-      language: r
+    - language: r
       r:
         - release
-      cache:
-        - packages
-        - directories:
-          - /home/travis/build/thospfuller/rcoboldi/java/rcoboldi-assembly/target/
       install:
         - Rscript -e 'install.packages(c("devtools","roxygen2","testthat", "RJSONIO"));devtools::install_deps("r-package")'
       before_script:

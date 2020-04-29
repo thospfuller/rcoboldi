@@ -33,3 +33,5 @@ The Java API uses Log4J and writes files to the ~/rcoboldi-package-logs/ directo
 - [ProLeap ANTLR4-based parser for COBOL](https://github.com/uwol/proleap-cobol-parser)
 - [EBCDIC Character Format - A Guide](https://niallbunting.com/ebcdic/cobol/packing/copybooks/2019/12/09/ebcdic-character-format-guide.html)
 - [PyPI EBCDIC](https://pypi.org/project/ebcdic/)
+- [Brush up your COBOL: Why is a 60 year old language suddenly in demand?](https://stackoverflow.blog/2020/04/20/brush-up-your-cobol-why-is-a-60-year-old-language-suddenly-in-demand/)
+- [COBOL Is Everywhere. Who Will Maintain It?](https://thenewstack.io/cobol-everywhere-will-maintain/)

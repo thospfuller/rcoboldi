@@ -1,20 +1,38 @@
-matrix:
+stages:
+  - buildJavaDependencies
+  - buildRPackage
+
+jobs:
   include:
-  - language: java
-    jdk: oraclejdk11
-    before_script:
-      - $HOME/build/thospfuller/rcoboldi/travis-install-java-dependencies.sh
-    script:
-      - cd ./java && mvn clean package && cd /home/travis/build/thospfuller/rcoboldi
-  - language: r
-    r:
-      - release
-    install:
-      - Rscript -e 'install.packages(c("devtools","roxygen2","testthat", "RJSONIO"));devtools::install_deps("r-package")'
-    before_script:
-      - $HOME/build/thospfuller/rcoboldi/cp-jar-to-inst-java.sh
-    script:
-      - Rscript -e 'devtools::check("/home/travis/build/thospfuller/rcoboldi/r-package/")'
+    - stage: "buildJavaDependencies"
+      name: "Build Java Dependencies"
+      language: java
+      cache: 
+        packages: true
+        directories:
+          - /home/travis/build/thospfuller/rcoboldi/java/rcoboldi-assembly/target/
+      jdk: oraclejdk11
+      before_script:
+        - $HOME/build/thospfuller/rcoboldi/travis-install-java-dependencies.sh
+      script:
+        - cd ./java && mvn clean package && cd /home/travis/build/thospfuller/rcoboldi
+      # after_success:
+      #  - $HOME/build/thospfuller/rcoboldi/cp-jar-to-inst-java.sh
+    - stage: "buildRPackage"
+      name: "Build R Package"
+      language: r
+      r:
+        - release
+      #cache:
+      #  packages: true
+      #  directories:
+      #    - /home/travis/build/thospfuller/rcoboldi/java/rcoboldi-assembly/target/
+      install:
+        - Rscript -e 'install.packages(c("devtools","roxygen2","testthat", "RJSONIO"));devtools::install_deps("r-package")'
+      before_script:
+        - $HOME/build/thospfuller/rcoboldi/cp-jar-to-inst-java.sh
+      script:
+        - Rscript -e 'devtools::check("/home/travis/build/thospfuller/rcoboldi/r-package/")'
 
 dist: bionic
 
@@ -22,3 +40,4 @@ notifications:
   email:
     on_success: change
     on_failure: change
+

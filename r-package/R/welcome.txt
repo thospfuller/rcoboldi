@@ -1,0 +1,19 @@
+    ______      __                         __     __               _
+   / ____/___  / /_  ___  ________  ____  / /_   / /  ____  ____ _(_)____
+  / /   / __ \/ __ \/ _ \/ ___/ _ \/ __ \/ __/  / /  / __ \/ __ `/ / ___/
+ / /___/ /_/ / / / /  __/ /  /  __/ / / / /_   / /__/ /_/ / /_/ / / /__
+ \____/\____/_/ /_/\___/_/   \___/_/ /_/\__/  /_____|____/\__, /_/\___/
+                                                        /____/
+
+ R COBOL Data Integration Package 1.0.3-RELEASE
+
+ Brought to you by: https://coherentlogic.com
+
+ Software Engineering and Data Analytics
+ McLean, VA USA
+
+    Join : http://eepurl.com/b5jPPj
+ Connect : https://www.linkedin.com/in/thomasfuller/
+    Like : https://github.com/thospfuller/rcoboldi/
+  Follow : https://twitter.com/thospfuller
+           https://www.linkedin.com/company/229316/

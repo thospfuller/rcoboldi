@@ -176,7 +176,7 @@ ReadCopyBookAsDataFrame <- function (copyBookFile, inFile, inputFileStructure, f
 #'
 #' @param args The same args that would be passed in when executing Cobol2Csv from the command line.
 #'
-#' \examples{
+#' @examples{
 #'   \dontrun{
 #'     RCOBOLDI::CobolToCSV("-I ~/temp/absaoss_cobrix_test1_example.bin -C ~/temp/absaoss_cobrix_test1_copybook.cob -FS Fixed_Length -IC cp037 -O ~/temp/absaoss_cobrix_test1.csv")
 #'   }

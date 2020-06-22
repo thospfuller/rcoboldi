@@ -9,7 +9,7 @@
     <parent>
         <groupId>com.coherentlogic.rproject.integration</groupId>
         <artifactId>rcobol</artifactId>
-        <version>1.0.2-RELEASE</version>
+        <version>1.0.3-RELEASE</version>
     </parent>
 
     <name>RCOBOL Assembly Module</name>
@@ -23,7 +23,7 @@
         <dependency>
             <groupId>com.coherentlogic.rproject.integration.rcobol</groupId>
             <artifactId>rcoboldi-core</artifactId>
-            <version>1.0.2-RELEASE</version>
+            <version>1.0.3-RELEASE</version>
         </dependency>
     </dependencies>
 

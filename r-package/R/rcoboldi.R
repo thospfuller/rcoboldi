@@ -133,7 +133,9 @@ Finalize <- function () {
 #'   result <- RCOBOLDI::ReadCopyBookAsDataFrame("../java/rcoboldi-core/src/test/resources/example1/DTAR020.cbl", "../java/rcoboldi-core/src/test/resources/example1/DTAR020.bin", "Fixed Length Binary", "cp037")
 #'   result <- RCOBOLDI::ReadCopyBookAsDataFrame("../java/rcoboldi-core/src/test/resources/example2/DTAR107.cbl", "../java/rcoboldi-core/src/test/resources/example2/DTAR107.bin", "Fixed Length Binary", "cp037")
 #'   result <- RCOBOLDI::ReadCopyBookAsDataFrame("../java/rcoboldi-core/src/test/resources/example3/AmsLocation.cbl", "../java/rcoboldi-core/src/test/resources/example3/Ams_LocDownload_20041228.txt", "Text", "cp1252")
-#'   result <- RCOBOLDI::ReadCopyBookAsDataFrame("/Users/thospfuller/development/projects/rcoboldi-gh/rcoboldi/java/rcoboldi-core/src/test/resources/example4/absaoss_cobrix_test1_copybook.cob", "/Users/thospfuller/development/projects/rcoboldi-gh/rcoboldi/java/rcoboldi-core/src/test/resources/example4/absaoss_cobrix_test1_example.bin", "Fixed Length Binary", "cp037")
+#'   result <- RCOBOLDI::ReadCopyBookAsDataFrame("../java/rcoboldi-core/src/test/resources/cobrix-data/test1_copybook.cob", "../java/rcoboldi-core/src/test/resources/cobrix-data/test1_data/example.bin", "Fixed Length Binary", "cp037")
+#'   result <- RCOBOLDI::ReadCopyBookAsDataFrame("../java/rcoboldi-core/src/test/resources/cobrix-data/test2_copybook.cob", "../java/rcoboldi-core/src/test/resources/cobrix-data/test2_data/example2.bin", "Fixed Length Binary", "cp037")
+#'   result <- RCOBOLDI::ReadCopyBookAsDataFrame("../java/rcoboldi-core/src/test/resources/cobrix-data/test3_copybook.cob", "../java/rcoboldi-core/src/test/resources/cobrix-data/test3_data/TRAN2.AUG31.DATA.dat", "Fixed Length Binary", "cp037")
 #'  }
 #' }
 #'
@@ -214,25 +216,8 @@ CobolToCSV <- function (args) {
 #' @export
 #'
 About <- function () {
-    cat (
-        "                                                                               \n",
-        "    ______      __                         __     __               _           \n",
-        "   / ____/___  / /_  ___  ________  ____  / /_   / /  ____  ____ _(_)____      \n",
-        "  / /   / __ \\/ __ \\/ _ \\/ ___/ _ \\/ __ \\/ __/  / /  / __ \\/ __ `/ / ___/\n",
-        " / /___/ /_/ / / / /  __/ /  /  __/ / / / /_   / /__/ /_/ / /_/ / / /__        \n",
-        " \\____/\\____/_/ /_/\\___/_/   \\___/_/ /_/\\__/  /_____|____/\\__, /_/\\___/ \n",
-        "                                                         /____/                \n",
-        " RCOBOLDI (R COBOL Data Integration) Package 1.0.2-RELEASE                     \n",
-        "                                                                               \n",
-        " Brought to you by: https://coherentlogic.com                                  \n",
-        "                                                                               \n",
-        " Software Engineering and Data Analytics                                       \n",
-        " McLean, VA USA                                                                \n",
-        "                                                                               \n",
-        "  Follow : https://www.linkedin.com/company/229316/                            \n",
-        " Connect : https://www.linkedin.com/in/thomasfuller/                           \n",
-        "    Like : https://github.com/thospfuller/rcoboldi/                            \n",
-        "           https://github.com/bmTas/JRecord/                                   \n",
-        "                                                                               \n"
-    )
+  welcomeConnection <- file('./R/welcome.txt')
+  welcomeText <- readLines(con = welcomeConnection)
+  cat(welcomeText, sep='\n')
+  close(welcomeConnection)
 }

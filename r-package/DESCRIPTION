@@ -9,10 +9,12 @@ Description: Import single-record type COBOL data files as properly structured d
 SystemRequirements: Java (>= 11)
 Depends:
     rJava,
-    RJSONIO
+    RJSONIO,
+    logging
 Imports:
     rJava,
-    RJSONIO
+    RJSONIO,
+    logging
 Suggests:
     testthat
 LazyLoad: yes

@@ -32,6 +32,13 @@
             <groupId>com.coherentlogic.enterprise-data-adapter</groupId>
             <artifactId>data-adapter-core</artifactId>
         </dependency>
+        <!-- TPF: Added to address "ScriptEngineManager providers.next(): javax.script.ScriptEngineFactory: Provider org.codehaus.groovy.jsr223.GroovyScriptEngineFactory not found"
+          -->
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-jsr223</artifactId>
+            <version>3.0.4</version>
+        </dependency>
 
         <dependency>
             <groupId>com.jamonapi</groupId>

@@ -47,6 +47,25 @@
                                         <include>**</include>
                                     </includes>
                                 </filter>
+                                <!-- TPF: Added to address "ScriptEngineManager providers.next(): javax.script.ScriptEngineFactory: Provider org.codehaus.groovy.jsr223.GroovyScriptEngineFactory
+
+                                          The following appears in the output when building via Maven:
+
+                                          [INFO] Including org.codehaus.groovy:groovy-jsr223:jar:3.0.4 in the shaded jar.
+                                          [INFO] Including org.codehaus.groovy:groovy:jar:3.0.4 in the shaded jar.
+                                  -->
+                                <filter>
+                                    <artifact>org.codehaus.groovy:groovy-jsr223</artifact>
+                                    <excludes>
+                                        <exclude>**</exclude>
+                                    </excludes>
+                                </filter>
+                                <filter>
+                                    <artifact>org.codehaus.groovy:groovy</artifact>
+                                    <excludes>
+                                        <exclude>**</exclude>
+                                    </excludes>
+                                </filter>
                                 <filter>
                                     <artifact>com.google.code.gson:gson</artifact>
                                     <includes>

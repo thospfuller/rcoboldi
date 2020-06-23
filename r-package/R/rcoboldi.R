@@ -23,6 +23,7 @@
 #'
 #' @import RJSONIO
 #' @import rJava
+#' @import logging
 #'
 #' @docType package
 #'
@@ -80,9 +81,9 @@ NULL
 Initialize <- function (disableAbout = FALSE) {
 
     if(!disableAbout) {
-        About()
+        RCOBOLDI::About()
     }
-  
+
     if (!is.null (.rcoboldi.env$jCopyBookConverter)) {
         warning ("Initialize only needs to be called once per R session.")
     }
@@ -216,8 +217,26 @@ CobolToCSV <- function (args) {
 #' @export
 #'
 About <- function () {
-  welcomeConnection <- file('./R/welcome.txt')
+
+  packageWelcomeTxtFile <- system.file("extdata/welcome.txt", package="RCOBOLDI", mustWork=TRUE)
+
+  logging::loginfo (cat ("packageWelcomeTxtFile: ", packageWelcomeTxtFile, sep=""))
+
+  welcomeConnection <- NULL
+
+  tryCatch(
+    welcomeConnection <- file(packageWelcomeTxtFile), Throwable = function (e) {
+
+      logger::logerror (cat("Unable to read the welcome.txt file; packageWelcomeTxt: ",
+        packageWelcomeTxtFile, e$getMessage(), sep=""))
+    }
+  )
+
   welcomeText <- readLines(con = welcomeConnection)
+
   cat(welcomeText, sep='\n')
-  close(welcomeConnection)
+
+  if (!is.null(welcomeConnection) && isOpen(welcomeConnection)) {
+    close(welcomeConnection)
+  }
 }

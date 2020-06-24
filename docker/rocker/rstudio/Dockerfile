@@ -12,12 +12,20 @@
 # docker rmi $(docker images -q)
 # docker build ./docker
 #
-# -----
+# ----- Release -----
 #
+# docker tag [id] thospfuller/rcoboldi-rockstar-rstudio:[1.0.3]
+# docker push thospfuller/rcoboldi-rockstar-rstudio:[1.0.3]
+#
+# ----- Delete All Images -----
+#
+# docker rmi -f $(docker images -q)
+#
+# ----- Run -----
 # docker run -d -p 8787:8787 -e PASSWORD=password --name rstudio -i -t [id]
 # docker exec -it clrstudio /bin/bash
 #
-FROM rockstar/rstudio:latest
+FROM thospfuller/rockstar-rstudio:1.0.0
 
 RUN su -
 RUN apt-get update

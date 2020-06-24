@@ -12,7 +12,7 @@ The following is a fully working example based on the Rocker/RStudio image.
 
 ### From the command line:
 
-```docker pull thospfuller/rcoboldi-rocker-rstudio:[latest or 1.0.2 or some other tag]```
+```docker pull thospfuller/rcoboldi-rockstar-rstudio:[latest or 1.0.3 or some other tag]```
 
 then
 
@@ -21,7 +21,7 @@ then
 should show something like this:
 
 > REPOSITORY                            TAG                 IMAGE ID            CREATED             SIZE
-> thospfuller/rcoboldi-rocker-rstudio   1.0.2               3f8c1c269940        37 minutes ago      2.42GB
+> thospfuller/rcoboldi-rockstar-rstudio   1.0.3             3f8c1c269940        37 minutes ago      2.42GB
 
 then
 

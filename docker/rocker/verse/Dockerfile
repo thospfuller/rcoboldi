@@ -74,14 +74,14 @@ RUN mvn install:install-file -Dfile=/home/rstudio/jrecord/lib/JRecord.jar -Dgrou
 RUN mvn install:install-file -Dfile=/home/rstudio/jrecord/lib/cb2xml.jar -DgroupId=net.sf -DartifactId=cb2xml -Dversion=0.90.2 -Dpackaging=jar
 RUN mvn install:install-file -Dfile=/home/rstudio/Cobol2Csv/lib/Cobol2Csv.jar -DgroupId=net.sf -DartifactId=cb2csv -Dversion=0.90 -Dpackaging=jar
 
-RUN mkdir /home/rstudio/rcoboldi/r-package/inst/
 RUN mkdir /home/rstudio/rcoboldi/r-package/inst/java
 
 RUN sudo chown -R rstudio:rstudio /home/rstudio/rcoboldi/r-package/*
 
-RUN cd /home/rstudio/rcoboldi/java && mvn clean package && cp rcoboldi-assembly/target/rcoboldi-assembly-1.0.2-RELEASE.jar /home/rstudio/rcoboldi/r-package/inst/java
+RUN cd /home/rstudio/rcoboldi/java && mvn clean package && cp rcoboldi-assembly/target/rcoboldi-assembly-1.0.3-RELEASE.jar /home/rstudio/rcoboldi/r-package/inst/java
 
 RUN R -e 'install.packages("RJSONIO")'
+RUN R -e 'install.packages("logging")'
 RUN R -e 'roxygen2::roxygenize("/home/rstudio/rcoboldi/r-package/", roclets = c("rd", "collate", "namespace", "vignette"))'
 RUN cd /home/rstudio/rcoboldi/ && R CMD INSTALL --preclean --no-multiarch --with-keep.source r-package
 

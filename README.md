@@ -6,7 +6,7 @@ Note that not all copybook files can be converted into CSV -- for example single
 
 # R COBOL Data Integration (RCOBOLDI) package examples
 
-## [Example One: Install the RCOBOLDI package locally and then convert a COBOL data files into data frames.](SIMPLE_EXAMPLE.md)
+## [Example One: Install the RCOBOLDI package locally and then convert COBOL data files into data frames.](SIMPLE_EXAMPLE.md)
 
 Load the RCOBOLDI package locally and use it to convert COBOL data files into data frames. 
 

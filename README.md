@@ -105,7 +105,7 @@ then
 
 #### From the browser:
 
-The next step is to test this in R so point your browser to [http://localhost:8787](http://localhost:8787) and use "rstudio" and "password" to login and then execute the following:
+The next  is to test this in R so point your browser to [http://localhost:8787](http://localhost:8787) and use "rstudio" and "password" to login and then execute the following:
 
 ```
 library(RCOBOLDI)
@@ -123,7 +123,7 @@ docker build -t rcoboldi/rocker-rstudio:1.0.1 https://raw.githubusercontent.com/
 [some image id]
 ```
 
-![Build the Docker image from the R COBOL Data Integration package Dockerfile."](https://github.com/thospfuller/rcoboldi/tree/master/images/RCOBOLDI_StepOneBuildDockerImage.png "Build the Docker image from the R COBOL Data Integration package Dockerfile.")
+![Build the Docker image from the R COBOL Data Integration package Dockerfile."](https://github.com/thospfuller/rcoboldi/tree/master/images/RCOBOLDI_StepOneBuildDockerImage.png)
 
 #### Step 2.) Launch a container based on this image.
 

@@ -96,8 +96,8 @@ then
 
 should show something like this:
 
-> REPOSITORY                            TAG                 IMAGE ID            CREATED             SIZE
-> thospfuller/rcoboldi-rockstar-rstudio   1.0.3             3f8c1c269940        37 minutes ago      2.42GB
+```> REPOSITORY                            TAG                 IMAGE ID            CREATED             SIZE
+> thospfuller/rcoboldi-rockstar-rstudio   1.0.3             3f8c1c269940        37 minutes ago      2.42GB```
 
 then
 

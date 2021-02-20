@@ -123,7 +123,7 @@ docker build -t rcoboldi/rocker-rstudio:1.0.1 https://raw.githubusercontent.com/
 [some image id]
 ```
 
-![Build the Docker image from the R COBOL Data Integration package Dockerfile."](https://github.com/thospfuller/rcoboldi/tree/master/images/RCOBOLDI_StepOneBuildDockerImage.png)
+![Build the Docker image from the R COBOL Data Integration package Dockerfile."](images/RCOBOLDI_StepOneBuildDockerImage.png)
 
 #### Step 2.) Launch a container based on this image.
 
@@ -151,7 +151,7 @@ result <- RCOBOLDI::ReadCopyBookAsDataFrame("DTAR020.cbl", "DTAR020.bin", "Fixed
 head(result)
 ```
 
-![An example of the R COBOL Data Integration Package loading a file with the inputFileStructure set to "Fixed Length Binary" and the font set to "cp037". This should work out-of-the-box with a container built from the rcoboldi:rocker-rstudio image."](images/RCOBOLDI-RockerRStudio.png "An example of the R COBOL Data Integration Package loading a file with the inputFileStructure set to 'Fixed Length Binary' and the font set to 'cp037'. This should work out-of-the-box with a container built from the rcoboldi:rocker-rstudio image.")
+![An example of the R COBOL Data Integration Package loading a file with the inputFileStructure set to "Fixed Length Binary" and the font set to "cp037". This should work out-of-the-box with a container built from the rcoboldi:rocker-rstudio image."](images/RCOBOLDI-RockerRStudio.png)
 
 ### YouTube
 
@@ -170,7 +170,7 @@ Below is a video which demonstrates the R COBOL Data Integration package running
 
 # R COBOL Data Integration package logging
 
-The Java API uses Log4J and writes files to the ~/rcoboldi-package-logs/ directory. The Log4J configuration file can be found [here](java/rcoboldi-core/src/main/resources).
+The Java API uses Log4J and writes files to the ~/rcoboldi-package-logs/ directory. [The Log4J configuration file can be found here](java/rcoboldi-core/src/main/resources).
 
 # See Also
 

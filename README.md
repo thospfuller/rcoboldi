@@ -74,9 +74,9 @@ RCOBOLDI::CobolToCSV("-I .../rcoboldi/java/rcoboldi-core/src/test/resources/exam
 
 -----
 
-## Try the R COBOL Data Integration package by creating a container from a preconfigured Rocker/RStudio Docker image available on DockerHub : If you just want to try the package on some test data, start here.
+## Try the R COBOL Data Integration (RCOBOLDI) package via a browser using a preconfigured Docker image available on DockerHub
 
-Below we include two examples for working with images in Docker along with a demonstration video showing the package in action.
+Below we include two examples for working with images in Docker along with a demonstration video showing the package in action. If you just want to try the package on some test data, start here.
 
 ### Using the R COBOL Data Integration (RCOBOLDI) package RStudio image on DockerHub
 

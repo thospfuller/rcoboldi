@@ -14,7 +14,7 @@ In this simple example the R COBOL Data Integration package has been installed l
 
 This example also how includes a call to ```CobolToCSV```.
 
-### Preconditions
+### R COBOL Data Integration (RCOBOLDI) package preconditions
 
 The following should be executed prior to attempting to run the R script, below.
 
@@ -26,7 +26,7 @@ If you have trouble with rJava and Java 11 then you might need to execute the fo
 
 ```R CMD javareconf```
 
-### R Script Example
+### R COBOL Data Integration (RCOBOLDI) package example
 
 The following example should work with the only change needed being the path to the files.
 
@@ -68,7 +68,7 @@ result <- RCOBOLDI::ReadCopyBookAsDataFrame(".../rcoboldi-gh/rcoboldi/java/rcobo
 RCOBOLDI::CobolToCSV("-I .../rcoboldi/java/rcoboldi-core/src/test/resources/example4/absaoss_cobrix_test1_example.bin -C .../rcoboldi/java/rcoboldi-core/src/test/resources/example4/absaoss_cobrix_test1_copybook.cob -FS Fixed_Length -IC cp037 -O .../temp/absaoss_cobrix_test1.csv")
 ```
 
-### Example Output
+### R COBOL Data Integration (RCOBOLDI) package example output
 
 ![An example of the R COBOL DI (Data Integration) Package in use.](images/RCOBOLDIPackageInAction.png "An example of the R COBOL DI (Data Integration) Package in use.")
 
@@ -78,15 +78,15 @@ RCOBOLDI::CobolToCSV("-I .../rcoboldi/java/rcoboldi-core/src/test/resources/exam
 
 Below we include two examples for working with images in Docker along with a demonstration video showing the package in action.
 
-### Using The RCOBOLDI RStudio Image On DockerHub
+### Using the R COBOL Data Integration (RCOBOLDI) package RStudio image on DockerHub
 
-The RCOBOLDI [Rocker/RStudio image](https://hub.docker.com/r/thospfuller/rcoboldi-rocker-rstudio) is available on DockerHub. This image is built using dependencies which have been deployed in the Drat repository.
+The RCOBOLDI [Rocker/RStudio image](https://hub.docker.com/r/thospfuller/rcoboldi-rocker-rstudio) is available on DockerHub. This image is built using dependencies which have been deployed in the [thospfuller/drat](https://github.com/thospfuller/drat) repository.
 
-The RCOBOLDI [Rocker/Verse image](https://hub.docker.com/r/thospfuller/rcoboldi-rocker-verse) is a complete build using source code cloned from the GitHub repository.
+The RCOBOLDI [Rocker/Verse image](https://hub.docker.com/r/thospfuller/rcoboldi-rocker-verse) is a complete build using source code cloned from the GitHub project repository.
 
 The following is a fully working example based on the Rocker/RStudio image.
 
-#### From the command line:
+#### Pull and run the R COBOL Data Integration (RCOBOLDI) DockerHub image from the command line
 
 ```docker pull thospfuller/rcoboldi-rockstar-rstudio:[latest or 1.0.3 or some other tag]```
 
@@ -105,7 +105,7 @@ then
 
 ```docker run -d -p 8787:8787 -e PASSWORD=password --name rstudio -i -t 3f8c1c269940```
 
-#### From the browser:
+#### Try the R COBOL Data Integration (RCOBOLDI) package from the browser
 
 The next  is to test this in R so point your browser to [http://localhost:8787](http://localhost:8787) and use "rstudio" and "password" to login and then execute the following:
 
@@ -116,9 +116,9 @@ result <- RCOBOLDI::ReadCopyBookAsDataFrame("/home/rstudio/rcoboldi/java/rcobold
 head(result)
 ```
 
-### Building the RCOBOLDI RStudio Docker Image Locally
+### Building the R COBOL Data Integration (RCOBOLDI) RStudio Docker Image Locally
 
-#### Step 1.) Build the image (this can take up to 20 minutes).
+#### Step 1.) Build the R COBOL Data Integration (RCOBOLDI) (this can take up to 20 minutes).
 
 ```
 docker build -t rcoboldi/rocker-rstudio:1.0.1 https://raw.githubusercontent.com/thospfuller/rcoboldi/master/docker/rocker/rstudio/Dockerfile
@@ -127,7 +127,7 @@ docker build -t rcoboldi/rocker-rstudio:1.0.1 https://raw.githubusercontent.com/
 
 ![Build the Docker image from the R COBOL Data Integration package Dockerfile."](images/RCOBOLDI_StepOneBuildDockerImage.png)
 
-#### Step 2.) Launch a container based on this image.
+#### Step 2.) Run the R COBOL Data Integration (RCOBOLDI) container based on the image created in the previous step
 
 ```
 docker run -d -p 8787:8787 -e PASSWORD=password --name rstudio -i -t [some image id]
@@ -170,7 +170,7 @@ Below is a video which demonstrates the R COBOL Data Integration package running
 - [Rocker/RStudio](https://hub.docker.com/r/rocker/rstudio/)
 - [Rocker/Verse](https://hub.docker.com/r/rocker/verse/)
 
-# R COBOL Data Integration package logging
+# R COBOL Data Integration (RCOBOLDI) package logging
 
 The Java API uses Log4J and writes files to the ~/rcoboldi-package-logs/ directory. [The Log4J configuration file can be found here](java/rcoboldi-core/src/main/resources).
 

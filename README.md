@@ -190,3 +190,6 @@ The Java API uses Log4J and writes files to the ~/rcoboldi-package-logs/ directo
 - [PyPI EBCDIC](https://pypi.org/project/ebcdic/)
 - [Brush up your COBOL: Why is a 60 year old language suddenly in demand?](https://stackoverflow.blog/2020/04/20/brush-up-your-cobol-why-is-a-60-year-old-language-suddenly-in-demand/)
 - [COBOL Is Everywhere. Who Will Maintain It?](https://thenewstack.io/cobol-everywhere-will-maintain/)
+- (COBOL Copybook Example on Oracle.com)[https://docs.oracle.com/cd/E15817_01/server.111/b31053/c_examples.htm]
+- (COBOL copy books on IBM.com)[https://www.ibm.com/docs/en/cics-ts/5.5?topic=books-cobol-copy]
+- [COBOL Copybook Format on MuleSoft.com](https://docs.mulesoft.com/dataweave/latest/dataweave-formats-copybook)
